@@ -90,6 +90,7 @@ export default defineMarkdocConfig({
 		},
 		RecentWork: {
 			attributes: {
+				label: { type: String, render: "label" },
 				title: { type: String, render: "title", required: true },
 				buttons: { type: Array, render: "buttons", required: true },
 			},
