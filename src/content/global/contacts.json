@@ -1,0 +1,11 @@
+{
+	"phone": "",
+	"mail": "hello@jaynabergerson.com",
+	"socials": [
+		{
+			"title": "LinkedIn",
+			"link": "https://www.linkedin.com/in/jaynabergerson",
+			"icon": "mdi:linkedin"
+		}
+	]
+}

@@ -1,0 +1,32 @@
+{
+	"logo": {
+		"imagePath": "/src/assets/global/navigation/profilepic-jaynabergerson-logo-v3.svg"
+	},
+	"pages": [
+		{
+			"title": "Home",
+			"link": "/"
+		},
+		{
+			"title": "Work",
+			"link": "/works"
+		},
+		{
+			"title": "About",
+			"link": "/about"
+		},
+		{
+			"title": "Articles",
+			"link": "/news"
+		},
+		{
+			"title": "Resources",
+			"link": "/resources"
+		},
+		{
+			"title": "Contact",
+			"link": "/contact"
+		}
+	],
+	"actions": []
+}

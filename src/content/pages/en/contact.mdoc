@@ -1,0 +1,25 @@
+---
+title: Contact
+type: informational
+lastUpdateDate: 2026-02-17
+hideTitle: false
+seo:
+  title: Contact | Jayna Bergerson — UX Designer
+  description: Get in touch with Jayna Bergerson to discuss UX design projects, collaborations, or opportunities.
+  author: Jayna Bergerson
+---
+
+{% Container %}
+
+{% Contact
+  title="Let's connect"
+  fields=[
+    {title: "Name", placeholder: "Your name", required: true, type: "text"},
+    {title: "Email", placeholder: "you@example.com", required: true, type: "email"},
+    {title: "Subject", placeholder: "What's this about?", type: "text"},
+    {title: "Message", placeholder: "Tell me about your project or how I can help...", required: true, type: "textarea", width: 2},
+    {title: "Send Message", type: "submit", width: 2}
+  ]
+/%}
+
+{% /Container %}

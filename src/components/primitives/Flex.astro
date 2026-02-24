@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+  direction?: string;
+  verticalAlign?: string;
+  horizontalAlign?: string;
+  itemsAlignment?: string;
+  gap?: number;
+  wrap?: boolean;
+}
+
+const {
+  class: className,
+  direction = "row",
+  verticalAlign,
+  horizontalAlign,
+  itemsAlignment,
+  gap = 4,
+  wrap = false,
+} = Astro.props;
+
+const directionClass = direction === "column" ? "flex-col" : "flex-row";
+const wrapClass = wrap ? "flex-wrap" : "";
+const gapClass = `gap-${gap}`;
+---
+
+<div class:list={["flex", directionClass, wrapClass, gapClass, className]}>
+  <slot />
+</div>
