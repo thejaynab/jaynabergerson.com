@@ -8,7 +8,7 @@ import type { PluginAPI } from "tailwindcss/types/config";
 import style from "./src/content/global/style.json";
 
 const config: Config = {
-	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,mdoc,svelte,ts,tsx,vue}"],
 	theme: {
 		screens: {
 			xs: "400px",

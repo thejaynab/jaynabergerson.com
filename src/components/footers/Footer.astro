@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Container from "@/components/primitives/Container.astro";
 import Link from "@/components/primitives/Link.astro";
+import { Icon } from "astro-icon/components";
 import { getLocalizedSettings } from "@/lib/localization-helpers";
 import { translatePath, unlocalizedUrl } from "@/lib/localization-helpers";
 import { defaultLocale, locales } from "site";
@@ -193,6 +194,24 @@ const lastPosts = posts
 								href={`mailto:${contacts.mail}`}
 							>
 								{contacts.mail}
+							</a>
+						</div>
+					</div>
+
+					<div class="mt-10">
+						<p class="text-white text-lg font-sans tracking-[0.2em] mb-4">CONNECT</p>
+						<div class="flex items-center gap-4">
+							<a href="https://www.linkedin.com/in/jaynabergerson/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-white hover:opacity-60 transition-opacity">
+								<Icon name="mdi:linkedin" class="w-[1.4em] h-[1.4em]" />
+							</a>
+							<a href="#" target="_blank" rel="noopener noreferrer" aria-label="Medium" class="text-white hover:opacity-60 transition-opacity">
+								<Icon name="mdi:medium" class="w-[1.4em] h-[1.4em]" />
+							</a>
+							<a href="https://github.com/thejaynab" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-white hover:opacity-60 transition-opacity">
+								<Icon name="mdi:github" class="w-[1.4em] h-[1.4em]" />
+							</a>
+							<a href="mailto:thejaynab@gmail.com" aria-label="Email" class="text-white hover:opacity-60 transition-opacity">
+								<Icon name="mdi:email-outline" class="w-[1.4em] h-[1.4em]" />
 							</a>
 						</div>
 					</div>

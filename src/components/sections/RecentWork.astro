@@ -22,7 +22,7 @@ const recentWorks = works
 		(a, b) =>
 			a.data.lastUpdateDate.getTime() - b.data.lastUpdateDate.getTime(),
 	)
-	.slice(0, 4) as CollectionEntry<"works">[];
+	.slice(0, 6) as CollectionEntry<"works">[];
 
 interface Props {
 	label?: string;
@@ -41,7 +41,7 @@ const { label, title, buttons } = Astro.props as Props;
 </div>
 
 <div
-	class="text-sm font-medium auto-cols-fr grid-cols-1 md:grid-cols-2 grid-rows-[auto_auto] grid gap-[3.13rem]"
+	class="text-sm font-medium auto-cols-fr grid-cols-1 md:grid-cols-3 grid-rows-[auto_auto] grid gap-[1.25rem]"
 >
 	{recentWorks.map((work) => <WorkPreview {work} />)}
 </div>

@@ -25,12 +25,12 @@ const videoSrc = work.data?.video ? await loadVideo(work.data.video) : null;
 
 <a
 	href={localizedPath}
-	class="work-card group block overflow-hidden relative cursor-pointer"
+	class="work-card group block relative cursor-pointer"
 	style={!work.data.cover && work.data.backgroundColor ? `background-color: ${work.data.backgroundColor}` : undefined}
 >
-	<!-- Background image — fills entire card (only if cover image provided) -->
+	<!-- Background image — fills entire card -->
 	{work.data.cover && (
-		<div class="absolute inset-0 z-0">
+		<div class="absolute inset-0 z-0 overflow-hidden rounded-lg">
 			{
 				videoSrc ? (
 					<video
@@ -53,82 +53,119 @@ const videoSrc = work.data?.video ? await loadVideo(work.data.video) : null;
 		</div>
 	)}
 
-	<!-- Arrow icon — fades in on hover -->
-	<div class="hover-icon absolute top-10 right-10 z-20">
+	<!-- Arrow icon — slides in on hover -->
+	<div class="hover-icon absolute top-[30px] right-[30px] z-20">
 		<div
-			class="bg-white rounded-full w-10 h-10 flex items-center justify-center"
+			class="bg-white rounded-full w-16 h-16 flex items-center justify-center"
 		>
 			<Icon
 				name="iconamoon:arrow-top-right-1-thin"
-				class="w-6 h-6 text-black"
+				class="w-7 h-7 text-black stroke-[2]"
 			/>
 		</div>
 	</div>
 
-	<!-- Text overlay -->
-	<div class="relative z-10 flex flex-col justify-between h-full p-10">
-		<div>
-			<!-- Category / Tags -->
-			<p class:list={[
-				"text-[0.8125rem] font-bold tracking-wide mb-4",
-				work.data.cover ? "text-neutral-800" : "text-white/80"
-			]}>
-				{Array.from(work.data.tags).join(" \u00b7 ")}
-			</p>
+	<!-- Gradient overlay for text legibility -->
+	<div class="card-gradient absolute inset-0 z-[5] rounded-lg"></div>
 
+	<!-- Content — upper left, always visible -->
+	<div class="relative z-10 flex flex-col justify-start h-full p-[30px] pr-[110px]">
+		<span class="card-tags">
+			{Array.from(work.data.tags).join(" \u00b7 ")}
+		</span>
 
-			<!-- Title -->
-			<h3 class:list={[
-				"text-[2.5rem] md:text-[3rem] font-extrabold leading-[1.05] mb-3 pr-16",
-				work.data.cover ? "text-black" : "text-white"
-			]}>
-				{work.data.title}
-			</h3>
+		<span class="card-title">
+			{work.data.title}
+		</span>
 
-			<!-- Description -->
-			{work.data.description && (
-				<p class:list={[
-					"text-[1rem] md:text-[1.0625rem] leading-relaxed max-w-[75%]",
-					work.data.cover ? "text-neutral-700" : "text-white/70"
-				]}>
-					{work.data.description}
-				</p>
-			)}
-		</div>
+		{work.data.description && (
+			<span class="card-description">
+				{work.data.description}
+			</span>
+		)}
 	</div>
 </a>
 
 <style>
-	/* Base Card */
+	/* Base Card — Avada Fusion style */
 	.work-card {
 		aspect-ratio: 3 / 4;
-		border-radius: 12px;
+		border-radius: 8px;
+		overflow: hidden;
 		box-shadow: none;
-		transition: all 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+		transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	/* Lift Up + Slight Enlarge on Hover */
+	/* Hover: Scale down + deep shadow */
 	.work-card:hover {
-		transform: translateY(-12px) scale(1.01);
-		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+		transform: scaleX(0.96) scaleY(0.96);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 	}
 
-	/* Arrow Icon — Opacity Fade */
+	/* Gradient overlay — transparent to dark at bottom */
+	.card-gradient {
+		background: linear-gradient(
+			to bottom,
+			transparent 40%,
+			rgba(0, 0, 0, 0.55) 100%
+		);
+		pointer-events: none;
+	}
+
+	/* Card-specific typography — isolated from global styles */
+	.card-tags {
+		display: block;
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		margin-bottom: 0.75rem;
+		color: rgba(255, 255, 255, 0.8);
+		line-height: 1.4;
+	}
+
+	.card-title {
+		display: block;
+		font-size: 1.5rem;
+		font-weight: 600;
+		line-height: 1.2;
+		margin-bottom: 0.5rem;
+		color: #ffffff;
+	}
+
+	@media (min-width: 768px) {
+		.card-title {
+			font-size: 1.75rem;
+		}
+	}
+
+	.card-description {
+		display: block;
+		font-size: 0.9375rem;
+		font-weight: 400;
+		line-height: 1.6;
+		color: rgba(255, 255, 255, 0.7);
+	}
+
+	/* Arrow Icon — slides in from right */
 	.hover-icon {
 		opacity: 0;
-		transition: opacity 0.3s ease;
+		transform: translateX(20px);
+		transition: opacity 0.35s ease,
+			transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.work-card:hover .hover-icon {
 		opacity: 1;
+		transform: translateX(0);
 	}
 
-	/* Image Zoom */
+	/* Image zoom on hover */
 	.work-media {
-		transition: transform 0.6s ease;
+		transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.work-card:hover .work-media {
-		transform: scale(1.05);
+		transform: scale(1.08);
 	}
 </style>
