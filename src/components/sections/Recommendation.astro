@@ -2,6 +2,8 @@
 interface RecommendationItem {
 	quote: string;
 	name: string;
+	jobTitle?: string;
+	company?: string;
 }
 
 interface Props {
@@ -70,7 +72,13 @@ const { pretitle, title, recommendations } = Astro.props;
 						&ldquo;{t.quote}&rdquo;
 					</h2>
 					<div class="bg-white/90 w-12 h-[1px] my-8 mx-auto"></div>
-					<h3 class="text-white text-lg">{t.name}</h3>
+					<h3 class="rec-name text-white text-lg">{t.name}</h3>
+					{t.jobTitle && (
+						<span class="rec-title text-white/70 text-sm mt-1">{t.jobTitle}</span>
+					)}
+					{t.company && (
+						<span class="rec-company text-white/50 text-sm mt-0.5">{t.company}</span>
+					)}
 				</div>
 			))}
 		</div>
