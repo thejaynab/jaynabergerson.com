@@ -4,6 +4,7 @@ import { getLocalizedSettings } from "@/lib/localization-helpers";
 import { translatePath, unlocalizedUrl } from "@/lib/localization-helpers";
 import { defaultLocale, locales } from "site";
 import logoSvg from "@/assets/global/navigation/jb-logo-w-title-website-v2.svg";
+import { Icon } from "astro-icon/components";
 
 const currentLocale = Astro.currentLocale;
 
@@ -140,11 +141,11 @@ const mobileNavLinks = desktopNavLinks;
 
 <header class="absolute w-full z-30 bg-white">
 	<div
-		class="items-center grid-cols-[1fr_auto] lg:grid-cols-[auto_1fr_auto] grid-rows-[auto] justify-between left-0 py-[40px] px-6 lg:px-20 right-0 top-0 grid gap-4"
+		class="items-center grid-cols-[1fr_auto] lg:grid-cols-[auto_1fr_auto] grid-rows-[auto] justify-between left-0 py-[40px] px-[40px] right-0 top-0 grid"
 	>
 		<!-- Logo -->
 		<div
-			class="items-center flex-wrap justify-start relative flex z-20"
+			class="items-start flex-col justify-start relative flex z-20"
 		>
 			<a
 				href={translatePath(currentLocale ?? defaultLocale, "/")}
@@ -155,13 +156,28 @@ const mobileNavLinks = desktopNavLinks;
 					id="header-logo-img"
 					src={logoSvg.src}
 					alt="Jayna Bergerson"
-					width="160"
-					style="width: 160px; height: auto;"
+					width="180"
+					style="width: 180px; height: auto;"
 				/>
 			</a>
+			<!-- Social Icons -->
+			<div class="flex items-center gap-4 mt-[16px] ml-0">
+				<a href="https://www.linkedin.com/in/jaynabergerson/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-black hover:opacity-60 transition-opacity">
+					<Icon name="mdi:linkedin" class="w-[1.4em] h-[1.4em]" />
+				</a>
+				<a href="#" target="_blank" rel="noopener noreferrer" aria-label="Medium" class="text-black hover:opacity-60 transition-opacity">
+					<Icon name="mdi:medium" class="w-[1.4em] h-[1.4em]" />
+				</a>
+				<a href="https://github.com/thejaynab" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-black hover:opacity-60 transition-opacity">
+					<Icon name="mdi:github" class="w-[1.4em] h-[1.4em]" />
+				</a>
+				<a href="mailto:thejaynab@gmail.com" aria-label="Email" class="text-black hover:opacity-60 transition-opacity">
+					<Icon name="ic:outline-mail" class="w-[1.4em] h-[1.4em]" />
+				</a>
+			</div>
 		</div>
 		<!-- Desktop Nav Links (hidden on mobile) -->
-		<nav class="hidden lg:flex items-center justify-end gap-8 z-20">
+		<nav class="hidden lg:flex items-center justify-end gap-10 z-20">
 			{
 				desktopNavLinks.map((page) => (
 					<a
@@ -169,7 +185,7 @@ const mobileNavLinks = desktopNavLinks;
 							currentLocale ?? defaultLocale,
 							page.link,
 						)}
-						class="desktop-nav-link text-black text-[20px] nav-font-bold tracking-wide"
+						class="desktop-nav-link text-black text-[30px] nav-font tracking-wide"
 					>
 						{page.title}
 					</a>

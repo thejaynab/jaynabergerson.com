@@ -17,6 +17,7 @@ const config: Config = {
 		extend: {
 			colors: tailwindcssPaletteGenerator([style.theme.colors.primary, style.theme.colors.secondary]),
 			fontWeight: {
+				semibold: '500',
 				bold: '500',
 			},
 			fontFamily: {

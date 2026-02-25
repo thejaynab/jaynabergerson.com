@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 /* Custom nav font weight */
-.nav-font-bold {
-	font-weight: 600;
+.nav-font {
+	font-weight: 400;
 }
 
 :root {
