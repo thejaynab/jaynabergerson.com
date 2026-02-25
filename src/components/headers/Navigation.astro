@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import { getLocalizedSettings } from "@/lib/localization-helpers";
 import { translatePath, unlocalizedUrl } from "@/lib/localization-helpers";
 import { defaultLocale, locales } from "site";
+import logoSvg from "@/assets/global/navigation/jb-logo-w-title-website-v2.svg";
 
 const currentLocale = Astro.currentLocale;
 
@@ -17,11 +18,13 @@ function isActiveLocale(locale: string): boolean {
 
 const { header, contacts } = getLocalizedSettings(currentLocale);
 
-const logoPath = header.logo?.imagePath;
-
-const images = import.meta.glob<{ default: ImageMetadata }>(
-	"/src/assets/global/**/*.{webp,jpeg,jpg,png,gif,svg}",
+// Desktop header links: Work, About, Articles, Contact (exclude Home & Resources)
+const desktopNavLinks = header.pages.filter(
+	(page) => ["/works", "/about", "/news", "/contact"].includes(page.link)
 );
+
+// Mobile overlay links: same 4 pages
+const mobileNavLinks = desktopNavLinks;
 ---
 
 <style>
@@ -91,6 +94,23 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 			width: 12px;
 		}
 	}
+	.desktop-nav-link {
+		position: relative;
+		text-decoration: none;
+	}
+	.desktop-nav-link::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: -2px;
+		width: 0;
+		height: 2.5px;
+		background-color: currentColor;
+		transition: width 0.3s ease;
+	}
+	.desktop-nav-link:hover::after {
+		width: 100%;
+	}
 	#navigation {
 		pointer-events: none;
 	}
@@ -118,33 +138,48 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 	}
 </style>
 
-<header class="fixed w-full z-30">
+<header class="absolute w-full z-30 bg-white">
 	<div
-		class="items-center auto-cols-fr grid-cols-2 lg:grid-cols-2 grid-rows-[auto] justify-between left-0 py-3.5 px-6 lg:px-20 right-0 top-0 grid gap-4"
+		class="items-center grid-cols-[1fr_auto] lg:grid-cols-[auto_1fr_auto] grid-rows-[auto] justify-between left-0 py-[40px] px-6 lg:px-20 right-0 top-0 grid gap-4"
 	>
+		<!-- Logo -->
 		<div
-			class="items-center flex-wrap justify-start relative flex text-blue-700 z-20"
+			class="items-center flex-wrap justify-start relative flex z-20"
 		>
 			<a
 				href={translatePath(currentLocale ?? defaultLocale, "/")}
 				id="header-logo"
-				class="text-blue-700 justify-self-start lg:justify-self-center underline inline-block max-w-full"
+				class="inline-block max-w-full"
 			>
-				<svg
-					id="CompanyLogo"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 50 50"
-					style="width: 100px; height: 100px;"
-				>
-					<defs><style>.cls-1{fill:#231f20;}</style></defs>
-					<path class="cls-1 logo-path" d="M45.79,26.63c1.65,1.35,2.48,2.95,2.48,4.79,0,2.52-.99,4.46-2.96,5.83-1.98,1.37-4.72,2.05-8.24,2.05-.79,0-1.45-.01-1.99-.04-1.79-.05-3.53-.08-5.24-.08-2.79,0-4.87.04-6.25.12v-.81c.89-.05,1.55-.16,1.97-.32.42-.16.7-.47.85-.93.15-.46.22-1.2.22-2.23V14.85c0-1.03-.08-1.77-.22-2.23-.15-.46-.43-.77-.85-.93-.42-.16-1.08-.27-1.97-.32v-.81c1.38.08,3.44.12,6.17.12l4.51-.04c.54-.03,1.16-.04,1.87-.04,3.25,0,5.73.58,7.45,1.75,1.72,1.16,2.58,2.71,2.58,4.63,0,1.57-.68,3.03-2.05,4.39-1.37,1.35-3.39,2.27-6.07,2.76v.08c3.52.27,6.1,1.08,7.76,2.44ZM34,11.65c-.34.19-.58.53-.71,1.02-.14.49-.2,1.22-.2,2.19v9.18h1.75c1.76,0,2.99-.6,3.7-1.81.7-1.2,1.06-2.81,1.06-4.81s-.32-3.55-.95-4.55c-.64-1-1.64-1.5-3.03-1.5-.73,0-1.27.1-1.6.28ZM41.53,31.26c0-2.14-.54-3.76-1.62-4.87-1.08-1.11-2.79-1.66-5.12-1.66h-1.71v10.27c0,.97.07,1.69.2,2.15.14.46.4.78.79.95.39.18.99.26,1.81.26,3.76,0,5.64-2.37,5.64-7.11Z"/>
-					<path class="cls-1 logo-path" d="M17.13,6.85c-2.73,0-4.78-.04-6.13-.12v.81c.89.05,1.55.16,1.97.32.42.16.7.47.85.93.15.46.22,1.2.22,2.23v22.25c0,2.22-.2,3.97-.59,5.26-.39,1.29-.96,2.21-1.71,2.76-.53.39-1.15.67-1.87.83-.44.06-.88.1-1.28.1-.57,0-.98-.02-1.23-.05.86-.32,1.52-.8,1.98-1.42.46-.63.7-1.31.7-2.07,0-1.07-.37-1.9-1.1-2.49-.73-.59-1.71-.89-2.92-.89-1.29,0-2.33.33-3.11.99-.79.66-1.18,1.55-1.18,2.66,0,1.4.6,2.46,1.8,3.19,1.2.73,2.55,1.1,4.05,1.1.68,0,1.29-.07,1.86-.16,2.74-.07,4.99-.67,6.74-1.81,1.85-1.22,3.07-2.82,3.63-4.79.46-1.6.69-4.3.69-8.12V11.04c0-1.03.07-1.77.22-2.23.15-.46.43-.77.83-.93.41-.16,1.07-.27,1.99-.32v-.81c-1.49.08-3.63.12-6.42.12Z"/>
-				</svg>
+				<img
+					id="header-logo-img"
+					src={logoSvg.src}
+					alt="Jayna Bergerson"
+					width="160"
+					style="width: 160px; height: auto;"
+				/>
 			</a>
 		</div>
-		<div class="justify-self-end col-span-1 row-span-1 z-40 col-start-3">
+		<!-- Desktop Nav Links (hidden on mobile) -->
+		<nav class="hidden lg:flex items-center justify-end gap-8 z-20">
+			{
+				desktopNavLinks.map((page) => (
+					<a
+						href={translatePath(
+							currentLocale ?? defaultLocale,
+							page.link,
+						)}
+						class="desktop-nav-link text-black text-[20px] nav-font-bold tracking-wide"
+					>
+						{page.title}
+					</a>
+				))
+			}
+		</nav>
+		<!-- Hamburger (mobile only) -->
+		<div class="justify-self-end col-span-1 row-span-1 z-40 lg:hidden">
 			<div
-				class="items-center justify-center relative flex h-16 lg:w-24 lg:h-24"
+				class="items-center justify-center relative flex h-16"
 			>
 				<div class="menu-icon">
 					<input
@@ -174,7 +209,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 		>
 			<div class="flex flex-col items-start md:items-center pt-10">
 				{
-					header.pages.map((page, index) => (
+					mobileNavLinks.map((page, index) => (
 						<a
 							data-nav-item
 							href={translatePath(
@@ -235,9 +270,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 					toggleActions: "play none none reverse",
 				},
 			})
-				.to("[data-company-name]", { opacity: 0 })
-				.to("header .logo-path", { opacity: 0 }, "<")
-				.set("#header-logo", { pointerEvents: "none" });
+				.to("[data-company-name]", { opacity: 0 });
 
 			const tl = gsap.timeline({
 				paused: true,

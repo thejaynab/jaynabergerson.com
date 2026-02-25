@@ -16,6 +16,9 @@ const config: Config = {
 		},
 		extend: {
 			colors: tailwindcssPaletteGenerator([style.theme.colors.primary, style.theme.colors.secondary]),
+			fontWeight: {
+				bold: '500',
+			},
 			fontFamily: {
 				sans: ["Inter Tight", ...defaultTheme.fontFamily.sans],
 				mono: ["Space Mono", ...defaultTheme.fontFamily.mono],
