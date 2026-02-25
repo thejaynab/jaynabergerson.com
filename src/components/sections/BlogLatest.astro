@@ -23,17 +23,21 @@ const recentPosts = posts
 	.slice(0, 4) as CollectionEntry<"posts">[];
 
 interface Props {
+	pretitle?: string;
 	title: string;
 }
 
-const { title } = Astro.props;
+const { pretitle, title } = Astro.props;
 ---
 
 <div class="text-sm font-medium pt-20 pb-32">
 	<div
-		class="items-center justify-center flex text-[3.13rem] leading-none font-semibold"
+		class="items-center justify-center flex flex-col"
 	>
-		<h2 class="my-1">{title}</h2>
+		{pretitle && (
+			<span class="font-sans text-[20px] tracking-[0.2em] uppercase block mb-3">{pretitle}</span>
+		)}
+		<h2 class="text-[3.13rem] leading-none font-semibold my-1">{title}</h2>
 	</div>
 	<div class="mt-16">
 		<div

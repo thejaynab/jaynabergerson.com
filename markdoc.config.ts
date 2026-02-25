@@ -70,6 +70,7 @@ export default defineMarkdocConfig({
 		},
 		BlogLatest: {
 			attributes: {
+				pretitle: { type: String, render: "pretitle" },
 				title: { type: String, render: "title", required: true },
 			},
 			render: component("./src/components/sections/BlogLatest.astro"),
@@ -90,7 +91,7 @@ export default defineMarkdocConfig({
 		},
 		RecentWork: {
 			attributes: {
-				label: { type: String, render: "label" },
+				pretitle: { type: String, render: "pretitle" },
 				title: { type: String, render: "title", required: true },
 				buttons: { type: Array, render: "buttons", required: true },
 			},
@@ -98,6 +99,8 @@ export default defineMarkdocConfig({
 		},
 		Recommendation: {
 			attributes: {
+				pretitle: { type: String, render: "pretitle" },
+				title: { type: String, render: "title" },
 				recommendations: { type: Array, render: "recommendations", required: true },
 			},
 			render: component("./src/components/sections/Recommendation.astro"),

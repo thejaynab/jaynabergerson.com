@@ -5,13 +5,25 @@ interface RecommendationItem {
 }
 
 interface Props {
+	pretitle?: string;
+	title?: string;
 	recommendations: RecommendationItem[];
 }
 
-const { recommendations } = Astro.props;
+const { pretitle, title, recommendations } = Astro.props;
 ---
 
 <div class="text-sm font-medium pt-20 pb-14">
+	{(pretitle || title) && (
+		<div class="items-center justify-center flex flex-col mb-10">
+			{pretitle && (
+				<span class="font-sans text-[20px] tracking-[0.2em] uppercase block mb-3">{pretitle}</span>
+			)}
+			{title && (
+				<h2 class="text-[3.13rem] leading-none font-semibold my-1">{title}</h2>
+			)}
+		</div>
+	)}
 	<div
 		class="bg-black flex-grow py-20 px-8 md:px-16 rounded-3xl relative"
 		x-data={`{

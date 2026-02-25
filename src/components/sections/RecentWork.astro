@@ -25,17 +25,17 @@ const recentWorks = works
 	.slice(0, 6) as CollectionEntry<"works">[];
 
 interface Props {
-	label?: string;
+	pretitle?: string;
 	title: string;
 	buttons: ButtonProps[];
 }
 
-const { label, title, buttons } = Astro.props as Props;
+const { pretitle, title, buttons } = Astro.props as Props;
 ---
 
 <div class="items-center text-sm font-medium justify-center flex flex-col pt-20 pb-16">
-	{label && (
-		<span class="font-sans text-[20px] tracking-[0.2em] uppercase block mb-3">{label}</span>
+	{pretitle && (
+		<span class="font-sans text-[20px] tracking-[0.2em] uppercase block mb-3">{pretitle}</span>
 	)}
 	<h2 class="text-[3.13rem] leading-none font-semibold my-1">{title}</h2>
 </div>
