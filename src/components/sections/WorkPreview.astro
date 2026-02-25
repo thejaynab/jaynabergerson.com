@@ -90,24 +90,23 @@ const videoSrc = work.data?.video ? await loadVideo(work.data.video) : null;
 	/* Base Card — Avada Fusion style */
 	.work-card {
 		aspect-ratio: 3 / 4;
-		border-radius: 8px;
+		border-radius: 10px;
 		overflow: hidden;
 		box-shadow: none;
 		transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	/* Hover: Scale down + deep shadow */
+	/* Hover: Scale down */
 	.work-card:hover {
 		transform: scaleX(0.96) scaleY(0.96);
-		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 	}
 
-	/* Gradient overlay — transparent to dark at bottom */
+	/* Gradient overlay — subtle on light backgrounds */
 	.card-gradient {
 		background: linear-gradient(
 			to bottom,
-			transparent 40%,
-			rgba(0, 0, 0, 0.55) 100%
+			transparent 60%,
+			rgba(255, 255, 255, 0.3) 100%
 		);
 		pointer-events: none;
 	}
@@ -115,36 +114,44 @@ const videoSrc = work.data?.video ? await loadVideo(work.data.video) : null;
 	/* Card-specific typography — isolated from global styles */
 	.card-tags {
 		display: block;
-		font-size: 0.75rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 12.5px;
+		font-style: normal;
+		font-weight: 400;
+		text-transform: none;
+		letter-spacing: 0.63px;
 		margin-bottom: 0.75rem;
-		color: rgba(255, 255, 255, 0.8);
-		line-height: 1.4;
+		color: rgb(63, 63, 63);
+		line-height: 25.9px;
 	}
 
 	.card-title {
 		display: block;
-		font-size: 1.5rem;
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 48px;
+		font-style: normal;
 		font-weight: 600;
-		line-height: 1.2;
+		letter-spacing: 0.48px;
+		line-height: 46.08px;
 		margin-bottom: 0.5rem;
-		color: #ffffff;
+		color: rgb(63, 63, 63);
 	}
 
 	@media (min-width: 768px) {
 		.card-title {
-			font-size: 1.75rem;
+			font-size: 48px;
 		}
 	}
 
 	.card-description {
 		display: block;
-		font-size: 0.9375rem;
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 17.5px;
+		font-style: normal;
 		font-weight: 400;
-		line-height: 1.6;
-		color: rgba(255, 255, 255, 0.7);
+		letter-spacing: 0.63px;
+		line-height: 25.9px;
+		color: rgba(64, 64, 64, 0.8);
 	}
 
 	/* Arrow Icon — slides in from right */

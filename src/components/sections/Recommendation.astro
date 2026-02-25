@@ -1,0 +1,102 @@
+---
+interface RecommendationItem {
+	quote: string;
+	name: string;
+}
+
+interface Props {
+	recommendations: RecommendationItem[];
+}
+
+const { recommendations } = Astro.props;
+---
+
+<div class="text-sm font-medium pt-20 pb-14">
+	<div
+		class="bg-black flex-grow py-20 px-8 md:px-16 rounded-3xl relative"
+		x-data={`{
+			current: 0,
+			count: ${recommendations.length},
+			interval: null,
+			autoDelay: 6000,
+			init() {
+				this.startAuto();
+			},
+			next() {
+				this.current = (this.current + 1) % this.count;
+				this.restartAuto();
+			},
+			prev() {
+				this.current = (this.current - 1 + this.count) % this.count;
+				this.restartAuto();
+			},
+			startAuto() {
+				this.interval = setInterval(() => {
+					this.current = (this.current + 1) % this.count;
+				}, this.autoDelay);
+			},
+			restartAuto() {
+				clearInterval(this.interval);
+				this.startAuto();
+			}
+		}`}
+	>
+		<!-- Slides -->
+		<div class="overflow-hidden relative">
+			{recommendations.map((t: RecommendationItem, i: number) => (
+				<div
+					x-show={`current === ${i}`}
+					x-transition:enter="transition ease-out duration-500"
+					x-transition:enter-start="opacity-0 translate-x-8"
+					x-transition:enter-end="opacity-100 translate-x-0"
+					x-transition:leave="transition ease-in duration-300 absolute inset-0"
+					x-transition:leave-start="opacity-100 translate-x-0"
+					x-transition:leave-end="opacity-0 -translate-x-8"
+					class="items-center flex-col justify-center text-center flex px-8 md:px-16"
+				>
+					<h2 class="text-white text-xl md:text-[2.13rem] leading-snug md:leading-9 lg:max-w-[60%] mb-1">
+						&ldquo;{t.quote}&rdquo;
+					</h2>
+					<div class="bg-white/90 w-12 h-[1px] my-8 mx-auto"></div>
+					<h3 class="text-white text-lg">{t.name}</h3>
+				</div>
+			))}
+		</div>
+
+		<!-- Left Arrow -->
+		<button
+			x-on:click="prev()"
+			class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+			aria-label="Previous recommendation"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+			</svg>
+		</button>
+
+		<!-- Right Arrow -->
+		<button
+			x-on:click="next()"
+			class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+			aria-label="Next recommendation"
+		>
+			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+			</svg>
+		</button>
+
+		<!-- Dots -->
+		{recommendations.length > 1 && (
+			<div class="flex justify-center gap-2 mt-8">
+				{recommendations.map((_: RecommendationItem, i: number) => (
+					<button
+						x-on:click={`current = ${i}; restartAuto()`}
+						class="w-2 h-2 rounded-full transition-colors"
+						x-bind:class={`current === ${i} ? 'bg-white' : 'bg-white/30 hover:bg-white/50'`}
+						aria-label={`Go to recommendation ${i + 1}`}
+					/>
+				))}
+			</div>
+		)}
+	</div>
+</div>

@@ -96,12 +96,11 @@ export default defineMarkdocConfig({
 			},
 			render: component("./src/components/sections/RecentWork.astro"),
 		},
-		Testimonial: {
+		Recommendation: {
 			attributes: {
-				testimonial: { type: String, render: "testimonial", required: true },
-				name: { type: String, render: "name", required: true },
+				recommendations: { type: Array, render: "recommendations", required: true },
 			},
-			render: component("./src/components/sections/Testimonial.astro"),
+			render: component("./src/components/sections/Recommendation.astro"),
 		},
 		Results: {
 			attributes: {
