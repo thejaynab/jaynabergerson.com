@@ -135,5 +135,12 @@ export default defineMarkdocConfig({
 			},
 			render: component("./src/components/sections/Contact.astro"),
 		},
+		Gallery: {
+			attributes: {
+				folder: { type: String, render: "folder", required: true },
+				exclude: { type: String, render: "exclude" },
+			},
+			render: component("./src/components/sections/Gallery.astro"),
+		},
 	},
 });

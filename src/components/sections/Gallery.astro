@@ -1,0 +1,74 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+	folder: string;
+	exclude?: string;
+}
+
+const { folder, exclude } = Astro.props;
+
+// Import all post images eagerly
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+	"/src/assets/posts/**/*.{webp,png,jpg,jpeg,svg,gif}",
+	{ eager: true }
+);
+
+// Filter to only images in the specified folder, excluding any specified filenames
+const excludeList = exclude ? exclude.split(",").map((s: string) => s.trim()) : [];
+
+const images = Object.entries(allImages)
+	.filter(([path]) => path.includes(`/${folder}/`))
+	.filter(([path]) => !excludeList.some((ex: string) => path.includes(ex)))
+	.sort(([a], [b]) => a.localeCompare(b))
+	.map(([path, mod]) => ({
+		src: mod.default,
+		alt: path.split("/").pop()?.replace(/\.[^.]+$/, "").replace(/-/g, " ") || "",
+	}));
+---
+
+<div class="gallery-grid">
+	{images.map((img) => (
+		<div class="gallery-item">
+			<Image
+				src={img.src}
+				alt={img.alt}
+				widths={[400, 600, 800]}
+				sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+				class="gallery-image"
+			/>
+		</div>
+	))}
+</div>
+
+<style>
+	.gallery-grid {
+		columns: 1;
+		column-gap: 10px;
+		margin: 2rem 0;
+	}
+
+	@media (min-width: 640px) {
+		.gallery-grid {
+			columns: 2;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.gallery-grid {
+			columns: 3;
+		}
+	}
+
+	.gallery-item {
+		break-inside: avoid;
+		margin-bottom: 10px;
+	}
+
+	.gallery-image {
+		width: 100%;
+		height: auto;
+		display: block;
+		border-radius: 8px;
+	}
+</style>

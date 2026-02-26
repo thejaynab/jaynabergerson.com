@@ -46,11 +46,12 @@ const localizedPath = translatePath(
 		/>
 	</Link>
 	<div class="items-start flex-col pt-8 flex">
-		<span
-			class="font-semibold pb-1.5 px-6 pt-2 uppercase inline-block border-2 border-black border-solid rounded-3xl"
+		<a
+			href={`/category/${post.data.category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
+			class="font-semibold pb-1.5 px-6 pt-2 uppercase inline-block border-2 border-black border-solid rounded-3xl no-underline text-inherit hover:opacity-70 transition-opacity"
 		>
 			{post.data.category}
-		</span>
+		</a>
 		<a href={localizedPath} class="text-3xl font-semibold mt-5 mb-3">
 			{post.data.title}
 		</a>

@@ -41,50 +41,29 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout>
-	<section class="py-32 md:py-56">
+	<section class="post-layout py-32 md:py-56">
 		<Container>
 			<div class="text-center">
+				{/* Category */}
 				{
-					"author" in frontmatter.data &&
-						frontmatter?.data?.author &&
-						"pubDate" in frontmatter.data &&
-						frontmatter?.data?.pubDate && (
-							<div class="inline-flex items-center gap-4 pb-4 lg:pb-6">
-								<span class="text-xs font-semibold uppercase tracking-wide text-black">
-									<span>
-										{l.writtenBy} {frontmatter.data?.author}
-										{l.writtenAt}
-									</span>
-									{frontmatter.data?.pubDate
-										?.toString()
-										.slice(0, 10)}
-								</span>
-							</div>
-						)
+					"category" in frontmatter.data && frontmatter.data?.category && (
+						<div class="pb-4">
+							<a href={`/category/${frontmatter.data.category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`} class="font-semibold pb-1.5 px-6 pt-2 uppercase inline-block border-2 border-black border-solid rounded-3xl no-underline text-inherit hover:opacity-70 transition-opacity">
+								{frontmatter.data.category}
+							</a>
+						</div>
+					)
 				}
 
-				<Title level={1}>{frontmatter.data.title}</Title>
-				<p class="mx-auto max-w-2xl pt-8 text-base text-slate-500">
-					<em>{frontmatter.data?.description}</em>
-				</p>
+				{/* Title (H1) */}
+				<h1 class="post-title">{frontmatter.data.title}</h1>
+
+				{/* Author */}
+				<div class="post-author pt-6">
+					by {frontmatter.data?.author ?? "Jayna Bergerson"}
+				</div>
 			</div>
 			<div class="flex w-full flex-col items-center justify-center pt-12">
-				<div class="flex flex-wrap justify-center gap-3">
-					{
-						"tags" in frontmatter.data &&
-							frontmatter.data?.tags?.map((tag: unknown) => (
-								<li class="list-none">
-									<Link
-										href={`/tags/${tag}`}
-										size="md"
-										style="outline"
-									>
-										{tag}
-									</Link>
-								</li>
-							))
-					}
-				</div>
 				{
 					"cover" in frontmatter.data && frontmatter.data?.cover && (
 						<Image
@@ -94,7 +73,40 @@ const { frontmatter } = Astro.props;
 						/>
 					)
 				}
-				<Prose><slot /></Prose>
+
+				{/* Description */}
+				<div class="post-description">
+					{frontmatter.data?.description}
+				</div>
+
+				<Prose class="post-prose"><slot /></Prose>
+				{
+					"pubDate" in frontmatter.data && frontmatter.data?.pubDate && (
+						<div class="post-date pt-12">
+							{frontmatter.data.pubDate.toLocaleDateString("en-US", {
+								month: "long",
+								day: "numeric",
+								year: "numeric",
+							})}
+						</div>
+					)
+				}
+				{
+					"tags" in frontmatter.data && frontmatter.data?.tags?.length > 0 && (
+						<div class="w-full max-w-3xl pt-12">
+							<div class="flex flex-wrap gap-2">
+								{frontmatter.data.tags.map((tag: string) => (
+									<a
+										href={`/tags/${tag.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
+										class="post-tag"
+									>
+										{tag}
+									</a>
+								))}
+							</div>
+						</div>
+					)
+				}
 				<div class="mx-auto w-full max-w-3xl pt-20">
 					<Share />
 				</div>
@@ -102,3 +114,167 @@ const { frontmatter } = Astro.props;
 		</Container>
 	</section>
 </BaseLayout>
+
+<style is:global>
+	/* Article-scoped typography — uses is:global to bypass Astro scoping issues
+	   with child components. Classes are specific to PostLayout so they won't leak. */
+
+	.post-tag {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 13px;
+		font-weight: 500;
+		letter-spacing: 0.04em;
+		line-height: 1;
+		padding: 6px 16px;
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		border-radius: 9999px;
+		color: rgba(0, 0, 0, 0.55);
+		text-decoration: none;
+		text-transform: capitalize;
+		transition: all 0.2s ease;
+		white-space: nowrap;
+	}
+
+	.post-tag:hover {
+		border-color: rgba(0, 0, 0, 0.5);
+		color: rgba(0, 0, 0, 0.85);
+		background-color: rgba(0, 0, 0, 0.04);
+	}
+
+	.post-title {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 96px;
+		font-style: normal;
+		font-weight: 600;
+		letter-spacing: -1.92px;
+		line-height: 92.16px;
+	}
+
+	.post-date {
+		font-family: "Roboto Mono", "Lucida Console", Monaco, monospace;
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 500;
+		letter-spacing: 0.6px;
+		line-height: 20.7px;
+	}
+
+	.post-description {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		font-size: 3rem !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		letter-spacing: 0.03rem !important;
+		line-height: 3.4rem !important;
+		text-align: left !important;
+		margin-top: 3rem !important;
+		width: 100% !important;
+		max-width: 48rem !important;
+		align-self: center !important;
+	}
+
+	.post-author {
+		font-family: "Roboto Mono", "Lucida Console", Monaco, monospace;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 500;
+		letter-spacing: 0.03rem;
+		text-transform: uppercase;
+	}
+
+	/* Article H2 */
+	.post-prose h2 {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		font-size: 2.6rem !important;
+		font-style: normal !important;
+		font-weight: 600 !important;
+		letter-spacing: 0.03rem !important;
+		line-height: 2.8rem !important;
+		margin-top: 2.5rem !important;
+		margin-bottom: 1.25rem !important;
+	}
+
+	/* Article paragraphs */
+	.post-prose p {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		font-size: 1.3rem !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		letter-spacing: 0.03rem !important;
+		line-height: 1.8rem !important;
+		color: rgb(63, 63, 63) !important;
+		margin-block-end: 20px !important;
+		margin-bottom: 20px !important;
+		margin-block-start: 0px !important;
+	}
+
+	/* Article list items — match paragraph styling */
+	.post-prose li {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		font-size: 1.3rem !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		letter-spacing: 0.03rem !important;
+		line-height: 1.8rem !important;
+		color: rgb(63, 63, 63) !important;
+	}
+
+	/* Article unordered/ordered lists */
+	.post-prose ul,
+	.post-prose ol {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		font-size: 1.3rem !important;
+		letter-spacing: 0.03rem !important;
+		line-height: 1.8rem !important;
+		color: rgb(63, 63, 63) !important;
+	}
+
+	/* Responsive title scaling */
+	@media (max-width: 1024px) {
+		.post-title {
+			font-size: 64px;
+			line-height: 62px;
+			letter-spacing: -1.28px;
+		}
+
+		.post-prose h2 {
+			font-size: 2.5rem !important;
+			line-height: 1.1 !important;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.post-title {
+			font-size: 42px;
+			line-height: 42px;
+			letter-spacing: -0.84px;
+		}
+
+		.post-prose h2 {
+			font-size: 2rem !important;
+			line-height: 1.1 !important;
+		}
+	}
+
+	/* Gallery breakout — match featured image width while text stays at prose width */
+	.post-prose {
+		max-width: 100% !important;
+	}
+
+	/* Constrain text elements to readable width and center them */
+	.post-prose h2,
+	.post-prose p,
+	.post-prose ul,
+	.post-prose ol,
+	.post-prose blockquote {
+		max-width: 48rem !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+
+	/* Remove prose margins from gallery images */
+	.post-prose .gallery-grid img {
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
+	}
+</style>

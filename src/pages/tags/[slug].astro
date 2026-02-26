@@ -1,0 +1,98 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Container from "@/components/primitives/Container.astro";
+import BlogPreview from "@/components/sections/BlogPreview.astro";
+
+export async function getStaticPaths() {
+	function slugify(text: string): string {
+		return text
+			.toLowerCase()
+			.replace(/[^a-z0-9]+/g, "-")
+			.replace(/(^-|-$)/g, "");
+	}
+
+	const posts = await getCollection("posts");
+	const visiblePosts = posts.filter((post) => !post.data.hidden);
+
+	// Collect all unique tags
+	const tags = [...new Set(visiblePosts.flatMap((post) => post.data.tags))];
+
+	return tags.map((tag) => ({
+		params: { slug: slugify(tag) },
+		props: { tag },
+	}));
+}
+
+interface Props {
+	tag: string;
+}
+
+const { tag } = Astro.props;
+
+const posts = await getCollection("posts");
+
+const filteredPosts = posts
+	.map((post) => {
+		const [lang, ...slug] = post.slug.split("/");
+		return {
+			...post,
+			lang: lang,
+			slug: post.slug.startsWith("/") ? post.slug : `/${post.slug}`,
+		};
+	})
+	.filter((post) => post.lang === "en" && !post.data.hidden && post.data.tags.includes(tag))
+	.sort(
+		(a, b) =>
+			b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+	) as CollectionEntry<"posts">[];
+---
+
+<BaseLayout>
+	<section class="tag-page py-32 md:py-56">
+		<Container>
+			<div class="text-center mb-16">
+				<span class="tag-pretitle block mb-3">TAG</span>
+				<h1 class="tag-title">{tag}</h1>
+			</div>
+			<div
+				class="gap-x-[1.88rem] text-sm font-medium auto-cols-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-rows-[auto] gap-y-10 grid pb-40"
+			>
+				{filteredPosts.map((post) => <BlogPreview {post} />)}
+			</div>
+		</Container>
+	</section>
+</BaseLayout>
+
+<style>
+	.tag-pretitle {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 20px;
+		font-weight: 500;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+	}
+
+	.tag-title {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 96px;
+		font-style: normal;
+		font-weight: 600;
+		letter-spacing: -1.92px;
+		line-height: 92.16px;
+	}
+
+	@media (max-width: 1024px) {
+		.tag-title {
+			font-size: 64px;
+			line-height: 61.44px;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.tag-title {
+			font-size: 42px;
+			line-height: 40.32px;
+		}
+	}
+</style>
