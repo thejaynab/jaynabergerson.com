@@ -82,8 +82,8 @@ const { frontmatter } = Astro.props;
 				<Prose class="post-prose"><slot /></Prose>
 				{
 					"pubDate" in frontmatter.data && frontmatter.data?.pubDate && (
-						<div class="post-date pt-12">
-							{frontmatter.data.pubDate.toLocaleDateString("en-US", {
+						<div class="post-date w-full max-w-3xl pt-12 text-left">
+							Published on {frontmatter.data.pubDate.toLocaleDateString("en-US", {
 								month: "long",
 								day: "numeric",
 								year: "numeric",

@@ -89,7 +89,7 @@ const videoSrc = work.data?.video ? await loadVideo(work.data.video) : null;
 <style>
 	/* Base Card — Avada Fusion style */
 	.work-card {
-		aspect-ratio: 3 / 4;
+		aspect-ratio: 400 / 550;
 		border-radius: 10px;
 		overflow: hidden;
 		box-shadow: none;
@@ -104,9 +104,9 @@ const videoSrc = work.data?.video ? await loadVideo(work.data.video) : null;
 	/* Gradient overlay — subtle on light backgrounds */
 	.card-gradient {
 		background: linear-gradient(
-			to bottom,
-			transparent 60%,
-			rgba(255, 255, 255, 0.3) 100%
+			to top,
+			transparent 40%,
+			rgba(255, 255, 255, 0.4) 100%
 		);
 		pointer-events: none;
 	}

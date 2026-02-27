@@ -4,8 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import Container from "@/components/primitives/Container.astro";
 import Link from "@/components/primitives/Link.astro";
 import Prose from "@/components/primitives/Prose.astro";
-import Share from "@/components/primitives/Share.astro";
-import Title from "@/components/primitives/Title.astro";
+import WorkShare from "@/components/primitives/WorkShare.astro";
 import { loadVideo } from "@/lib/asset-helpers";
 import { Icon } from "astro-icon/components";
 import { defaultLocale } from "site";
@@ -44,13 +43,13 @@ const videoSrc = frontmatter.data?.video
 ---
 
 <BaseLayout>
-	<section class="py-32 md:py-56">
+	<section class="work-layout py-32 md:py-56">
 		<Container>
 			<div class="text-center">
-				<Title level={1}>{frontmatter.data.title}</Title>
-				<p class="mx-auto max-w-2xl pt-8 text-base text-slate-500">
-					<em>{frontmatter.data?.description}</em>
-				</p>
+				<h1 class="work-title">{frontmatter.data.title}</h1>
+				<div class="work-description">
+					{frontmatter.data?.description}
+				</div>
 				{
 					frontmatter.data.link && (
 						<Link
@@ -81,18 +80,155 @@ const videoSrc = frontmatter.data?.video
 						"cover" in frontmatter.data &&
 						frontmatter.data?.cover && (
 							<Image
-								class="w-full rounded-4xl lg:w-auto lg:min-w-[50rem] lg:rounded-5xl"
+								class="mt-12 w-full rounded-4xl lg:w-auto lg:min-w-[50rem] lg:rounded-5xl"
 								src={frontmatter.data?.cover}
 								alt={`Cover image for ${frontmatter.data?.title}`}
 							/>
 						)
 					)
 				}
-				<Prose><slot /></Prose>
+				<Prose class="work-prose"><slot /></Prose>
 				<div class="mx-auto w-full max-w-3xl pt-20">
-					<Share />
+					<WorkShare />
 				</div>
 			</div>
 		</Container>
 	</section>
 </BaseLayout>
+
+<style is:global>
+	/* Case study–scoped typography — translated from PostLayout article styles.
+	   Uses is:global so child-component markup is reached.
+	   All selectors are prefixed with .work-* so they won't leak. */
+
+	.work-title {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 96px;
+		font-style: normal;
+		font-weight: 600;
+		letter-spacing: -1.92px;
+		line-height: 92.16px;
+	}
+
+	.work-description {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		font-size: 3rem !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		letter-spacing: 0.03rem !important;
+		line-height: 3.4rem !important;
+		text-align: left !important;
+		margin-top: 3rem !important;
+		width: 100% !important;
+		max-width: 48rem !important;
+		align-self: center !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+
+	/* Case study H2 */
+	.work-prose h2 {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		font-size: 2.6rem !important;
+		font-style: normal !important;
+		font-weight: 600 !important;
+		letter-spacing: 0.03rem !important;
+		line-height: 2.8rem !important;
+		margin-top: 2.5rem !important;
+		margin-bottom: 1.25rem !important;
+	}
+
+	/* Case study H3 */
+	.work-prose h3 {
+		letter-spacing: 0.03rem !important;
+	}
+
+	/* Case study H4 */
+	.work-prose h4 {
+		letter-spacing: 0.03rem !important;
+	}
+
+	/* Case study paragraphs */
+	.work-prose p {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		font-size: 1.3rem !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		letter-spacing: 0.03rem !important;
+		line-height: 1.8rem !important;
+		color: rgb(63, 63, 63) !important;
+		margin-block-end: 20px !important;
+		margin-bottom: 20px !important;
+		margin-block-start: 0px !important;
+	}
+
+	/* Case study list items — match paragraph styling */
+	.work-prose li {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		font-size: 1.3rem !important;
+		font-style: normal !important;
+		font-weight: 400 !important;
+		letter-spacing: 0.03rem !important;
+		line-height: 1.8rem !important;
+		color: rgb(63, 63, 63) !important;
+	}
+
+	/* Case study unordered/ordered lists */
+	.work-prose ul,
+	.work-prose ol {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		font-size: 1.3rem !important;
+		letter-spacing: 0.03rem !important;
+		line-height: 1.8rem !important;
+		color: rgb(63, 63, 63) !important;
+	}
+
+	/* Responsive title scaling */
+	@media (max-width: 1024px) {
+		.work-title {
+			font-size: 64px;
+			line-height: 62px;
+			letter-spacing: -1.28px;
+		}
+
+		.work-prose h2 {
+			font-size: 2.5rem !important;
+			line-height: 1.1 !important;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.work-title {
+			font-size: 42px;
+			line-height: 42px;
+			letter-spacing: -0.84px;
+		}
+
+		.work-prose h2 {
+			font-size: 2rem !important;
+			line-height: 1.1 !important;
+		}
+	}
+
+	/* Gallery breakout — match featured image width while text stays at prose width */
+	.work-prose {
+		max-width: 100% !important;
+	}
+
+	/* Constrain text elements to readable width and center them */
+	.work-prose h2,
+	.work-prose p,
+	.work-prose ul,
+	.work-prose ol,
+	.work-prose blockquote {
+		max-width: 48rem !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+
+	/* Remove prose margins from gallery images */
+	.work-prose .gallery-grid img {
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
+	}
+</style>

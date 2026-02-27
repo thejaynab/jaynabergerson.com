@@ -41,9 +41,18 @@ const { pretitle, title } = Astro.props;
 	</div>
 	<div class="mt-16">
 		<div
-			class="gap-x-[1.88rem] auto-cols-fr grid-cols-1 lg:grid-cols-3 grid-rows-[auto] gap-y-10 grid"
+			class="blog-latest-grid gap-x-[1.88rem] auto-cols-fr grid-cols-1 lg:grid-cols-3 grid-rows-[auto] gap-y-10 grid"
 		>
 			{recentPosts.map((post) => <BlogPreview {post} />)}
 		</div>
 	</div>
 </div>
+
+<style>
+	.blog-latest-grid :global(.blog-date) {
+		font-size: 12px;
+	}
+	.blog-latest-grid :global(.mt-5:has(.blog-date)) {
+		margin-top: 0;
+	}
+</style>
