@@ -5,6 +5,7 @@ import Container from "@/components/primitives/Container.astro";
 import Link from "@/components/primitives/Link.astro";
 import Prose from "@/components/primitives/Prose.astro";
 import WorkShare from "@/components/primitives/WorkShare.astro";
+import WorkTLDR from "@/components/sections/WorkTLDR.astro";
 import { loadVideo } from "@/lib/asset-helpers";
 import { Icon } from "astro-icon/components";
 import { defaultLocale } from "site";
@@ -45,48 +46,104 @@ const videoSrc = frontmatter.data?.video
 <BaseLayout>
 	<section class="work-layout py-32 md:py-56">
 		<Container>
-			<div class="text-center">
-				<h1 class="work-title">{frontmatter.data.title}</h1>
-				<div class="work-description">
-					{frontmatter.data?.description}
-				</div>
+			{/* Work Type Category — centered */}
+			{
+				frontmatter.data.workType && (
+					<div class="work-header-meta">
+						<span class="work-type-badge">
+							{frontmatter.data.workType}
+						</span>
+					</div>
+				)
+			}
+
+			{/* Title — centered */}
+			<h1 class="work-title">{frontmatter.data.title}</h1>
+
+			{/* Tech Category — centered */}
+			{
+				frontmatter.data.tech && (
+					<div class="work-tech">
+						{frontmatter.data.tech}
+					</div>
+				)
+			}
+
+			{/* Description + intro — above columns, centered */}
+			<div class="work-description-block">
+				<div class="work-description" set:html={frontmatter.data?.description} />
 				{
-					frontmatter.data.link && (
-						<Link
-							href={frontmatter.data.link}
-							target="_blank"
-							class="mt-10"
-							style="outline"
-						>
-							{l.visitProject}
-							<Icon
-								name="iconamoon:arrow-top-right-1-thin"
-								class="inline-block w-6 h-6 ml-2"
-							/>
-						</Link>
+					frontmatter.data.intro && (
+						<div class="work-intro-paragraph">
+							{frontmatter.data.intro}
+						</div>
 					)
 				}
 			</div>
-			<div class="flex w-full flex-col items-center justify-center pt-10">
-				{
-					"video" in frontmatter.data &&
-					frontmatter.data?.video &&
-					videoSrc ? (
-						<video autoplay loop muted playsinline>
-							<source src={videoSrc} />
-							Your browser does not support the video tag.
-						</video>
-					) : (
-						"cover" in frontmatter.data &&
-						frontmatter.data?.cover && (
-							<Image
-								class="mt-12 w-full rounded-4xl lg:w-auto lg:min-w-[50rem] lg:rounded-5xl"
-								src={frontmatter.data?.cover}
-								alt={`Cover image for ${frontmatter.data?.title}`}
-							/>
+
+			{/* Two-column: TLDR (2/3) | featured image (1/3) */}
+			<div class="work-intro-grid">
+				<div class="work-intro-text">
+					{
+						frontmatter.data.link && (
+							<Link
+								href={frontmatter.data.link}
+								target="_blank"
+								class="mt-6"
+								style="outline"
+							>
+								{l.visitProject}
+								<Icon
+									name="iconamoon:arrow-top-right-1-thin"
+									class="inline-block w-6 h-6 ml-2"
+								/>
+							</Link>
 						)
-					)
-				}
+					}
+					{
+						frontmatter.data.tldr && frontmatter.data.tldr.length > 0 && (
+							<WorkTLDR items={frontmatter.data.tldr} />
+						)
+					}
+				</div>
+				<div class="work-intro-cover">
+					{
+						"video" in frontmatter.data &&
+						frontmatter.data?.video &&
+						videoSrc ? (
+							<video autoplay loop muted playsinline class="w-full rounded-3xl">
+								<source src={videoSrc} />
+								Your browser does not support the video tag.
+							</video>
+						) : (
+							"cover" in frontmatter.data &&
+							frontmatter.data?.cover && (
+								<Image
+									class="w-full rounded-3xl"
+									src={frontmatter.data?.cover}
+									alt={`Cover image for ${frontmatter.data?.title}`}
+								/>
+							)
+						)
+					}
+				</div>
+			</div>
+
+			{/* Full-width hero image below intro */}
+			{
+				frontmatter.data.heroImage && (
+					<div class="work-hero-image">
+						<Image
+							class="w-full rounded-3xl"
+							src={frontmatter.data.heroImage}
+							alt={`Hero image for ${frontmatter.data?.title}`}
+						/>
+					</div>
+				)
+			}
+
+			{/* Body content */}
+			<div class="flex w-full flex-col items-center justify-center pt-10">
 				<Prose class="work-prose"><slot /></Prose>
 				<div class="mx-auto w-full max-w-3xl pt-20">
 					<WorkShare />
@@ -101,6 +158,27 @@ const videoSrc = frontmatter.data?.video
 	   Uses is:global so child-component markup is reached.
 	   All selectors are prefixed with .work-* so they won't leak. */
 
+	/* Work Type Badge — matches article category style */
+	.work-type-badge {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 13px;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		line-height: 1;
+		padding: 8px 24px;
+		text-transform: uppercase;
+		display: inline-block;
+		border: 2px solid black;
+		border-radius: 9999px;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.work-header-meta {
+		text-align: center;
+		padding-bottom: 1rem;
+	}
+
 	.work-title {
 		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
 		font-size: 72px;
@@ -108,22 +186,115 @@ const videoSrc = frontmatter.data?.video
 		font-weight: 600;
 		letter-spacing: -1.44px;
 		line-height: 70px;
+		text-align: center;
+	}
+
+	/* Tech line — matches article author style */
+	.work-tech {
+		font-family: "Roboto Mono", "Lucida Console", Monaco, monospace;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 500;
+		letter-spacing: 0.03rem;
+		text-transform: uppercase;
+		padding-top: 1.25rem;
+		text-align: center;
+	}
+
+	/* Description block — above columns, centered */
+	.work-description-block {
+		max-width: 48rem;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 2.5rem;
+	}
+
+	/* Two-column intro grid: 2/3 text, 1/3 cover */
+	.work-intro-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+		margin-top: 40px;
+		align-items: start;
+		max-width: 48rem;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	@media (min-width: 768px) {
+		.work-intro-grid {
+			grid-template-columns: 2fr 1fr;
+			gap: 3rem;
+		}
+	}
+
+	.work-intro-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	.work-intro-cover {
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+	}
+
+	.work-intro-cover img,
+	.work-intro-cover video {
+		width: 100%;
+		height: auto;
+		border-radius: 1.5rem;
+		object-fit: cover;
+	}
+
+	/* TLDR section — full width, centered */
+	.work-tldr-section {
+		max-width: 48rem;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 1rem;
+	}
+
+	/* Full-width hero image below TLDR */
+	.work-hero-image {
+		margin-top: 2.5rem;
+		max-height: 600px;
+		overflow: hidden;
+		border-radius: 1.5rem;
+		position: relative;
+	}
+
+	.work-hero-image img {
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		left: 0;
 	}
 
 	.work-description {
 		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
-		font-size: 3rem !important;
+		font-size: 1.5rem !important;
 		font-style: normal !important;
 		font-weight: 400 !important;
 		letter-spacing: 0.03rem !important;
-		line-height: 3.4rem !important;
+		line-height: 2.1rem !important;
 		text-align: left !important;
-		margin-top: 3rem !important;
 		width: 100% !important;
-		max-width: 48rem !important;
-		align-self: center !important;
-		margin-left: auto !important;
-		margin-right: auto !important;
+		color: rgb(63, 63, 63) !important;
+	}
+
+	.work-intro-paragraph {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 1.5rem;
+		font-style: normal;
+		font-weight: 600;
+		letter-spacing: 0.03rem;
+		line-height: 2.1rem;
+		text-align: left;
+		width: 100%;
+		color: rgb(63, 63, 63);
+		margin-top: 1.5rem;
 	}
 
 	/* Case study H2 */

@@ -1,5 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
+import type { ButtonProps } from "@/components/primitives/Button.astro";
+import Link from "@/components/primitives/Link.astro";
 import BlogPreview from "@/components/sections/BlogPreview.astro";
 
 const currentLocale = Astro.currentLocale;
@@ -25,9 +27,10 @@ const recentPosts = posts
 interface Props {
 	pretitle?: string;
 	title: string;
+	buttons?: ButtonProps[];
 }
 
-const { pretitle, title } = Astro.props;
+const { pretitle, title, buttons } = Astro.props;
 ---
 
 <div class="text-sm font-medium pt-20 pb-32">
@@ -46,6 +49,19 @@ const { pretitle, title } = Astro.props;
 			{recentPosts.map((post) => <BlogPreview {post} />)}
 		</div>
 	</div>
+	{buttons && buttons.length > 0 && (
+		<div class="items-center flex-col text-sm font-medium flex text-white pt-16">
+			{buttons.map(({ title, href, style, icon }) => (
+				<Link
+					href={href}
+					style={style as "primary" | "button" | "outline" | "buttonLight"}
+					icon={icon}
+				>
+					{title}
+				</Link>
+			))}
+		</div>
+	)}
 </div>
 
 <style>

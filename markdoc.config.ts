@@ -72,6 +72,7 @@ export default defineMarkdocConfig({
 			attributes: {
 				pretitle: { type: String, render: "pretitle" },
 				title: { type: String, render: "title", required: true },
+				buttons: { type: Array, render: "buttons" },
 			},
 			render: component("./src/components/sections/BlogLatest.astro"),
 		},
@@ -109,6 +110,8 @@ export default defineMarkdocConfig({
 			attributes: {
 				title: { type: String, render: "title", required: true },
 				results: { type: Array, render: "results", required: true },
+				buttonText: { type: String, render: "buttonText" },
+				buttonHref: { type: String, render: "buttonHref" },
 			},
 			render: component("./src/components/sections/Results.astro"),
 		},
@@ -141,6 +144,12 @@ export default defineMarkdocConfig({
 				exclude: { type: String, render: "exclude" },
 			},
 			render: component("./src/components/sections/Gallery.astro"),
+		},
+		WorkTLDR: {
+			attributes: {
+				items: { type: Array, render: "items", required: true },
+			},
+			render: component("./src/components/sections/WorkTLDR.astro"),
 		},
 	},
 });

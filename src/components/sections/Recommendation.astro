@@ -27,7 +27,7 @@ const { pretitle, title, recommendations } = Astro.props;
 		</div>
 	)}
 	<div
-		class="bg-black flex-grow py-20 px-8 md:px-16 rounded-3xl relative"
+		class="bg-white border border-[rgb(63,63,63)] flex-grow py-20 px-8 md:px-16 rounded-3xl relative"
 		x-data={`{
 			current: 0,
 			count: ${recommendations.length},
@@ -68,16 +68,16 @@ const { pretitle, title, recommendations } = Astro.props;
 					x-transition:leave-end="opacity-0 -translate-x-8"
 					class="items-center flex-col justify-center text-center flex px-8 md:px-16"
 				>
-					<h2 class="text-white text-xl md:text-[2.13rem] leading-snug md:leading-9 lg:max-w-[60%] mb-1">
+					<h2 class="text-gray-800 text-xl md:text-[2.13rem] leading-snug md:leading-9 lg:max-w-[60%] mb-1">
 						&ldquo;{t.quote}&rdquo;
 					</h2>
-					<div class="bg-white/90 w-12 h-[1px] my-8 mx-auto"></div>
-					<h3 class="rec-name text-white text-lg">{t.name}</h3>
+					<div class="bg-gray-800/30 w-12 h-[1px] my-8 mx-auto"></div>
+					<h3 class="rec-name text-gray-800 text-lg">{t.name}</h3>
 					{t.jobTitle && (
-						<span class="rec-title text-white/70 text-sm mt-1">{t.jobTitle}</span>
+						<span class="rec-title text-gray-500 text-sm mt-1">{t.jobTitle}</span>
 					)}
 					{t.company && (
-						<span class="rec-company text-white/50 text-sm mt-0.5">{t.company}</span>
+						<span class="rec-company text-gray-400 text-sm mt-0.5">{t.company}</span>
 					)}
 				</div>
 			))}
@@ -86,7 +86,7 @@ const { pretitle, title, recommendations } = Astro.props;
 		<!-- Left Arrow -->
 		<button
 			x-on:click="prev()"
-			class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+			class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-800"
 			aria-label="Previous recommendation"
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -97,7 +97,7 @@ const { pretitle, title, recommendations } = Astro.props;
 		<!-- Right Arrow -->
 		<button
 			x-on:click="next()"
-			class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white"
+			class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors text-gray-800"
 			aria-label="Next recommendation"
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -112,7 +112,7 @@ const { pretitle, title, recommendations } = Astro.props;
 					<button
 						x-on:click={`current = ${i}; restartAuto()`}
 						class="w-2 h-2 rounded-full transition-colors"
-						x-bind:class={`current === ${i} ? 'bg-white' : 'bg-white/30 hover:bg-white/50'`}
+						x-bind:class={`current === ${i} ? 'bg-gray-800' : 'bg-gray-300 hover:bg-gray-400'`}
 						aria-label={`Go to recommendation ${i + 1}`}
 					/>
 				))}
