@@ -4,13 +4,17 @@ import { Image } from "astro:assets";
 interface Props {
 	folder: string;
 	exclude?: string;
+	layout?: string;
+	alts?: string;
 }
 
-const { folder, exclude } = Astro.props;
+const { folder, exclude, layout, alts } = Astro.props;
+const gridClass = layout ? `gallery-grid gallery-grid--${layout}` : "gallery-grid";
+const altList = alts ? alts.split("|").map((s: string) => s.trim()) : [];
 
-// Import all post images eagerly
+// Import all post and work images eagerly
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
-	"/src/assets/posts/**/*.{webp,png,jpg,jpeg,svg,gif}",
+	["/src/assets/posts/**/*.{webp,png,jpg,jpeg,svg,gif}", "/src/assets/works/**/*.{webp,png,jpg,jpeg,svg,gif}"],
 	{ eager: true }
 );
 
@@ -21,15 +25,15 @@ const images = Object.entries(allImages)
 	.filter(([path]) => path.includes(`/${folder}/`))
 	.filter(([path]) => !excludeList.some((ex: string) => path.includes(ex)))
 	.sort(([a], [b]) => a.localeCompare(b))
-	.map(([path, mod]) => ({
+	.map(([path, mod], i) => ({
 		src: mod.default,
-		alt: path.split("/").pop()?.replace(/\.[^.]+$/, "").replace(/-/g, " ") || "",
+		alt: altList[i] || path.split("/").pop()?.replace(/\.[^.]+$/, "").replace(/-/g, " ") || "",
 	}));
 ---
 
-<div class="gallery-grid">
-	{images.map((img) => (
-		<div class="gallery-item">
+<div class={gridClass}>
+	{images.map((img, i) => (
+		<div class={`gallery-item ${layout === 'feature-left' && i === 0 ? 'gallery-item--feature' : ''} ${layout === 'feature-right' && i === images.length - 1 ? 'gallery-item--feature' : ''}`}>
 			<Image
 				src={img.src}
 				alt={img.alt}
@@ -70,5 +74,82 @@ const images = Object.entries(allImages)
 		height: auto;
 		display: block;
 		border-radius: 8px;
+	}
+
+	/* --- Layout variants --- */
+
+	/* 1-column */
+	.gallery-grid--1-col {
+		columns: 1 !important;
+	}
+
+	/* 2-column */
+	.gallery-grid--2-col {
+		columns: 1 !important;
+	}
+	@media (min-width: 640px) {
+		.gallery-grid--2-col {
+			columns: 2 !important;
+		}
+	}
+
+	/* 3-column (same as default but explicit) */
+	.gallery-grid--3-col {
+		columns: 1 !important;
+	}
+	@media (min-width: 640px) {
+		.gallery-grid--3-col {
+			columns: 2 !important;
+		}
+	}
+	@media (min-width: 1024px) {
+		.gallery-grid--3-col {
+			columns: 3 !important;
+		}
+	}
+
+	/* Feature-left: tall image left, two stacked right */
+	.gallery-grid--feature-left {
+		columns: unset !important;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto;
+		gap: 10px;
+	}
+	@media (min-width: 640px) {
+		.gallery-grid--feature-left {
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 1fr 1fr;
+		}
+		.gallery-grid--feature-left .gallery-item--feature {
+			grid-row: 1 / 3;
+		}
+		.gallery-grid--feature-left .gallery-item--feature .gallery-image {
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	/* Feature-right: two stacked left, tall image right */
+	.gallery-grid--feature-right {
+		columns: unset !important;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto;
+		gap: 10px;
+	}
+	@media (min-width: 640px) {
+		.gallery-grid--feature-right {
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 1fr 1fr;
+		}
+		.gallery-grid--feature-right .gallery-item--feature {
+			grid-row: 1 / 3;
+			grid-column: 2;
+		}
+		.gallery-grid--feature-right .gallery-item--feature .gallery-image {
+			height: 100%;
+			object-fit: cover;
+		}
 	}
 </style>

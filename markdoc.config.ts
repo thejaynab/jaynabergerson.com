@@ -142,6 +142,8 @@ export default defineMarkdocConfig({
 			attributes: {
 				folder: { type: String, render: "folder", required: true },
 				exclude: { type: String, render: "exclude" },
+				layout: { type: String, render: "layout" },
+				alts: { type: String, render: "alts" },
 			},
 			render: component("./src/components/sections/Gallery.astro"),
 		},
