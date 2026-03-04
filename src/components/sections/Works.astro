@@ -6,22 +6,19 @@ import WorkPreview from "@/components/sections/WorkPreview.astro";
 
 const currentLocale = Astro.currentLocale;
 
-const works = await getCollection("works");
+const works = await getCollection("work");
 
 const allWorks = works
 	.map((work) => {
-		const [lang, ...slug] = work.slug.split("/");
 		return {
 			...work,
-			lang: lang,
 			slug: work.slug.startsWith("/") ? work.slug : `/${work.slug}`,
 		};
 	})
-	.filter((page) => page.lang === currentLocale)
 	.sort(
 		(a, b) =>
 			a.data.lastUpdateDate.getTime() - b.data.lastUpdateDate.getTime(),
-	) as CollectionEntry<"works">[];
+	) as CollectionEntry<"work">[];
 ---
 
 <div

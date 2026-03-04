@@ -4,11 +4,11 @@ import PostLayout from "@/layouts/PostLayout.astro";
 import { getCollectionStaticPaths } from "@/lib/collection-helpers";
 
 export interface Props {
-	data: CollectionEntry<"posts">;
+	data: CollectionEntry<"articles">;
 }
 
 export async function getStaticPaths() {
-	return await getCollectionStaticPaths("posts", "en");
+	return await getCollectionStaticPaths("articles");
 }
 
 const { data: post } = Astro.props;

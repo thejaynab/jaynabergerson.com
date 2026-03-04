@@ -631,10 +631,10 @@ export default config({
 				}),
 			},
 		}),
-		posts: collection({
-			label: "Posts",
+		articles: collection({
+			label: "Articles",
 			slugField: "title",
-			path: "src/content/posts/it/*",
+			path: "src/content/articles/*",
 			entryLayout: "content",
 			columns: ["title", "lastUpdateDate"],
 			previewUrl: "/post/{slug}",
@@ -714,13 +714,13 @@ export default config({
 				}),
 			},
 		}),
-		works: collection({
-			label: "Works",
+		work: collection({
+			label: "Work",
 			slugField: "title",
-			path: "src/content/works/it/*",
+			path: "src/content/work/*",
 			entryLayout: "content",
 			columns: ["title", "lastUpdateDate"],
-			previewUrl: "/works/{slug}",
+			previewUrl: "/work/{slug}",
 			format: { contentField: "content" },
 			schema: {
 				title: fields.slug({

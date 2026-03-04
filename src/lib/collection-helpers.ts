@@ -1,5 +1,5 @@
 import { type ContentEntryMap, getCollection } from "astro:content";
-import { type Locale, defaultLocale } from "site.config";
+import { type Locale, defaultLocale, locales } from "site.config";
 
 export async function getCollectionStaticPaths<CollectionName extends keyof ContentEntryMap>(
 	collectionName: CollectionName,
@@ -12,12 +12,23 @@ export async function getCollectionStaticPaths<CollectionName extends keyof Cont
 	});
 
 	const paths = visibleItems.map((item) => {
-		const [lang, ...slug] = item.slug.split("/");
-		let localizedSlug = slug;
+		const parts = item.slug.split("/");
+		let lang: string;
+		let localizedSlug: string[];
+
+		// Check if slug starts with a known locale (e.g., pages/en/about)
+		if (locales.includes(parts[0] as Locale)) {
+			lang = parts[0];
+			localizedSlug = parts.slice(1);
+		} else {
+			// Collections without locale subfolders (e.g., articles, work)
+			lang = defaultLocale;
+			localizedSlug = parts;
+		}
 
 		if (collectionName === "pages") {
 			// For pages handle homepage slug
-			localizedSlug = slug[0] === "homepage" || slug[0] === "index" ? [] : slug;
+			localizedSlug = localizedSlug[0] === "homepage" || localizedSlug[0] === "index" ? [] : localizedSlug;
 		}
 
 		if (lang !== defaultLocale && !locale) {

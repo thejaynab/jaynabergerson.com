@@ -68,8 +68,8 @@ const servicesCollection = defineCollection({
 });
 
 export const collections = {
-	posts: postsCollection,
+	articles: postsCollection,
 	pages: pagesCollection,
 	services: servicesCollection,
-	works: worksCollection,
+	work: worksCollection,
 };

@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 			.replace(/(^-|-$)/g, "");
 	}
 
-	const posts = await getCollection("posts");
+	const posts = await getCollection("articles");
 
 	const visiblePosts = posts.filter((post) => !post.data.hidden);
 
@@ -31,22 +31,20 @@ interface Props {
 
 const { category } = Astro.props;
 
-const posts = await getCollection("posts");
+const posts = await getCollection("articles");
 
 const filteredPosts = posts
 	.map((post) => {
-		const [lang, ...slug] = post.slug.split("/");
 		return {
 			...post,
-			lang: lang,
 			slug: post.slug.startsWith("/") ? post.slug : `/${post.slug}`,
 		};
 	})
-	.filter((post) => post.lang === "en" && !post.data.hidden && post.data.category === category)
+	.filter((post) => !post.data.hidden && post.data.category === category)
 	.sort(
 		(a, b) =>
 			b.data.pubDate.getTime() - a.data.pubDate.getTime(),
-	) as CollectionEntry<"posts">[];
+	) as CollectionEntry<"articles">[];
 ---
 
 <BaseLayout>
