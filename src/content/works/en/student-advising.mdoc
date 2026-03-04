@@ -27,19 +27,19 @@ impact:
     description: "Identified improvements across systems, sites, and applications"
   - value: "2+"
     description: "Applications changed within 3 months of the report"
-  - value: "3"
-    description: "Additional research contracts awarded"
+  - value: "$500k+"
+    description: "In additional research contracts generated from the engagement"
 backgroundColor: '#E5EDE8'
 pubDate: 2025-09-01
 lastUpdateDate: 2026-03-03
 ---
 
-## The problem
 
 You're a first-year student at Northeastern. You have an academic advisor, a co-op advisor, and — because you're in the honors program — an honors advisor. To book time with each, you open three different applications: BookMe for one, Appointment+ for another, Calendly for the third. Each requires a separate login because none are connected to the university's identity manager.
 
 You receive somewhere between 10 and 20 university emails a day. You're toggling between up to 44 web applications and managing multiple calendars that change depending on your college, major, concentration, and any additional programs you're enrolled in.
 
+### The problem:
 University leadership assumed students were simply disorganized — bad at reading emails, neglectful of deadlines.
 
 The quantitative survey data seemed to confirm this: students were dropping the ball. But that data only measured *what* was happening. It didn't explain *why*.
@@ -52,7 +52,9 @@ Six months to evaluate a technology ecosystem serving 27,000 students across doz
 ### The decision I made:
 Rather than evaluating individual applications in isolation — which was the expected approach — I chose to map the entire ecosystem as a *system*. The pain wasn't in any single tool. It was in how those tools interacted, overlapped, and siloed.
 
-That reframing changed what the engagement could deliver: not a list of app-level fixes, but a structural diagnosis of institutional fragmentation.
+**That reframing changed what the engagement could deliver: not a list of app-level fixes, but a structural diagnosis of institutional fragmentation.**
+
+
 
 {% Gallery folder="northeastern-systems-map" layout="feature-left" /%}
 
@@ -62,7 +64,11 @@ The university already had technical architecture diagrams. What it didn't have 
 
 I built a subject matter map through iterative research: reviewing over 15 internal documents and reports, conducting student and staff interviews, running surveys, and attending a series of technology-focused meetings with application experts across the university. Each meeting added connections, revealed data flow directions, and exposed where systems were talking to each other — and where they weren't.
 
-The map wasn't a wiring diagram. It was designed to be legible to Vice Chancellors, Deans, department heads, and support staff — anyone who would need to act on the findings. It showed which tools belonged to which functional domains, which direction data flowed between systems, and critically, which applications sat outside the university's identity manager. Those are marked with red key icons — each one representing a separate login a student had to manage.
+The map wasn't a wiring diagram. It was designed to be legible to Vice Chancellors, Deans, department heads, and support staff — anyone who would need to act on the findings.
+
+It showed which tools belonged to which functional domains, which direction data flowed between systems, and critically, which applications sat outside the university's identity manager. Those are marked with red key icons — each one representing a separate login a student had to manage.
+
+{% PasswordGate %}
 
 ### What it revealed:
 
@@ -76,9 +82,13 @@ The harder challenge wasn't the research — it was the reception. My findings c
 
 I needed to present findings that challenged deeply held assumptions — to stakeholders who had the authority to reject them.
 
-**The decision I made:** I created the student journey map not only because journey maps are standard UX practice, but because I recognized that *this specific audience* needed to *see* the student experience laid out end-to-end — every system, every requirement, every advising touchpoint across four undergraduate years. The sheer physical length of the map was itself the argument. I didn't need to explain the complexity when stakeholders could see it.
+### The decision I made:
 
-**What I chose not to do:** I didn't present raw research to stakeholders. I didn't use jargon — not because I couldn't, but because adding technical complexity would have given people a reason to disengage. When findings are hard to hear, the delivery has to be simple enough that there's nothing to hide behind. I kept language straightforward, connected the dots explicitly, and let the evidence carry the weight.
+I created the student journey map not only because journey maps are standard UX practice, but because I recognized that *this specific audience* needed to *see* the student experience laid out end-to-end — every system, every requirement, every advising touchpoint across four undergraduate years. The sheer physical length of the map was itself the argument. I didn't need to explain the complexity when stakeholders could see it.
+
+### What I chose not to do:
+
+I didn't present raw research to stakeholders. I didn't use jargon — not because I couldn't, but because adding technical complexity would have given people a reason to disengage. When findings are hard to hear, the delivery has to be simple enough that there's nothing to hide behind. I kept language straightforward, connected the dots explicitly, and let the evidence carry the weight.
 
 I modified the presentation multiple times based on stakeholder feedback — not to dilute the findings, but to find the framing that preserved their integrity while making them actionable. That balance — between being rigorous and being heard — was the hardest part of the engagement.
 
@@ -88,15 +98,28 @@ I modified the presentation multiple times based on stakeholder feedback — not
 
 A 130-page report is documentation, not communication. I knew no stakeholder would read it cover-to-cover. But the findings needed to be exhaustive for institutional reference — every discovery, every methodology decision, every data point documented so the university could return to it for years.
 
-**The decision I made:** I designed a two-layer delivery strategy. The Discovery Report — edited to 102 pages with client feedback and our content strategist — served as the authoritative record: an executive summary, research methodology, a detailed report of findings, 55 specific recommendations mapped to specific discoveries, 7 holistic solution concepts, and a strategic action plan. This was the reference document.
+### The decision I made:
+
+I designed a two-layer delivery strategy. The Discovery Report — edited to 102 pages with client feedback and our content strategist — served as the authoritative record: an executive summary, research methodology, a detailed report of findings, 55 specific recommendations mapped to specific discoveries, 7 holistic solution concepts, and a strategic action plan. This was the reference document.
 
 For *decision-making*, I built a presentation that distilled the actionable points. Two artifacts, two audiences, one coherent story. I developed all the content and worked with the design director to create branded, visually compelling slides. The content strategist ensured consistency between the report and the presentation — so stakeholders who read both would never encounter contradictions.
 
-The 55 recommendations weren't a flat list. I designed a **strategic action plan** — a sequenced roadmap where each recommendation builds on the previous one without causing operational disruption. For instance: consolidate data infrastructure and server architecture *before* building a new student-facing mobile application — because the app depends on clean, connected data. Skip that step, and you're layering a new tool on top of the same fragmented system that created the problem.
+### How I enabled action:
+The 55 recommendations weren't a flat list. I designed a **strategic action plan** — a sequenced roadmap where each recommendation builds on the previous one without causing operational disruption.
 
-That sequencing is what turned research into something the institution could actually execute. Recommendations without an implementation order are a wishlist. An action plan gives leadership the confidence to move.
+For instance: consolidate data infrastructure and server architecture *before* building a new student-facing mobile application — because the app depends on clean, connected data. Skip that step, and you're layering a new tool on top of the same fragmented system that created the problem.
 
-I presented to multiple stakeholder groups across the university — Vice Chancellors, Deans, IT leadership, the Education Innovation team, and the Student Support Initiative. Each presentation connected the dots between what the research uncovered, what it meant for their specific domain, and what they could do next.
+That sequencing is what turned research into something the institution could actually execute. Recommendations without an implementation order are a wishlist.
+
+An action plan gives leadership the confidence to move.
+
+### What my presentation provided:
+
+I presented to multiple stakeholder groups across the university — Vice Chancellors, Deans, IT leadership, the Education Innovation team, and the Student Support Initiative.
+
+Each presentation connected the dots between what the research uncovered, what it meant for their specific domain, and what they could do next.
+
+
 
 {% Recommendation
    pretitle="From Client"
@@ -114,7 +137,11 @@ Two applications were changed as a result of the report.
 
 2. **The Student Hub** — an internal portal that had been linking students *out* to find data — was restructured to pull information *inward*. The research had shown that outbound links broke silently; staff never noticed because they didn't use the student-facing interface daily. Students encountered dead ends constantly.
 
-Northeastern brought me back to lead three additional research projects — each building on the foundation and relationships established in Discovery I. The engagement generated over $500,000 in contract work for Concentric Sky and created a new applied-research revenue stream for a company previously known exclusively for application development. The contacts, proposals, and follow-on work demonstrated that rigorous research could be just as profitable as building products.
+Northeastern brought me back to lead three additional research projects — each building on the foundation and relationships established in Discovery I.
+
+The engagement **generated over $500K in contract work for Concentric Sky** and created a new applied-research revenue stream for a company previously known exclusively for application development.
+
+The contacts, proposals, and follow-on work demonstrated that rigorous research could be just as profitable as building products.
 
 ## Reflection
 
@@ -123,3 +150,5 @@ If I were to do this engagement again, I'd push earlier for direct observation s
 The journey map and systems chart were powerful proxies, but nothing replaces seeing a student toggle between six applications to complete a single advising task.
 
 *Due to NDA, detailed artifacts and internal metrics are omitted. I'm happy to discuss methodology and tradeoffs in conversation.*
+
+{% /PasswordGate %}

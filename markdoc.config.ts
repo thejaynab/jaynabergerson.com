@@ -153,5 +153,9 @@ export default defineMarkdocConfig({
 			},
 			render: component("./src/components/sections/WorkTLDR.astro"),
 		},
+		PasswordGate: {
+			children: ["*"],
+			render: component("./src/components/sections/PasswordGate.astro"),
+		},
 	},
 });
