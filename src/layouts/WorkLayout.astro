@@ -81,31 +81,8 @@ const videoSrc = frontmatter.data?.video
 				}
 			</div>
 
-			{/* Three-column: TLDR | featured image | impact */}
+			{/* Cover thumbnail */}
 			<div class="work-intro-grid">
-				<div class="work-intro-text">
-					{
-						frontmatter.data.link && (
-							<Link
-								href={frontmatter.data.link}
-								target="_blank"
-								class="mt-6"
-								style="outline"
-							>
-								{l.visitProject}
-								<Icon
-									name="iconamoon:arrow-top-right-1-thin"
-									class="inline-block w-6 h-6 ml-2"
-								/>
-							</Link>
-						)
-					}
-					{
-						frontmatter.data.tldr && frontmatter.data.tldr.length > 0 && (
-							<WorkTLDR items={frontmatter.data.tldr} />
-						)
-					}
-				</div>
 				<div class="work-intro-cover">
 					{
 						"video" in frontmatter.data &&
@@ -127,33 +104,61 @@ const videoSrc = frontmatter.data?.video
 						)
 					}
 				</div>
+			</div>
+
+			{/* Overview section — below cover */}
+			<div class="work-intro-text">
+				<h3 class="work-section-heading work-section-heading--center">Overview</h3>
 				{
-					frontmatter.data.impact && frontmatter.data.impact.length > 0 && (
-						<div class="work-intro-impact">
-							<span class="work-impact-title">Impact</span>
-							<div class="work-impact-rows">
-								{frontmatter.data.impact.map(({ value, description }: { value: string; description: string }) => (
-									<div class="work-impact-row">
-										<span class="work-impact-number">{value}</span>
-										<span class="work-impact-desc">{description}</span>
-									</div>
-								))}
-							</div>
-							<div class="work-impact-button">
-								<Link
-									href="#what-changed"
-									size="md"
-									style="outline"
-									class="work-impact-link flex justify-center gap-3"
-								>
-									<Icon size={23} name="ic:sharp-vertical-align-bottom" />
-									<span>View full impact</span>
-								</Link>
-							</div>
-						</div>
+					frontmatter.data.link && (
+						<Link
+							href={frontmatter.data.link}
+							target="_blank"
+							class="mt-6"
+							style="outline"
+						>
+							{l.visitProject}
+							<Icon
+								name="iconamoon:arrow-top-right-1-thin"
+								class="inline-block w-6 h-6 ml-2"
+							/>
+						</Link>
+					)
+				}
+				{
+					frontmatter.data.tldr && frontmatter.data.tldr.length > 0 && (
+						<WorkTLDR items={frontmatter.data.tldr} />
 					)
 				}
 			</div>
+
+			{/* Impact section — standalone below grid */}
+			{
+				frontmatter.data.impact && frontmatter.data.impact.length > 0 && (
+					<div class="work-impact-section">
+						<h3 class="work-section-heading work-section-heading--center">Impact</h3>
+						<div class="work-impact-cards">
+							{frontmatter.data.impact.map(({ value, description }: { value: string; description: string }) => (
+								<div class="work-impact-card">
+									<span class="work-impact-number">{value}</span>
+									<span class="work-impact-desc">{description}</span>
+								</div>
+							))}
+						</div>
+						<div class="work-impact-button">
+							<Link
+								href="#what-changed"
+								size="md"
+								style="outline"
+								class="work-impact-link"
+							>
+								<Icon size={20} name="ic:sharp-vertical-align-bottom" />
+								<span>View full impact</span>
+							</Link>
+						</div>
+					</div>
+				)
+			}
 
 			{/* Full-width hero image below intro */}
 			{
@@ -235,118 +240,140 @@ const videoSrc = frontmatter.data?.video
 		margin-top: 2.5rem;
 	}
 
-	/* Three-column intro grid */
+	/* Shared section heading — used for both Overview and Impact */
+	.work-section-heading {
+		font-family: 'Inter Tight', sans-serif;
+		font-size: 1.1rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: rgba(0, 0, 0, 0.4);
+		margin: 0 0 0.5rem 0;
+		padding: 0;
+		line-height: 1;
+	}
+
+	.work-section-heading--center {
+		text-align: center;
+		margin-bottom: 28px;
+	}
+
+	/* Override for Overview heading */
+	.work-intro-text .work-section-heading--center {
+		margin-bottom: 8px;
+	}
+
+	/* Single-column intro section */
 	.work-intro-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 2.5rem;
-		margin-top: 40px;
-		align-items: start;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5rem;
+		padding-top: 2rem;
+		padding-left: 2rem;
+		padding-right: 2rem;
+		padding-bottom: 2rem;
 		background: white;
-		padding: 2rem;
 		border-radius: 1rem;
-		box-shadow: 0 0 30px 15px white;
 		position: relative;
 		z-index: 1;
-	}
-
-	@media (min-width: 768px) {
-		.work-intro-grid {
-			grid-template-columns: 1fr 1fr;
-			gap: 2rem;
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.work-intro-grid {
-			grid-template-columns: 1fr 1fr 1fr;
-			gap: 2.5rem;
-		}
+		max-width: 48rem;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.work-intro-text {
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
+		max-width: 600px;
+		margin-top: 48px;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	.work-intro-cover {
-		display: flex;
-		align-items: flex-start;
-		justify-content: center;
+		position: relative;
+		overflow: hidden;
+		width: 400px;
+		height: 400px;
+		margin-top: 28px;
+		border-radius: 1rem;
+		flex-shrink: 0;
 	}
 
 	.work-intro-cover img,
 	.work-intro-cover video {
+		position: absolute;
+		bottom: 0;
+		left: 0;
 		width: 100%;
 		height: auto;
-		border-radius: 1.5rem;
+		border-radius: 0;
 		object-fit: cover;
 	}
 
-	/* Impact column */
-	.work-intro-impact {
-		display: flex;
-		flex-direction: column;
+	/* Impact section — standalone below the grid */
+	.work-impact-section {
+		margin-top: 3rem;
+	}
+
+	.work-impact-cards {
+		display: grid;
+		grid-template-columns: 1fr;
 		gap: 1.25rem;
-		padding: 1.25rem 0;
+		margin-top: 1rem;
 	}
 
-	.work-impact-title {
-		font-family: 'Roboto Mono', monospace;
-		font-size: 12px;
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		color: rgba(0, 0, 0, 0.4);
+	@media (min-width: 640px) {
+		.work-impact-cards {
+			grid-template-columns: repeat(4, 1fr);
+		}
 	}
 
-	.work-impact-rows {
+	.work-impact-card {
 		display: flex;
 		flex-direction: column;
-		gap: 0;
-	}
-
-	.work-impact-row {
-		display: flex;
 		align-items: center;
-		gap: 1rem;
-		text-align: left;
-		padding: 1rem 0;
-	}
-
-	.work-impact-row + .work-impact-row {
-		border-top: 1px solid rgba(0, 0, 0, 0.1);
+		text-align: center;
+		padding: 1.75rem 1.25rem;
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		border-radius: 0.875rem;
+		gap: 0.5rem;
 	}
 
 	.work-impact-number {
 		font-family: 'Inter Tight', sans-serif;
-		font-size: 2.5rem;
+		font-size: 4rem;
 		font-weight: 600;
 		line-height: 1;
-		color: rgba(0, 0, 0, 0.7);
-		width: 4.5rem;
-		flex-shrink: 0;
-		text-align: left;
+		color: rgba(0, 0, 0, 0.75);
 	}
 
 	.work-impact-desc {
 		font-family: 'Inter Tight', sans-serif;
-		font-size: 0.95rem;
+		font-size: 0.9rem;
 		font-weight: 400;
 		line-height: 1.4;
-		color: rgba(0, 0, 0, 0.6);
+		color: rgba(0, 0, 0, 0.5);
 	}
 
 	.work-impact-button {
-		margin-top: 0.5rem;
+		margin-top: 28px;
+		display: flex;
+		justify-content: center;
 	}
 
 	.work-impact-link {
 		font-size: 0.85rem !important;
-		color: rgb(63, 63, 63) !important;
+		color: #fff !important;
+		background-color: #000 !important;
 		text-decoration: none !important;
 		padding: 7px 14px !important;
+		border-radius: 6px !important;
+		display: inline-flex !important;
+		align-items: center !important;
+		gap: 0.5rem !important;
 	}
 
 	/* TLDR section — full width, centered */
