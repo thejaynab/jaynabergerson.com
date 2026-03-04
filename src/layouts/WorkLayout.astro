@@ -81,7 +81,7 @@ const videoSrc = frontmatter.data?.video
 				}
 			</div>
 
-			{/* Two-column: TLDR (2/3) | featured image (1/3) */}
+			{/* Three-column: TLDR | featured image | impact */}
 			<div class="work-intro-grid">
 				<div class="work-intro-text">
 					{
@@ -127,6 +127,32 @@ const videoSrc = frontmatter.data?.video
 						)
 					}
 				</div>
+				{
+					frontmatter.data.impact && frontmatter.data.impact.length > 0 && (
+						<div class="work-intro-impact">
+							<span class="work-impact-title">Impact</span>
+							<div class="work-impact-rows">
+								{frontmatter.data.impact.map(({ value, description }: { value: string; description: string }) => (
+									<div class="work-impact-row">
+										<span class="work-impact-number">{value}</span>
+										<span class="work-impact-desc">{description}</span>
+									</div>
+								))}
+							</div>
+							<div class="work-impact-button">
+								<Link
+									href="#what-changed"
+									size="md"
+									style="outline"
+									class="work-impact-link flex justify-center gap-3"
+								>
+									<Icon size={23} name="ic:sharp-vertical-align-bottom" />
+									<span>View full impact</span>
+								</Link>
+							</div>
+						</div>
+					)
+				}
 			</div>
 
 			{/* Full-width hero image below intro */}
@@ -209,22 +235,32 @@ const videoSrc = frontmatter.data?.video
 		margin-top: 2.5rem;
 	}
 
-	/* Two-column intro grid: 2/3 text, 1/3 cover */
+	/* Three-column intro grid */
 	.work-intro-grid {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 2.5rem;
 		margin-top: 40px;
 		align-items: start;
-		max-width: 48rem;
-		margin-left: auto;
-		margin-right: auto;
+		background: white;
+		padding: 2rem;
+		border-radius: 1rem;
+		box-shadow: 0 0 30px 15px white;
+		position: relative;
+		z-index: 1;
 	}
 
 	@media (min-width: 768px) {
 		.work-intro-grid {
-			grid-template-columns: 2fr 1fr;
-			gap: 3rem;
+			grid-template-columns: 1fr 1fr;
+			gap: 2rem;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.work-intro-grid {
+			grid-template-columns: 1fr 1fr 1fr;
+			gap: 2.5rem;
 		}
 	}
 
@@ -246,6 +282,71 @@ const videoSrc = frontmatter.data?.video
 		height: auto;
 		border-radius: 1.5rem;
 		object-fit: cover;
+	}
+
+	/* Impact column */
+	.work-intro-impact {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		padding: 1.25rem 0;
+	}
+
+	.work-impact-title {
+		font-family: 'Roboto Mono', monospace;
+		font-size: 12px;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: rgba(0, 0, 0, 0.4);
+	}
+
+	.work-impact-rows {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.work-impact-row {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		text-align: left;
+		padding: 1rem 0;
+	}
+
+	.work-impact-row + .work-impact-row {
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.work-impact-number {
+		font-family: 'Inter Tight', sans-serif;
+		font-size: 2.5rem;
+		font-weight: 600;
+		line-height: 1;
+		color: rgba(0, 0, 0, 0.7);
+		width: 4.5rem;
+		flex-shrink: 0;
+		text-align: left;
+	}
+
+	.work-impact-desc {
+		font-family: 'Inter Tight', sans-serif;
+		font-size: 0.95rem;
+		font-weight: 400;
+		line-height: 1.4;
+		color: rgba(0, 0, 0, 0.6);
+	}
+
+	.work-impact-button {
+		margin-top: 0.5rem;
+	}
+
+	.work-impact-link {
+		font-size: 0.85rem !important;
+		color: rgb(63, 63, 63) !important;
+		text-decoration: none !important;
+		padding: 7px 14px !important;
 	}
 
 	/* TLDR section — full width, centered */
@@ -312,6 +413,10 @@ const videoSrc = frontmatter.data?.video
 	/* Case study H3 */
 	.work-prose h3 {
 		letter-spacing: 0.03rem !important;
+		margin-top: 40px !important;
+		margin-block-end: 20px !important;
+		margin-bottom: 20px !important;
+		margin-block-start: 40px !important;
 	}
 
 	/* Case study H4 */
@@ -388,6 +493,7 @@ const videoSrc = frontmatter.data?.video
 
 	/* Constrain text elements to readable width and center them */
 	.work-prose h2,
+	.work-prose h3,
 	.work-prose p,
 	.work-prose ul,
 	.work-prose ol,

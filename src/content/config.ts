@@ -49,6 +49,7 @@ const worksCollection = defineCollection({
 			workType: z.optional(z.string()),
 			tech: z.optional(z.string()),
 			tldr: z.optional(z.array(z.object({ label: z.string(), value: z.string() }))),
+			impact: z.optional(z.array(z.object({ value: z.string(), description: z.string() }))),
 			backgroundColor: z.optional(z.string()),
 			hidden: z.optional(z.boolean()),
 		}),
