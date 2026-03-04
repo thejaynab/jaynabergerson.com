@@ -1,60 +1,150 @@
 ---
-# INSTRUCTIONS: Copy this file to src/content/work/your-project-slug.mdoc
-# Create a cover image at src/assets/works/your-project-slug/cover.svg (or .jpg/.png)
-title: "Project Title Here"
-link: ""  # Optional: external link to live project
-description: "One-line summary of the project outcome (max 160 characters for SEO)."
+# ============================================================================
+# CASE STUDY TEMPLATE
+# ============================================================================
+# INSTRUCTIONS:
+#   1. Copy this file to src/content/work/your-project-slug.mdoc
+#   2. Place your cover image at src/assets/works/jb-home-your-slug-v1.jpg
+#   3. Create gallery folders at src/assets/works/your-slug-artifact-name/
+#   4. Replace all placeholder text below with real content
+# ============================================================================
+
+title: "Project Title — Compelling Headline That Frames the Outcome"
+link: ""                              # Optional: external link to live project
+cover: '../../assets/works/jb-home-your-slug-v1.jpg'
+# heroImage: '../../assets/works/your-slug-hero.jpg'  # Optional: full-width hero below TLDR
+description: "2–4 sentence summary of the project. This renders large below the title. Use <br><br> for paragraph breaks. Focus on the business context and why the work mattered."
+intro: "1–2 sentences about YOUR role. This renders bold below the description."
 tags:
-  - UX/UI Design  # Options: Research, Content Strategy, UX/UI Design
-cover: '@/assets/works/your-project-slug/cover.svg'
+  - UX/UI Design                      # Options: Applied Research, Content Strategy, UX/UI Design, Info Architecture
+workType: "UX/UI Design"              # Renders as pill badge above title. Match your primary tag.
+tech: "Industry"                      # Renders in monospace below title. e.g., EdTech, SaaS, HealthTech, Public Safety
+tldr:                                 # Renders in the Overview section as label/value pairs
+  - label: "Duration"
+    value: "X Months"
+  - label: "Team"
+    value: "X–X"
+  - label: "Agency / Company"
+    value: "Company Name"
+  - label: "Client"
+    value: "Client Name"
+  - label: "Role"
+    value: "Your Title & Responsibilities"
+impact:                               # Renders as 4-column stat cards below Overview
+  - value: "000"
+    description: "What this number represents"
+  - value: "00%"
+    description: "What this percentage represents"
+  - value: "00"
+    description: "What this number represents"
+  - value: "$000k"
+    description: "What this dollar amount represents"
+backgroundColor: '#E5EDE8'            # Page background color (hex)
 pubDate: 2026-01-01
 lastUpdateDate: 2026-01-01
 ---
 
-## TL;DR / Impact
+<!-- =====================================================================
+     BODY CONTENT — Everything below renders inside the work-prose section.
+     
+     STRUCTURE:
+     1. Opening narrative (2–3 paragraphs framing the problem from the user's POV)
+     2. The problem / The constraint / The decision I made (### headings)
+     3. Gallery — primary artifact (systems map, wireframes, etc.)
+     4. H2 section — deeper explanation of the artifact or approach
+     5. PasswordGate — wraps sensitive/NDA content
+     6. More Galleries + Recommendation quotes inside the gate
+     7. Impact section with anchor link {% #what-changed %}
+     8. Reflection
+     9. NDA note (italic)
+     
+     AVAILABLE MARKDOC TAGS:
+     - {% Gallery folder="slug" layout="..." /%}
+       Layouts: default (masonry), 1-col, 2-col, 3-col, feature-left, feature-left-wide, feature-right
+       Optional: alts="Alt 1|Alt 2|Alt 3" (pipe-separated, one per image)
+     - {% PasswordGate %} ... {% /PasswordGate %}
+       Wraps content behind a password wall (SHA-256 hashed)
+     - {% Recommendation pretitle="..." recommendations=[...] /%}
+       Client testimonial carousel
+     ===================================================================== -->
 
-- **Key result 1** — e.g., "Reduced onboarding drop-off by 40%"
-- **Key result 2** — e.g., "Decreased support tickets by 55%"
-- **Key result 3** — e.g., "Shipped to 50,000+ users"
 
-## The Challenge
+*(Write 2–3 paragraphs that put the reader in the user's shoes. Set the scene — what was the experience like before you got involved? Make the reader feel the friction.)*
 
-Describe the business problem and user pain points in 3–5 sentences. Include context about why this project mattered.
+### The problem:
 
-## My Role & Team
+*(What was actually wrong? Challenge the surface-level assumption. What did the data or research reveal?)*
 
-Describe your specific responsibilities and who you worked with. Be clear about what *you* owned.
+### The constraint:
 
-## Process
+*(What made this hard? Time, politics, scale, technical debt, organizational complexity?)*
 
-### Discovery & Research
+### The decision I made:
 
-- What research methods did you use?
-- What were the key insights?
+*(What was your strategic framing decision? Focus on the WHY, not just the what. Bold the key insight.)*
 
-### Ideation & Design
+***(One bold sentence capturing the reframe or strategic pivot.)***
 
-Include sketches, wireframes, and early explorations. Show the messy work — it demonstrates your thinking process.
 
-![Design exploration](/images/work/project-slug/exploration.jpg)
-*Caption: Brief description of what this image shows.*
+{% Gallery folder="your-slug-artifact-1" layout="feature-left-wide" /%}
 
-### Testing & Iteration
+## Section heading — name this after the artifact or approach
 
-- How did you validate your designs?
-- What changed based on feedback?
+*(2–4 paragraphs explaining the artifact shown above. What does it show? How did you build it? What did it reveal? Connect the dots between research and the visual.)*
 
-### Final Design
+{% PasswordGate %}
 
-Include high-fidelity screens, prototypes, or design system contributions. Use annotated screenshots.
+### What the [artifact] revealed:
 
-![Final design](/images/work/project-slug/final.jpg)
-*Caption: Brief description of the final design.*
+*(Explain findings that emerged from the work shown above. This is protected content — include specifics that you wouldn't share publicly.)*
 
-## Outcome & Impact
+{% Gallery folder="your-slug-artifact-2" layout="feature-right" /%}
 
-Quantified results and business impact. Use specific numbers wherever possible.
+## Second major section heading
+
+*(Continue the narrative. Each H2 section should tell a chapter of the story: what you did, why, and what it meant.)*
+
+### The decision I made:
+
+*(Another strategic decision point — show your thinking.)*
+
+### What I chose not to do:
+
+*(Demonstrate judgment by explaining what you deliberately excluded and why.)*
+
+{% Gallery folder="your-slug-artifact-3" layout="2-col" /%}
+
+## Third section heading — e.g., "From [deliverable] to a decision"
+
+*(Explain how you moved from research/design to stakeholder action. Show the bridge between your work and business outcomes.)*
+
+### How I enabled action:
+
+*(What did you do to make the work actionable? Sequencing, prioritization, presentation strategy?)*
+
+
+{% Recommendation
+   pretitle="From Client"
+   recommendations=[
+     { quote: "Quote from stakeholder or client about the work.", name: "Full Name", jobTitle: "Title", company: "Company" },
+     { quote: "Another quote if available.", name: "Full Name", jobTitle: "Title", company: "Company" }
+   ]
+/%}
+
+{% /PasswordGate %}
+
+## Impact: What changed {% #what-changed %}
+
+*(Summarize the measurable outcomes. Use a numbered list for concrete results:)*
+
+1. **First outcome** — describe what changed and the quantified impact.
+
+2. **Second outcome** — describe what changed and the quantified impact.
+
+*(1–2 closing paragraphs about follow-on work, relationships built, or business value generated.)*
 
 ## Reflection
 
-What did you learn? What would you do differently? This shows self-awareness and growth.
+*(What would you do differently? Show self-awareness. 1–2 paragraphs.)*
+
+*Due to NDA, detailed artifacts and internal metrics are omitted. I'm happy to discuss methodology and tradeoffs in conversation.*

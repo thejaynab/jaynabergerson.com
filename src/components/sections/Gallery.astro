@@ -29,6 +29,9 @@ const images = Object.entries(allImages)
 		src: mod.default,
 		alt: altList[i] || path.split("/").pop()?.replace(/\.[^.]+$/, "").replace(/-/g, " ") || "",
 	}));
+
+// Skip rendering if no images found for this folder
+if (images.length === 0) return;
 ---
 
 {
