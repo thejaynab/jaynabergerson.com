@@ -1,13 +1,16 @@
 ---
 import promoVideo from "@/assets/pages/homepage/promo.webm";
+import cursorSvg from "@/assets/global/jb-cursor-v1.svg";
 // https://codepen.io/zank/pen/zYQqygJ
 // https://whatamesh.vercel.app/
 
+const cursorUrl = typeof cursorSvg === 'string' ? cursorSvg : cursorSvg.src;
 const { class: className } = Astro.props;
 ---
 
 <div class="relative">
 	<canvas id="blob" class:list={["touch:pointer-events-none", className]}
+		style={`--cursor-url: url('${cursorUrl}')`}
 	></canvas>
 	<video id="video-blob" autoplay loop muted>
 		<source src={promoVideo} />
@@ -19,7 +22,7 @@ const { class: className } = Astro.props;
 <style>
 	canvas {
 		touch-action: none;
-		cursor: grab;
+		cursor: var(--cursor-url) 15 15, grab;
 	}
 	video {
 		display: none;

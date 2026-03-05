@@ -1,96 +1,103 @@
 ---
-title: Emergent
+title: <strong>Restructured incident documentation</strong> for fire and EMS software
 link: ""
 cover: '../../assets/works/jb-home-emergent-software-v1.jpg'
-description: "Enable first responders to document incidents quickly and easily"
-intro: "*(Add 1–2 sentences about your specific role and contribution.)*"
+description: "Emergent was building an iOS application for first responders — firefighters and EMTs who document incidents in the field. New federal reporting standards (NERIS and NEMSIS) were about to change what data had to be collected and how it had to be structured.<br><br>But the app's existing navigation had no place for most of it."
+intro: "As UX Designer, I led the information architecture effort — mapping regulatory data requirements, identifying structural gaps, and presenting a recommended reorganization of the application to stakeholders and the development team."
 tags:
   - Info Architecture
 workType: "Info Architecture"
 tech: "Public Safety"
 tldr:
   - label: "Duration"
-    value: "*(Add)*"
+    value: "6 Months"
   - label: "Team"
-    value: "*(Add)*"
+    value: "8–12"
   - label: "Company"
-    value: "*(Add)*"
-  - label: "Client"
-    value: "Emergent"
+    value: "Emergent (Startup)"
   - label: "Role"
-    value: "*(Add)*"
+    value: "UX Designer"
 impact:
-  - value: "—"
-    description: "*(Add impact metric)*"
-  - value: "—"
-    description: "*(Add impact metric)*"
-  - value: "—"
-    description: "*(Add impact metric)*"
-  - value: "—"
-    description: "*(Add impact metric)*"
+  - value: "100+"
+    description: "NERIS and NEMSIS data elements mapped and cataloged in Airtable"
+  - value: "3"
+    description: "Structural recommendations presented to stakeholders for app reorganization"
+  - value: "2"
+    description: "Federal compliance standards (NERIS & NEMSIS) addressed simultaneously"
 backgroundColor: '#E8F0F0'
 pubDate: 2025-11-01
 lastUpdateDate: 2026-03-04
 ---
 
 
-*(Write 2–3 paragraphs that set the scene. What was the experience like for first responders before your work? What friction did they face documenting incidents?)*
+A firefighter arrives at a structure fire. An EMT treats a patient on scene. Within hours — sometimes minutes — they need to document everything: the incident, the scene, the patients, the actions taken, the resources deployed. Federal reporting standards dictate exactly what data must be collected, in what format, and how it relates to other data points.
+
+Emergent was building an iOS application to make that documentation faster and easier. The app already existed in a basic form — originally a side project built by developers, now being rebuilt as a full product with a dedicated team. But two federal compliance standards were about to reshape everything the app needed to collect: NERIS for fire service reporting and NEMSIS for EMS and patient data.
+
+The question wasn't whether the app could collect the data. The question was whether it had anywhere to put it.
 
 ### The problem:
 
-*(What was actually wrong with the existing documentation workflow? What did you discover beyond the surface-level issue?)*
+As I researched the regulatory requirements for NERIS and NEMSIS, it became clear that the problem wasn't at the field level — it was structural. The application's navigation and information architecture had no place for much of the data these standards required.
+
+Patient data, for example, was treated as a separate entity — disconnected from the incident it belonged to. But in reality, every patient encounter happens *within* an incident. The incident is the envelope. Everything that happens on scene — every patient, every action, every resource — needs to live inside that envelope and stay connected to it.
+
+NEMSIS also introduced HIPAA requirements for patient data. NERIS had its own set of data structures, packaging formats, and reporting rules. The two standards overlapped in places and diverged in others. And the current app wasn't built to accommodate either one coherently.
 
 ### The constraint:
 
-*(What made this project challenging? Time pressure, technical limitations, high-stakes environment?)*
+This was a startup. Timelines were compressed, the team was small, and development was already underway on other features. I couldn't pause everything for a months-long architecture overhaul. And there was no guarantee my recommendations would be implemented before priorities shifted — which, at a startup, they always do.
+
+I also had to account for the fact that I was new to the team. I needed to build credibility quickly while simultaneously telling stakeholders that their application's foundation needed to change.
 
 ### The decision I made:
 
-*(What was your strategic information architecture decision? Why did you frame the problem the way you did?)*
+Rather than waiting until the regulatory data work was complete and then presenting a finished recommendation, I recognized that the structural implications were urgent enough to escalate immediately. The development team needed to know *now* that their current architecture couldn't hold what was coming — not after I'd finished cataloging every data field.
 
+**I separated the infrastructure problem from the data problem.** I brought the structural concerns to the design team first, then pitched the recommended reorganization to stakeholders. They asked me to go back with the design team and refine the proposal. We whiteboarded the changes together and I presented the refined recommendations — essentially saying: here are structural changes you can make *now* that will allow you to simply plug in the regulatory data work the moment it's ready.
 
-{% Gallery folder="emergent-artifact-1" layout="feature-left-wide" /%}
+That framing mattered. I wasn't asking them to stop what they were doing. I was showing them how to prepare for what was coming so it wouldn't disrupt their existing work when it arrived.
 
-## *(Section heading — name after your primary artifact or approach)*
+## Mapping the regulatory landscape
 
-*(2–4 paragraphs explaining the artifact shown above. How does the information architecture solve the documentation problem?)*
+The data requirements for NERIS and NEMSIS are extraordinarily detailed. Each standard specifies required and optional fields, input types, nesting hierarchies, value sets, nullability rules, and packaging constraints. Swagger UI — confirmed as the authoritative source through direct contact with the Director of Research at FSRI — served as the primary reference.
 
-{% PasswordGate %}
+But Swagger UI isn't designed for cross-referencing, filtering, or connecting elements to an existing application's data structures. I built the analysis in Airtable, capturing metadata for each API element: API name, required vs. optional status, input type, nullability, payload constraints, descriptions, examples, defaults, value sets, nesting levels, associated objects, and source notes.
 
-### What the research revealed:
+This allowed me to do what Swagger UI alone couldn't:
 
-*(Protected findings — specifics about the architecture, user testing results, or internal details.)*
+- Filter and group elements by module, requirement level, and data type
+- Connect NERIS and NEMSIS elements to Emergent's existing data structures
+- Identify where the two standards overlapped, where they conflicted, and where entirely new data collection was needed
+- Log edge cases, formatting questions, and areas requiring subject matter expert input
+- Highlight mismatches between federal requirements and current app workflows
 
-{% Gallery folder="emergent-artifact-2" layout="feature-right" /%}
+The mapping revealed that dispatch data, for example, had significant overlap between NERIS and NEMSIS — but with critical differences in format, packaging, and intent that needed to be resolved before implementation.
 
-## *(Second section heading)*
+## The structural recommendation
 
-*(Continue the narrative — what did you design, and how did the approach evolve?)*
+The core of my recommendation addressed how the application organized information around an incident. In public safety, when first responders arrive on scene, the *incident* is the primary unit of work. Everything flows from it.
 
-{% Gallery folder="emergent-artifact-3" layout="2-col" /%}
+For a small call — a single EMT responding to one patient — the responder needs the incident details to be minimal and fast. They identify the situation, then focus entirely on the patient. For a large-scale incident — a structure fire with multiple patients and multiple units — the situational information is gathered by different people on scene, and EMTs need to focus solely on their assigned patients without being distracted by broader scene management.
 
-## *(Third section heading — e.g., "From architecture to implementation")*
+The app needed to support both scenarios with the same underlying structure. My recommendation reorganized the navigation so that:
 
-*(How did you move from information architecture to actionable design? What was the delivery strategy?)*
+1. **The incident became the true container** — patients, resources, actions, and scene data all nested within the incident rather than existing as parallel, disconnected entities
+2. **Patient-focused workflows were isolated** — an EMT working with a patient could focus on that patient without navigating through situational data being gathered by others
+3. **New regulatory data fields had logical homes** — rather than bolting NERIS and NEMSIS fields onto an existing structure that couldn't hold them, the reorganization created the scaffolding they needed
 
+I worked with the design team through whiteboarding sessions to refine these changes, ensuring they were feasible within the existing technical architecture while still addressing the regulatory requirements.
 
-{% Recommendation
-   pretitle="From Client"
-   recommendations=[
-     { quote: "*(Add client quote)*", name: "*(Name)*", jobTitle: "*(Title)*", company: "Emergent" }
-   ]
-/%}
+### What I chose not to do:
 
-{% /PasswordGate %}
+I recommended a complete redesign of the application — and others on the team shared that view. But I also recognized that a full redesign wasn't going to happen on a startup timeline. Instead, I focused on the structural changes that would *enable* a future redesign while solving the immediate compliance problem.
 
-## Impact: What changed {% #what-changed %}
-
-1. ***(First outcome)*** — *(describe what changed and the quantified impact.)*
-
-2. ***(Second outcome)*** — *(describe what changed and the quantified impact.)*
+The structural reorganization was a stop-gap that served double duty: it met the regulatory needs and laid a better foundation for whatever came next.
 
 ## Reflection
 
-*(What would you do differently? What did you learn about designing for high-stakes environments?)*
+I was let go before any of the recommendations were implemented — a reality of startup work where priorities and budgets shift without warning. I don't know how the application evolved after my departure.
 
-*Due to NDA, detailed artifacts and internal metrics are omitted. I'm happy to discuss methodology and tradeoffs in conversation.*
+What I do know is that the work itself was sound. The regulatory mapping was thorough, the structural diagnosis was accurate, and the reorganization I recommended was designed to be implemented incrementally without disrupting ongoing development.
+
+If I were to do this engagement again, I would have pushed harder to document the structural recommendations in a formal deliverable earlier. At a startup, institutional knowledge walks out the door when people do. The whiteboarding sessions and presentations were effective for alignment, but a comprehensive written reference would have ensured the thinking survived regardless of team changes. ▪️
