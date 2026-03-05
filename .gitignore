@@ -23,3 +23,6 @@ pnpm-debug.log*
 .unlighthouse
 
 .wrangler
+
+# Case study research notes (not for deployment)
+src/content/work/info/

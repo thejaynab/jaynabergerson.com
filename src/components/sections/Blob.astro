@@ -204,8 +204,8 @@ const { class: className } = Astro.props;
 		private _acceleration: number = 0;
 		private _speed: number = 0;
 		private _radialEffect: number = 0;
-		private _elasticity: number = 0.001;
-		private _friction: number = 0.0085;
+		private _elasticity: number = 0.0015;
+		private _friction: number = 0.008;
 
 		constructor(azimuth: number, parent: Blob) {
 			this.parent = parent;
@@ -341,9 +341,9 @@ const { class: className } = Astro.props;
 					Math.sqrt(
 						strength.x * strength.x + strength.y * strength.y,
 					) * 10;
-				if (strengthValue > 15) strengthValue = 15;
+				if (strengthValue > 25) strengthValue = 25;
 				nearestPoint.acceleration =
-					(strengthValue / 100) * (hover ? -1 : 1);
+					(strengthValue / 80) * (hover ? -1 : 1);
 			}
 		}
 
