@@ -70,13 +70,7 @@ const videoSrc = work.data?.video ? await loadVideo(work.data.video) : null;
 
 	<!-- Content — upper left, always visible -->
 	<div class="relative z-10 flex flex-col justify-start h-full p-[30px] pr-[110px]">
-		<span class="card-tags">
-			{Array.from(work.data.tags).join(" \u00b7 ")}
-		</span>
-
-		<span class="card-title">
-			{work.data.title}
-		</span>
+		<span class="card-title" set:html={work.data.title} />
 	</div>
 </a>
 
@@ -106,35 +100,16 @@ const videoSrc = work.data?.video ? await loadVideo(work.data.video) : null;
 	}
 
 	/* Card-specific typography — isolated from global styles */
-	.card-tags {
-		display: block;
-		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
-		font-size: 12.5px;
-		font-style: normal;
-		font-weight: 400;
-		text-transform: none;
-		letter-spacing: 0.63px;
-		margin-bottom: 0.75rem;
-		color: rgb(63, 63, 63);
-		line-height: 25.9px;
-	}
-
 	.card-title {
 		display: block;
 		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
-		font-size: 48px;
+		font-size: 2.3rem;
 		font-style: normal;
-		font-weight: 600;
-		letter-spacing: 0.48px;
-		line-height: 46.08px;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+		line-height: 1.05;
 		margin-bottom: 0.5rem;
-		color: rgb(63, 63, 63);
-	}
-
-	@media (min-width: 768px) {
-		.card-title {
-			font-size: 48px;
-		}
+		color: rgb(0, 0, 0);
 	}
 
 
