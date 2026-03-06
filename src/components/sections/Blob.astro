@@ -219,12 +219,22 @@ const { class: className } = Astro.props;
 		}
 
 		solveWith(leftPoint: Point, rightPoint: Point) {
+			let blobAny = this.parent as any;
+			// Freeze physics while holding sculpted shape
+			if (blobAny._holdShape) {
+				this.speed = 0;
+				this._acceleration = 0;
+				return;
+			}
+			// During slow recovery, use much gentler physics for gradual reform
+			let el = blobAny._slowRecover ? this.elasticity * 0.15 : this.elasticity;
+			let fr = blobAny._slowRecover ? this.friction * 3 : this.friction;
 			this.acceleration =
 				(-0.3 * this.radialEffect +
 					(leftPoint.radialEffect - this.radialEffect) +
 					(rightPoint.radialEffect - this.radialEffect)) *
-					this.elasticity -
-				this.speed * this.friction;
+					el -
+				this.speed * fr;
 		}
 
 		set acceleration(value: number) {
@@ -249,7 +259,10 @@ const { class: className } = Astro.props;
 
 		set radialEffect(value: number) {
 			if (typeof value == "number") {
-				this._radialEffect = value;
+				// Cap deformation so blob stays within canvas
+				let maxOutward = this.parent.radius * 0.25;
+				let maxInward = -this.parent.radius * 0.55;
+				this._radialEffect = Math.max(maxInward, Math.min(maxOutward, value));
 			}
 		}
 		get radialEffect() {
@@ -296,6 +309,9 @@ const { class: className } = Astro.props;
 	let isMouseMoveListenerAdded = false;
 	let oldMousePoint = { x: 0, y: 0 };
 	let hover = false;
+	let dragging = false;
+	let inactivityTimer: ReturnType<typeof setTimeout> | null = null;
+	let recoveryTimer: ReturnType<typeof setTimeout> | null = null;
 
 	let mouseMove = function (e: PointerEvent) {
 		let pos = blob.center;
@@ -347,6 +363,27 @@ const { class: className } = Astro.props;
 			}
 		}
 
+		// Click-and-drag sculpting — direct cursor tracking
+		if (dragging) {
+			let vector = { x: adjustedX - pos.x, y: adjustedY - pos.y };
+			let dragAngle = Math.atan2(vector.y, vector.x);
+			let targetRadial = dist - blob.radius;
+
+			blob.points.forEach((point) => {
+				let angleDiff = Math.abs(dragAngle - point.azimuth);
+				if (angleDiff > Math.PI) angleDiff = Math.PI * 2 - angleDiff;
+				if (angleDiff < 1.3) {
+					// Sine-based falloff for smooth, organic bending
+					let falloff = Math.cos((angleDiff / 1.3) * (Math.PI / 2));
+					falloff = falloff * falloff;
+					// Near-instant tracking at grab point, smooth taper outward
+					let blend = 0.85 * falloff;
+					point.radialEffect += (targetRadial * falloff - point.radialEffect) * blend;
+					point.speed = 0;
+				}
+			});
+		}
+
 		oldMousePoint.x = adjustedX;
 		oldMousePoint.y = adjustedY;
 	};
@@ -382,6 +419,33 @@ const { class: className } = Astro.props;
 		if (!isMouseMoveListenerAdded) {
 			window.removeEventListener("pointermove", mouseMove);
 			window.addEventListener("pointermove", mouseMove);
+
+			canvas.addEventListener("pointerdown", function () {
+				dragging = true;
+				// Cancel any pending recovery — user is sculpting again
+				if (inactivityTimer) { clearTimeout(inactivityTimer); inactivityTimer = null; }
+				if (recoveryTimer) { clearTimeout(recoveryTimer); recoveryTimer = null; }
+				// Keep shape frozen — preserve previous sculpting
+				(blob as any)._holdShape = true;
+				(blob as any)._slowRecover = false;
+			});
+			window.addEventListener("pointerup", function () {
+				if (dragging) {
+					dragging = false;
+					// Freeze the shape immediately
+					(blob as any)._holdShape = true;
+					// After 3 seconds of inaction, begin gentle recovery
+					inactivityTimer = setTimeout(() => {
+						(blob as any)._holdShape = false;
+						(blob as any)._slowRecover = true;
+						// After another 4 seconds, return to normal physics
+						recoveryTimer = setTimeout(() => {
+							(blob as any)._slowRecover = false;
+						}, 4000);
+					}, 3000);
+				}
+			});
+
 			isMouseMoveListenerAdded = true;
 		}
 

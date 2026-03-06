@@ -70,6 +70,9 @@ const videoSrc = work.data?.video ? await loadVideo(work.data.video) : null;
 
 	<!-- Content — upper left, always visible -->
 	<div class="relative z-10 flex flex-col justify-start h-full p-[30px] pr-[110px]">
+		{work.data.tech && (
+			<span class="card-tech">{work.data.tech}</span>
+		)}
 		<span class="card-title" set:html={work.data.title} />
 	</div>
 </a>
@@ -100,10 +103,21 @@ const videoSrc = work.data?.video ? await loadVideo(work.data.video) : null;
 	}
 
 	/* Card-specific typography — isolated from global styles */
+	.card-tech {
+		display: block;
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+		font-size: 0.85rem;
+		font-weight: 500;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: rgb(0, 0, 0);
+		margin-bottom: 14px;
+	}
+
 	.card-title {
 		display: block;
 		font-family: "Inter Tight", Arial, Helvetica, sans-serif;
-		font-size: 2.3rem;
+		font-size: 1.9rem;
 		font-style: normal;
 		font-weight: 400;
 		letter-spacing: 0.02em;
