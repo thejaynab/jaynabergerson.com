@@ -88,6 +88,7 @@ const { frontmatter } = Astro.props;
 								month: "long",
 								day: "numeric",
 								year: "numeric",
+								timeZone: "UTC",
 							})}
 						</div>
 					)
@@ -265,7 +266,8 @@ const { frontmatter } = Astro.props;
 	.post-prose p,
 	.post-prose ul,
 	.post-prose ol,
-	.post-prose blockquote {
+	.post-prose blockquote,
+	.post-prose .code-block-wrapper {
 		max-width: 48rem !important;
 		margin-left: auto !important;
 		margin-right: auto !important;

@@ -6,6 +6,13 @@ export default defineMarkdocConfig({
 			...nodes.document, // Apply defaults for other options
 			render: undefined, // default 'article'
 		},
+		fence: {
+			attributes: {
+				content: { type: String, render: "content" },
+				language: { type: String, render: "language" },
+			},
+			render: component("./src/components/primitives/CodeBlock.astro"),
+		},
 		heading: {
 			attributes: {
 				...nodes.heading.attributes, // Use the correct base attributes for a heading
