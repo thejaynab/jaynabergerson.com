@@ -52,9 +52,7 @@ const localizedPath = translatePath(
 		>
 			{post.data.category}
 		</a>
-		<a href={localizedPath} class="text-3xl font-semibold mt-5 mb-3">
-			{post.data.title}
-		</a>
+		<a href={localizedPath} class="text-3xl font-semibold mt-5 mb-3" set:html={post.data.title} />
 		<div class="mt-5">
 			<p class="mb-3 blog-date">
 				{

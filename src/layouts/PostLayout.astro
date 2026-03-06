@@ -6,6 +6,7 @@ import Link from "@/components/primitives/Link.astro";
 import Prose from "@/components/primitives/Prose.astro";
 import Share from "@/components/primitives/Share.astro";
 import Title from "@/components/primitives/Title.astro";
+import DontMiss from "@/components/sections/DontMiss.astro";
 import { defaultLocale } from "site";
 import BaseLayout from "./BaseLayout.astro";
 
@@ -41,7 +42,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout>
-	<section class="post-layout pt-8 md:pt-16 pb-32 md:pb-56">
+	<section class="post-layout">
 		<Container>
 			<div class="text-center">
 				{/* Category */}
@@ -56,7 +57,7 @@ const { frontmatter } = Astro.props;
 				}
 
 				{/* Title (H1) */}
-				<h1 class="post-title">{frontmatter.data.title}</h1>
+				<h1 class="post-title" set:html={frontmatter.data.title} />
 
 				{/* Author */}
 				<div class="post-author pt-6">
@@ -112,6 +113,7 @@ const { frontmatter } = Astro.props;
 				</div>
 			</div>
 		</Container>
+		<DontMiss currentSlug={frontmatter.slug} currentCategory={frontmatter.data.category} />
 	</section>
 </BaseLayout>
 
