@@ -13,6 +13,13 @@ export default defineMarkdocConfig({
 			},
 			render: component("./src/components/primitives/CodeBlock.astro"),
 		},
+		image: {
+			attributes: {
+				...nodes.image.attributes,
+				title: { type: String, render: "title" },
+			},
+			render: component("./src/components/primitives/Figure.astro"),
+		},
 		heading: {
 			attributes: {
 				...nodes.heading.attributes, // Use the correct base attributes for a heading

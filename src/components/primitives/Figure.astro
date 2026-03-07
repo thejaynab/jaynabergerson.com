@@ -1,0 +1,95 @@
+---
+import { Image } from "astro:assets";
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+	"/src/assets/**/*.{jpeg,jpg,png,gif,webp,svg}"
+);
+
+interface Props {
+	src: string;
+	alt?: string;
+	title?: string;
+}
+
+const { src, alt = "", title = "" } = Astro.props;
+
+// Parse width keyword and caption from title
+// Convention: "@original caption", "@extended caption", "@article caption", or just "caption"
+const widthKeywords = ["@original", "@extended", "@article"] as const;
+let width: "original" | "article" | "extended" = "article";
+let caption = title;
+
+for (const keyword of widthKeywords) {
+	if (title.startsWith(keyword)) {
+		width = keyword.slice(1) as typeof width;
+		caption = title.slice(keyword.length).trim();
+		break;
+	}
+}
+
+// Convert relative path (../../assets/...) to absolute (/src/assets/...)
+const resolvedPath = src.startsWith("../../")
+	? `/src/${src.replace("../../", "")}`
+	: src;
+
+const imageImport = images[resolvedPath];
+if (!imageImport) {
+	throw new Error(`Image not found: ${resolvedPath} (original: ${src})`);
+}
+const resolvedImage = (await imageImport()).default;
+
+const widthClass = {
+	original: "figure-original",
+	article: "figure-article",
+	extended: "figure-extended",
+}[width];
+---
+
+<figure class:list={["figure-wrapper", widthClass]}>
+	<Image src={resolvedImage} alt={alt} />
+	{caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+	.figure-wrapper {
+		margin: 1.5rem auto;
+		text-align: center;
+	}
+	.figure-wrapper :global(img) {
+		margin: 0 auto;
+	}
+
+	/* Article width — matches prose text (48rem) */
+	.figure-article {
+		max-width: 48rem;
+	}
+	.figure-article :global(img) {
+		width: 100%;
+	}
+
+	/* Original size — natural image dimensions */
+	.figure-original {
+		width: fit-content;
+	}
+	.figure-original :global(img) {
+		width: auto;
+		max-width: 100%;
+	}
+
+	/* Extended — wider breakout past article text */
+	.figure-extended {
+		max-width: 60rem;
+	}
+	.figure-extended :global(img) {
+		width: 100%;
+		border-radius: 1.5rem;
+	}
+
+	.figure-wrapper figcaption {
+		text-align: center;
+		font-size: 0.9rem;
+		color: #6b7280;
+		margin-top: 0.5rem;
+		font-style: italic;
+	}
+</style>

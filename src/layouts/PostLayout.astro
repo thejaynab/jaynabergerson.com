@@ -273,6 +273,15 @@ const { frontmatter } = Astro.props;
 		margin-right: auto !important;
 	}
 
+	/* Let paragraphs containing figures break out of the 48rem constraint.
+	   Markdoc wraps images in <p> tags, so the figure inherits p's max-width.
+	   Also hide stray "}" text leaked by @astrojs/markdoc renderer. */
+	.post-prose p:has(.figure-wrapper) {
+		max-width: 100% !important;
+		font-size: 0 !important;
+		line-height: 0 !important;
+	}
+
 	/* Remove prose margins from gallery images */
 	.post-prose .gallery-grid img {
 		margin-top: 0 !important;
