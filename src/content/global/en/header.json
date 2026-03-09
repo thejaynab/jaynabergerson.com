@@ -9,7 +9,7 @@
 		},
 		{
 			"title": "Work",
-			"link": "/works"
+			"link": "/work"
 		},
 		{
 			"title": "About",
@@ -17,11 +17,11 @@
 		},
 		{
 			"title": "Articles",
-			"link": "/news"
+			"link": "/articles"
 		},
 		{
-			"title": "Resources",
-			"link": "/resources"
+			"title": "Projects",
+			"link": "/projects"
 		},
 		{
 			"title": "Contact",

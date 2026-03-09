@@ -1,31 +1,16 @@
 ---
-import { Image } from "astro:assets";
 import { getLocalizedSettings } from "@/lib/localization-helpers";
-import { translatePath, unlocalizedUrl } from "@/lib/localization-helpers";
-import { defaultLocale, locales } from "site";
+import { translatePath } from "@/lib/localization-helpers";
+import { defaultLocale } from "site";
 import logoSvg from "@/assets/global/navigation/jb-logo-w-title-website-v2.svg";
 import { Icon } from "astro-icon/components";
 
 const currentLocale = Astro.currentLocale;
+const { header } = getLocalizedSettings(currentLocale);
 
-function getTranslatedUrl(locale: string): string {
-	const unlocalizedPath = unlocalizedUrl(Astro.url.pathname);
-	return translatePath(locale, unlocalizedPath);
-}
-
-function isActiveLocale(locale: string): boolean {
-	return locale === currentLocale;
-}
-
-const { header, contacts } = getLocalizedSettings(currentLocale);
-
-// Desktop header links: Work, About, Articles, Contact (exclude Home & Resources)
-const desktopNavLinks = header.pages.filter(
-	(page) => ["/works", "/about", "/news", "/contact"].includes(page.link)
+const navLinks = header.pages.filter((page) =>
+	["/work", "/about", "/articles", "/contact"].includes(page.link),
 );
-
-// Mobile overlay links: same 4 pages
-const mobileNavLinks = desktopNavLinks;
 ---
 
 <style>
@@ -179,7 +164,7 @@ const mobileNavLinks = desktopNavLinks;
 		<!-- Desktop Nav Links (hidden on mobile) -->
 		<nav class="hidden lg:flex items-center justify-end gap-10 z-20">
 			{
-				desktopNavLinks.map((page) => (
+				navLinks.map((page) => (
 					<a
 						href={translatePath(
 							currentLocale ?? defaultLocale,
@@ -225,7 +210,7 @@ const mobileNavLinks = desktopNavLinks;
 		>
 			<div class="flex flex-col items-start md:items-center pt-10">
 				{
-					mobileNavLinks.map((page, index) => (
+					navLinks.map((page, index) => (
 						<a
 							data-nav-item
 							href={translatePath(

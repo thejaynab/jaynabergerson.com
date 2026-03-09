@@ -1,73 +1,16 @@
 ---
-import { getCollection } from "astro:content";
 import Container from "@/components/primitives/Container.astro";
 import Link from "@/components/primitives/Link.astro";
 import { Icon } from "astro-icon/components";
 import { getLocalizedSettings } from "@/lib/localization-helpers";
-import { translatePath, unlocalizedUrl } from "@/lib/localization-helpers";
-import { defaultLocale, locales } from "site";
+import { translatePath } from "@/lib/localization-helpers";
+import { defaultLocale } from "site";
 
 const currentLocale = Astro.currentLocale;
-
-const { footer, contacts } = getLocalizedSettings(currentLocale);
-
-function getTranslatedUrl(locale: string): string {
-	const unlocalizedPath = unlocalizedUrl(Astro.url.pathname);
-	return translatePath(locale, unlocalizedPath);
-}
-
-function isActiveLocale(locale: string): boolean {
-	return locale === currentLocale;
-}
-
-const pages = await getCollection("pages");
-const services: any[] = [];
-const posts = await getCollection("articles");
-
-// get top 6 pages which are informational pages
-const topInfoPages = pages
-	.map((page) => {
-		const [lang, ...slug] = page.slug.split("/");
-		return {
-			...page,
-			lang: lang,
-			slug: page.slug.startsWith("/") ? page.slug : `/${page.slug}`,
-		};
-	})
-	.filter(
-		(page) =>
-			page.lang === currentLocale && page.data.type === "informational",
-	)
-	.slice(0, 6);
-
-const topServices = services
-	.map((page) => {
-		const [lang, ...slug] = page.slug.split("/");
-		return {
-			...page,
-			lang: lang,
-			slug: translatePath(
-				lang,
-				`/service${unlocalizedUrl(`/${page.slug}`)}`,
-			),
-		};
-	})
-	.filter((page) => page.lang === currentLocale)
-	.slice(0, 6);
-
-const lastPosts = posts
-	.map((page) => {
-		return {
-			...page,
-			slug: `/post/${page.slug}`,
-		};
-	})
-	.sort(
-		(a, b) =>
-			new Date(b.data.lastUpdateDate).getTime() -
-			new Date(a.data.lastUpdateDate).getTime(),
-	)
-	.slice(0, 5);
+const { footer, contacts, header } = getLocalizedSettings(currentLocale);
+const footerPageLinks = header.pages;
+const footerLinkClass =
+	"inline-block max-w-full text-white border-b-2 border-white border-solid pb-1 transition-[color,border-color,opacity] duration-200 hover:text-white/70 hover:border-white/70 focus-visible:text-white/70 focus-visible:border-white/70";
 ---
 
 <div
@@ -105,21 +48,21 @@ const lastPosts = posts
 						>
 							<div class="col-span-1 row-span-1">
 								<div
-									class="items-start flex-col flex gap-[0.63rem]"
+									class="items-start flex-col flex gap-4"
 								>
-									<p
-										class="text-white border-b-2 text-lg pb-1 mb-3 border-white border-solid"
-									>
-										Links
-									</p>
 									<ul
-										class="text-white/[0.65] mb-3 list-none"
+										class="text-white/[0.78] text-lg lg:text-xl leading-relaxed list-none"
 									>
 										{
-											topInfoPages.map(
-												({ data: { title }, slug }) => (
+												footerPageLinks.map(({ title, link }) => (
 													<li>
-														<a href={slug}>
+														<a
+															href={translatePath(
+																currentLocale ?? defaultLocale,
+																link,
+															)}
+															class="transition-opacity duration-200 hover:opacity-70 focus-visible:opacity-70"
+														>
 															{title}
 														</a>
 													</li>
@@ -129,46 +72,7 @@ const lastPosts = posts
 									</ul>
 								</div>
 							</div>
-							<div
-								class="items-start flex-col flex gap-[0.63rem]"
-							>
-								<p
-									class="text-white border-b-2 text-lg pb-1 mb-3 border-white border-solid"
-								>
-									Services
-								</p>
-								<ul class="text-white/[0.65] mb-3 list-none">
-									{
-										topServices.map(
-											({ data: { title }, slug }) => (
-												<li>
-													<a href={slug}>{title}</a>
-												</li>
-											),
-										)
-									}
-								</ul>
-							</div>
-							<div
-								class="items-start flex-col flex gap-[0.63rem]"
-							>
-								<p
-									class="text-white border-b-2 text-lg pb-1 mb-3 border-white border-solid"
-								>
-									Latest posts
-								</p>
-								<ul class="text-white/[0.65] mb-3 list-none">
-									{
-										lastPosts.map(
-											({ data: { title }, slug }) => (
-												<li>
-													<a href={slug}>{title}</a>
-												</li>
-											),
-										)
-									}
-								</ul>
-							</div>
+
 						</div>
 					</div>
 				</div>
@@ -184,7 +88,7 @@ const lastPosts = posts
 								{contacts.phone}
 							</a>
 							<a
-								class="border-b-2 pb-1 mb-3 border-white border-solid"
+								class={footerLinkClass}
 								href={`mailto:${contacts.mail}`}
 							>
 								{contacts.mail}
@@ -217,20 +121,9 @@ const lastPosts = posts
 						{footer.copyright}
 					</p>
 
-					<div class="flex gap-5 text-lg text-blue-700">
-						<a href="/privacy" class="inline-block max-w-full"
-							><p
-								class="text-white border-b-2 cursor-pointer pb-1 border-white border-solid"
-							>
-								Privacy policy
-							</p></a
-						><a href="/terms" class="inline-block max-w-full"
-							><p
-								class="text-white border-b-2 cursor-pointer pb-1 border-white border-solid"
-							>
-								Terms
-							</p></a
-						>
+					<div class="flex gap-5 text-lg">
+						<a href="/privacy" class={footerLinkClass}>Privacy policy</a>
+						<a href="/terms" class={footerLinkClass}>Terms</a>
 					</div>
 				</div>
 			</div>

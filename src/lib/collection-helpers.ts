@@ -27,8 +27,8 @@ export async function getCollectionStaticPaths<CollectionName extends keyof Cont
 		}
 
 		if (collectionName === "pages") {
-			// For pages handle homepage slug
-			localizedSlug = localizedSlug[0] === "homepage" || localizedSlug[0] === "index" ? [] : localizedSlug;
+			// For pages handle the root page slug
+			localizedSlug = localizedSlug[0] === "home" || localizedSlug[0] === "index" ? [] : localizedSlug;
 		}
 
 		if (lang !== defaultLocale && !locale) {
