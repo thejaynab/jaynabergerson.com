@@ -56,5 +56,11 @@
 	"cSpell.diagnosticLevel": "Information",
 	"[astro]": {
 		"editor.defaultFormatter": "astro-build.astro-vscode"
-	}
+	},
+	"cSpell.words": [
+		"Hari",
+		"Klint",
+		"Nummenmaa",
+		"Riitta"
+	]
 }

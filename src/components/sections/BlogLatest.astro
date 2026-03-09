@@ -15,11 +15,12 @@ const recentPosts = posts
 			slug: post.slug.startsWith("/") ? post.slug : `/${post.slug}`,
 		};
 	})
+	.filter((post) => !post.data.hidden)
 	.sort(
 		(a, b) =>
-			a.data.lastUpdateDate.getTime() - b.data.lastUpdateDate.getTime(),
+			b.data.lastUpdateDate.getTime() - a.data.lastUpdateDate.getTime(),
 	)
-	.slice(0, 4) as CollectionEntry<"articles">[];
+	.slice(0, 3) as CollectionEntry<"articles">[];
 
 interface Props {
 	pretitle?: string;
@@ -48,7 +49,7 @@ const { pretitle, title, buttons } = Astro.props;
 	</div>
 	{buttons && buttons.length > 0 && (
 		<div class="items-center flex-col text-sm font-medium flex text-white pt-16">
-			{buttons.map(({ title, href, style, icon }) => (
+			{buttons.map(({ title, href, style, icon }: ButtonProps) => (
 				<Link
 					href={href}
 					style={style as "primary" | "button" | "outline" | "buttonLight"}
