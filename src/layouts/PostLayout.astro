@@ -185,6 +185,12 @@ const { frontmatter } = Astro.props;
 		text-transform: uppercase;
 	}
 
+	/* Article H4 */
+	.post-prose h4 {
+		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
+		letter-spacing: 0 !important;
+	}
+
 	/* Article H2 */
 	.post-prose h2 {
 		font-family: "Inter Tight", Arial, Helvetica, sans-serif !important;
@@ -263,6 +269,7 @@ const { frontmatter } = Astro.props;
 
 	/* Constrain text elements to readable width and center them */
 	.post-prose h2,
+	.post-prose h4,
 	.post-prose p,
 	.post-prose ul,
 	.post-prose ol,
