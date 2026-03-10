@@ -7,7 +7,7 @@ intro: "As UX Designer, I led the information architecture effort — mapping re
 tags:
   - Info Architecture
 workType: "Info Architecture"
-tech: "Public Safety"
+tech: "Public Safety Tech"
 tldr:
   - label: "Duration"
     value: "6 Months"
@@ -48,7 +48,7 @@ NEMSIS also introduced HIPAA requirements for patient data. NERIS had its own se
 
 This was a startup. Timelines were compressed, the team was small, and development was already underway on other features. I couldn't pause everything for a months-long architecture overhaul. And there was no guarantee my recommendations would be implemented before priorities shifted — which, at a startup, they always do.
 
-I also had to account for the fact that I was new to the team. I needed to build credibility quickly while simultaneously telling stakeholders that their application's foundation needed to change.
+I also had to account for being new to the team — building credibility quickly while making the case for significant structural changes.
 
 ### The decision I made:
 
@@ -62,23 +62,22 @@ That framing mattered. I wasn't asking them to stop what they were doing. I was 
 
 The data requirements for NERIS and NEMSIS are extraordinarily detailed. Each standard specifies required and optional fields, input types, nesting hierarchies, value sets, nullability rules, and packaging constraints. Swagger UI — confirmed as the authoritative source through direct contact with the Director of Research at FSRI — served as the primary reference.
 
-But Swagger UI isn't designed for cross-referencing, filtering, or connecting elements to an existing application's data structures. I built the analysis in Airtable, capturing metadata for each API element: API name, required vs. optional status, input type, nullability, payload constraints, descriptions, examples, defaults, value sets, nesting levels, associated objects, and source notes.
+But Swagger UI isn't designed for cross-referencing, filtering, or connecting elements to an existing application's data structures. I built the analysis in Airtable, capturing metadata for each API element — requirement level, input type, nullability, payload constraints, value sets, nesting depth, and source notes.
 
 This allowed me to do what Swagger UI alone couldn't:
 
 - Filter and group elements by module, requirement level, and data type
 - Connect NERIS and NEMSIS elements to Emergent's existing data structures
-- Identify where the two standards overlapped, where they conflicted, and where entirely new data collection was needed
-- Log edge cases, formatting questions, and areas requiring subject matter expert input
-- Highlight mismatches between federal requirements and current app workflows
+- Identify where the two standards overlapped, conflicted, or required entirely new data collection
+- Track edge cases and questions requiring subject matter expert input
 
-The mapping revealed that dispatch data, for example, had significant overlap between NERIS and NEMSIS — but with critical differences in format, packaging, and intent that needed to be resolved before implementation.
+Dispatch data, for example, overlapped significantly between NERIS and NEMSIS — but with critical differences in format and packaging that needed resolution before implementation.
 
 ## The structural recommendation
 
 The core of my recommendation addressed how the application organized information around an incident. In public safety, when first responders arrive on scene, the *incident* is the primary unit of work. Everything flows from it.
 
-For a small call — a single EMT responding to one patient — the responder needs the incident details to be minimal and fast. They identify the situation, then focus entirely on the patient. For a large-scale incident — a structure fire with multiple patients and multiple units — the situational information is gathered by different people on scene, and EMTs need to focus solely on their assigned patients without being distracted by broader scene management.
+For a small call — a single EMT, one patient — the incident details need to be minimal so the responder can focus on the patient. For a large-scale incident — multiple patients, multiple units — situational data is gathered by different people on scene, and EMTs need to focus solely on their assigned patients without navigating broader scene management.
 
 The app needed to support both scenarios with the same underlying structure. My recommendation reorganized the navigation so that:
 

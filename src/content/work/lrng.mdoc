@@ -2,7 +2,7 @@
 title: <strong>Redesigned playlist navigation</strong> for a learner credentialing platform
 link: ""
 cover: '../../assets/works/jb-cs-csky-snhu-lrng-v2.jpg'
-description: "LRNG was a learning platform serving over 71,000 learners — many of them underprivileged high school students in Chicago and Philadelphia attending summer programs. Learners were getting lost in the interface, unable to tell where they were, what they'd completed, or what they needed to do next.<br><br>The platform had 937 playlists and over 55,000 digital credentials earned, but no coherent way to show a learner their progress."
+description: "LRNG was a learning platform serving over 71,000 learners — many of them underprivileged high school students in Chicago and Philadelphia attending summer programs. Learners were getting lost in the interface, unable to tell where they were, what they'd completed, or what they needed to do next.<br><br>The platform had 937 playlists and over 55,000 digital credentials earned, but no clear way to show a learner their progress."
 intro: "As Senior UX Designer at Concentric Sky, I led the redesign of the learner navigation experience — creating a strategic action plan, designing a playlist sidebar with progress tracking, and establishing documentation practices that reduced design-phase errors by 60%."
 tags:
   - UX/UI Design
@@ -22,7 +22,7 @@ tldr:
     value: "Senior UX Designer"
 impact:
   - value: "72k"
-    description: "Learners on the platform served by the redesigned experience"
+    description: "Learners on the platform at the time of the engagement"
   - value: "60%"
     description: "Reduction in things missed during the design phase"
   - value: "110+"
@@ -37,19 +37,19 @@ lastUpdateDate: 2026-03-04
 
 You're a 16-year-old in a summer learning program in Chicago. You open LRNG — a platform your program uses to assign coursework and issue digital credentials. You're working through a playlist, which is what the platform calls a course. Each playlist has multiple activities. Complete them all, and you earn a badge — a credential proving you finished.
 
-But you can't tell which playlist you're in. The playlist view and the activity view look almost identical — the only difference is a small label at the top that says "playlist" or "activity" in easily overlooked text. There's no indication of which playlist an activity belongs to. The only way to find out is to hit the back button and hope it takes you where you expect.
+But you can't tell which playlist you're in. The playlist view and the activity view look almost identical — distinguished only by a small label in easily overlooked text. There's no indication of which playlist an activity belongs to. The only way to find out is to hit the back button.
 
-You don't know how many activities you've completed. You don't know how many are left. You don't know if your submission was received, if it needs revision, or if it's been approved. You're navigating a credentialing system with no map and no progress indicator.
+You don't know how many activities you've completed, how many are left, or whether your submission was received, needs revision, or has been approved. You're navigating a credentialing system with no progress indicator.
 
 ### The problem:
 
-The LRNG platform had been built with a designer but without UX guidance. Features were added over time without reconsidering the cumulative experience. A recent reorganization had reduced component configurations from 24 down to six — but the redesign introduced variation without intention. Content types looked different, but not in ways that communicated *meaning*. When distinctions actually mattered — like telling the difference between a playlist and an activity within it — they were so subtle as to be imperceptible.
+The LRNG platform had evolved over time — features were added incrementally without reconsidering the cumulative experience. A recent simplification had reduced component configurations from 24 to six, but the remaining variation didn't always communicate meaningful distinctions. When distinctions actually mattered — like telling the difference between a playlist and an activity within it — they were so subtle as to be imperceptible.
 
-During a summer session, LRNG staff gathered learner feedback. It came back as a list of one-sentence statements with no follow-up or further research: *Learners don't know where they are. Learners can't tell what they're about to submit. Learners aren't aware they need to resubmit work. Learners don't always see feedback.* The statements confirmed what the interface made obvious — but there was no budget for additional user research.
+During a summer session, LRNG staff gathered learner feedback — high-level statements without follow-up research: *Learners don't know where they are. Learners can't tell what they're about to submit. Learners aren't aware they need to resubmit work. Learners don't always see feedback.* The feedback confirmed the interface needed improvement — but there was no budget for additional user research.
 
 ### The constraint:
 
-LRNG wanted these problems addressed before the next summer session — roughly three months away. There was no budget for user testing. The team was 24 to 30 people, but the platform's siloed work culture meant designers, developers, and front-end engineers operated in separate lanes with minimal collaboration. And the approval process for learner work was complex enough that any interface change risked breaking workflows that staff depended on.
+LRNG wanted these problems addressed before the next summer session — roughly three months away. There was no budget for user testing. The team was 24 to 30 people, but the team's workflow meant designers, developers, and front-end engineers operated in separate lanes with limited collaboration. And the approval process for learner work was complex enough that any interface change risked breaking workflows that staff depended on.
 
 ### The decision I made:
 
@@ -65,7 +65,7 @@ The first epic, for example — "Playlist UI Redesign" — addressed the most ur
 
 Each subsequent epic built on the previous one. The navigation redesign came before the approval workflow changes because the approval changes depended on learners understanding where they were first. The notification improvements came after both because they required a stable interface to reference.
 
-This sequencing mattered because the team had a history of shifting priorities mid-stream. By structuring the plan so each phase delivered standalone value while also preparing the ground for the next, I ensured that even if only part of the plan was implemented, the completed work would still improve the learner experience.
+This sequencing mattered because priorities had shifted mid-stream before. By structuring the plan so each phase delivered standalone value while also preparing the ground for the next, I ensured that even if only part of the plan was implemented, the completed work would still improve the learner experience.
 
 The plan went through several iterations with stakeholders and team members as I combined business considerations and technical limitations into each phase. Once agreed upon, I organized all the JIRA epics and tickets to correspond with the plan.
 
@@ -83,7 +83,7 @@ The core of the redesign was a sidebar navigation and progress indicator for pla
 
 The previous design had the right instinct — a step-by-step concept with checkmarks for completed activities. But it hadn't been fully thought through. It didn't account for how admins review and approve work. It didn't address what happens when a playlist has prerequisites — when you have to complete one playlist before starting another. It didn't handle the difference between a standard playlist and a premium playlist, or playlists with video banners, or mega-badges that require completing multiple playlists.
 
-I updated and expanded the designs, paying particular attention to messaging that would direct and guide learners on their educational journey. Since there was no budget for user testing, I iterated through multiple versions and shared them widely — with my team, with other teams at Concentric Sky, and with anyone whose feedback could approximate what I couldn't get from learners directly. Concentric Sky specialized in education technology, having worked with National Geographic, NASA, Encyclopedia Britannica, and PBS. The expertise in the building was real, even if it wasn't a substitute for proper research.
+I updated and expanded the designs, focusing on messaging that would guide learners through their educational journey. Without a user testing budget, I iterated through multiple versions and shared them broadly — with my team, other Concentric Sky teams, and colleagues whose feedback could approximate what I couldn't get from learners directly. Concentric Sky's portfolio included National Geographic, NASA, Encyclopedia Britannica, and PBS — the expertise in the building was real, even if it wasn't a substitute for dedicated research.
 
 I built the interface designs in Figma but documented the user journey in Lucidchart. The Lucidchart diagrams served as the single source of truth for each JIRA ticket — showing the sidebar design alongside the user's journey through it, so stakeholders and developers could visually trace how the interface changed with each step or situation.
 
@@ -97,13 +97,13 @@ While I would have normally recommended larger sweeping changes to the design, t
 
 ## Creating a source of truth
 
-When I joined the LRNG team, JIRA tickets were assembled by multiple people. I wrote the UX requirements and acceptance criteria. The UI designer added design links. The front-end developer added component links. The result was a ticket with several disconnected lists of references that developers had to piece together to understand the full experience.
+When I joined, JIRA tickets were assembled by multiple contributors — UX requirements, design links, and component references all added separately. Developers had to piece together disconnected lists to understand the full experience.
 
 I started creating comprehensive Lucidchart documents that unified everything — UX requirements, design specifications, interaction states, responsive behavior, and acceptance criteria — into a single, cohesive visual. Developers could open one document and see the complete picture: what to build, how it should look at different sizes, how it should behave with different content types, and what the acceptance criteria demanded.
 
 This wasn't just about developer convenience. It was about accountability. When every decision lives in one place, there's no ambiguity about what was agreed upon. No one picks between conflicting references. No one guesses.
 
-I also recognized early that the team had no institutional documentation. Design system specs, analytics reports, application criteria, and consistency requirements were scattered or inaccessible. I started and maintained a documentation practice in Confluence — a central repository where all team members could view, edit, and contribute. It served onboarding, decision-making, and long-term consistency.
+I also recognized early that design system specs, analytics reports, and consistency requirements were scattered across different locations — not easily accessible to the full team. I started and maintained a documentation practice in Confluence — a central repository where all team members could view, edit, and contribute. It served onboarding, decision-making, and long-term consistency.
 
 {% Recommendation
    pretitle="From Colleagues"
