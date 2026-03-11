@@ -1,0 +1,195 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+	folder: string;
+	exclude?: string;
+	beforeAlt?: string;
+	afterAlt?: string;
+}
+
+const { folder, exclude, beforeAlt = "Before", afterAlt = "After" } = Astro.props;
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+	["/src/assets/posts/**/*.{webp,png,jpg,jpeg,svg,gif}", "/src/assets/works/**/*.{webp,png,jpg,jpeg,svg,gif}"],
+	{ eager: true }
+);
+
+const excludeList = exclude ? exclude.split(",").map((s: string) => s.trim()) : [];
+
+const images = Object.entries(allImages)
+	.filter(([path]) => path.includes(`/${folder}/`))
+	.filter(([path]) => !excludeList.some((ex: string) => path.includes(ex)))
+	.sort(([a], [b]) => a.localeCompare(b))
+	.map(([_, mod]) => mod.default);
+
+const beforeImage = images[0];
+const afterImage = images[1];
+
+if (!beforeImage || !afterImage) return;
+---
+
+<div class="compare not-prose" data-compare>
+	<div class="compare-layer compare-layer--after">
+		<Image
+			src={afterImage}
+			alt={afterAlt}
+			quality={100}
+			class="compare-img"
+		/>
+		<span class="compare-label compare-label--after">After</span>
+	</div>
+	<div class="compare-layer compare-layer--before" data-compare-before style="clip-path: inset(0 50% 0 0);">
+		<Image
+			src={beforeImage}
+			alt={beforeAlt}
+			quality={100}
+			class="compare-img"
+		/>
+		<span class="compare-label compare-label--before">Before</span>
+	</div>
+	<div class="compare-handle" data-compare-handle style="left: 50%;">
+		<div class="compare-handle-line"></div>
+		<div class="compare-handle-circle">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M8 4l-6 8 6 8M16 4l6 8-6 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+			</svg>
+		</div>
+		<div class="compare-handle-line"></div>
+	</div>
+</div>
+
+<style>
+	.compare {
+		position: relative;
+		margin: 2rem auto;
+		border-radius: 8px;
+		overflow: hidden;
+		cursor: ew-resize;
+		touch-action: none;
+		user-select: none;
+		-webkit-user-select: none;
+		max-width: 750px;
+	}
+
+	.compare-layer {
+		width: 100%;
+	}
+
+	.compare-layer--after {
+		position: relative;
+	}
+
+	.compare-layer--before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.compare-img {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin: 0;
+	}
+
+	.compare-label {
+		position: absolute;
+		padding: 4px 12px;
+		background: rgba(0, 0, 0, 0.6);
+		color: white;
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		border-radius: 4px;
+		pointer-events: none;
+		z-index: 5;
+	}
+
+	.compare-label--before {
+		left: 12px;
+		bottom: 12px;
+	}
+
+	.compare-label--after {
+		right: 12px;
+		bottom: 12px;
+	}
+
+	.compare-handle {
+		position: absolute;
+		top: 0;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		transform: translateX(-50%);
+		pointer-events: none;
+		z-index: 10;
+	}
+
+	.compare-handle-line {
+		flex: 1;
+		width: 2px;
+		background: white;
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+	}
+
+	.compare-handle-circle {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: white;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #333;
+		flex-shrink: 0;
+	}
+</style>
+
+<script>
+	function initCompare() {
+		document.querySelectorAll<HTMLElement>("[data-compare]").forEach((el) => {
+			const before = el.querySelector<HTMLElement>("[data-compare-before]");
+			const handle = el.querySelector<HTMLElement>("[data-compare-handle]");
+			if (!before || !handle) return;
+
+			// Skip if already initialized
+			if (el.dataset.compareInit) return;
+			el.dataset.compareInit = "true";
+
+			let dragging = false;
+
+			function update(clientX: number) {
+				const rect = el.getBoundingClientRect();
+				const pct = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+				before!.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+				handle!.style.left = `${pct}%`;
+			}
+
+			el.addEventListener("pointerdown", (e: PointerEvent) => {
+				dragging = true;
+				el.setPointerCapture(e.pointerId);
+				update(e.clientX);
+				e.preventDefault();
+			});
+
+			el.addEventListener("pointermove", (e: PointerEvent) => {
+				if (!dragging) return;
+				update(e.clientX);
+			});
+
+			el.addEventListener("pointerup", () => { dragging = false; });
+			el.addEventListener("pointercancel", () => { dragging = false; });
+		});
+	}
+
+	initCompare();
+	document.addEventListener("astro:after-swap", initCompare);
+</script>

@@ -3,14 +3,14 @@ title: <strong>Built the design system</strong> that shipped a business planning
 link: ""
 cover: '../../assets/works/jb-cs-pas-liveplan-v2.jpg'
 description: "LivePlan had grown from a simple pitch builder into a full business planning platform — forecasts, dashboards, milestones, plan comparisons. But the interface had grown with it, accumulating inconsistent interactions and outdated visual patterns along the way.<br><br>The company hired an external designer to create the new look. What they still needed was someone to translate it into a working system."
-intro: "As UX/UI Designer & Developer at Palo Alto Software, I translated static design concepts into a complete front-end component library, created over 300 HTML/CSS prototypes, and bridged the gap between the design team and engineering."
+intro: "As UX/UI Designer & Developer at Palo Alto Software, I translated static design concepts into a complete front-end component library, created over 300 prototypes, and bridged the gap between the design team and engineering."
 tags:
   - UX/UI Design
 workType: "UX/UI Design"
 tech: "Business Planning Software"
 tldr:
   - label: "Duration"
-    value: "14 Months"
+    value: "14 Months "
   - label: "Team"
     value: "16–22"
   - label: "Company"
@@ -25,69 +25,117 @@ impact:
   - value: "4.8 ★"
     description: "Rating for financial forecasting by Forbes"
   - value: "300+"
-    description: "HTML/CSS prototypes created and maintained in a component library"
+    description: "prototypes created and maintained in a component library"
 backgroundColor: '#F0EBE5'
 pubDate: 2025-06-01
 lastUpdateDate: 2026-03-04
 ---
 
 
-LivePlan started as a way for entrepreneurs to quickly create a business pitch. Over the years, the platform expanded — the ability to write a full business plan, develop financial forecasts, set milestones, compare performance against similar businesses. Each new capability added value. Each also added interface complexity without a unifying design framework to hold it together.
+LivePlan started as a way for entrepreneurs to quickly create a business pitch. Over the years, the platform expanded — the ability to write a full business plan, develop financial forecasts, set milestones, compare performance against similar businesses.
 
-By the time I joined the UX team, the application had accumulated layers of inconsistent interactions and controls. Adding or removing content worked differently depending on which section the user was in. Visual hierarchy was inconsistent. The design itself hadn't been built responsively — it didn't work across devices. And critically, the designers and developers weren't collaborating. Designs were handed over as static images, and what engineers built often drifted from the original intent because there was no shared system connecting them.
+Each new capability added value. Each also added interface complexity without a unifying design framework to hold it together.
+
+By the time I joined the UX team, the application had accumulated layers of inconsistent interactions and controls.
+
+Adding or removing content worked differently depending on which section the user was in. Visual hierarchy was inconsistent. The design itself hadn't been built responsively — it didn't work across devices.
+
+And critically, the designers and developers weren't collaborating. Designs were handed over as static images, and what engineers built often drifted from the original intent because there was no shared system connecting them.
+
+{% Compare folder="compare" exclude="LivePlan-Forecast,img1159,Compare Design v2.jpg" beforeAlt="LivePlan before the redesign" afterAlt="LivePlan after the redesign" /%}
 
 ### The problem:
 
-The company knew the application needed a redesign, and they hired an external UI designer based in Norway to create the visual direction. He was talented, and his compositions were visually polished — but they were static Photoshop files that showed what screens could look like without addressing user workflows, interactive states, component behavior, or responsive breakpoints. This was before tools like Figma existed. There was no design-to-code pipeline.
+The company knew the application needed a redesign, and they hired an external UI designer based in Norway to create the visual direction.
 
-The development team had no way to faithfully implement what he designed. And when a workflow wasn't covered by an existing comp — a frequent reality given the time zone gap and limited bandwidth — engineering was left making assumptions.
+He was talented, and his compositions were visually polished — but they were static Photoshop files that showed what screens could look like without addressing user workflows, interactive states, component behavior, or responsive breakpoints.
+
+This was before tools like Figma existed. There was no design-to-code pipeline.
+
+The development team had no way to faithfully implement what he designed.
+
+And when a workflow wasn't covered by an existing comp — a frequent reality given the time zone gap and limited bandwidth — engineering was left making assumptions.
 
 ### The constraint:
 
-The redesign had to happen while the application continued serving its existing users. The team was 16 to 22 people, and the external designer's availability was inconsistent. I couldn't pause development to wait for assets. I needed to create a system that could absorb new designs as they arrived while also filling gaps independently — maintaining visual and interaction consistency whether the external designer had provided a comp or not.
+The redesign had to happen while the application continued serving its existing users.
+
+The team was 16 to 22 people, and the external designer's availability was inconsistent. I couldn't pause development to wait for assets.
+
+I needed to create a system that could absorb new designs as they arrived while also filling gaps independently — maintaining visual and interaction consistency whether the external designer had provided a comp or not.
 
 ### The decision I made:
 
-Rather than treating my role as a pass-through — receiving designs, writing HTML, handing files to engineering — I recognized that the real gap was systemic. **There was no shared language between design and development.** Static images couldn't communicate interaction behavior. Developers couldn't ask the external designer quick questions because of the time zone difference. And the UX team needed to experiment with ideas faster than the external design workflow allowed.
+Rather than treating my role as a pass-through — receiving designs, writing HTML and CSS, handing files to engineering — I recognized that the real gap was systemic.
 
-I decided to build a component library using Liquid templating language — a system of reusable, coded UI components that could be assembled into full prototypes. This wasn't just about speed. It was about creating a single source of truth that both designers and developers could reference, discuss, and build from.
+**There was no shared language between design and development.** Static images couldn't communicate interaction behavior.
+
+Developers couldn't ask the external designer quick questions because of the time zone difference. And the UX team needed to experiment with ideas faster than the external design workflow allowed.
+
+I decided to build a component library. This wasn't just about speed. It was about creating a single source of truth that both designers and developers could reference, discuss, and build from.
 
 That decision changed the dynamics of the entire redesign.
 
+{% Gallery folder="Dashboard" layout="feature-left" /%}
+
 ## A component library as common ground
 
-The component library wasn't a style guide sitting in a PDF somewhere. It was a living codebase — HTML and CSS components built in Liquid that could be composed, reused, and iterated on across hundreds of prototypes.
+The component library wasn't a style guide sitting in a PDF somewhere. It was a living codebase — HTML and CSS built in a way that could be composed, reused, and iterated on.
 
-Each component was pixel-perfect against the external designer's compositions, but it also encoded decisions that static images couldn't: responsive behavior, hover and focus states, spacing relationships, and how elements adapted when content changed. When the designer delivered a new screen, I could break it into components, build what was new, and assemble the rest from existing parts.
+Each component was pixel-perfect against the external designer's compositions, but it also encoded decisions that static images couldn't: responsive behavior, hover and focus states, spacing relationships, and how elements adapted when content changed.
+
+When the designer delivered a new screen, I could break it into components, build what was new, and assemble the rest from existing parts.
 
 More importantly, when a workflow needed a UI treatment not yet covered by the external designs, I could create it from the established system. The components carried enough design DNA that new compositions stayed visually and behaviorally consistent without requiring additional rounds with the external designer.
 
-I organized and maintained a directory of prototypes so anyone on the team — designers, developers, product managers — could find, reference, and discuss any screen or interaction. Over 14 months, the library grew to support more than 300 prototypes.
+I organized and maintained a directory of components and prototypes so anyone on the team — designers, developers, product managers — could find, reference, and discuss any screen or interaction.
+
+I started building the library in plain HTML and CSS — the fastest way to get working prototypes in front of the team.
+
+As the library scaled, I migrated it to Mixture, a static site generator, and adopted Liquid as the template language. That shift meant components could be defined once and included across prototypes rather than duplicated, which made the system dramatically easier to maintain.
+
+I managed version control through GitHub and SourceTree, giving the team a shared history of every change and a way to pull the latest prototypes at any time.
+
+Over 14 months, the library grew to support more than 300 prototypes.
 
 {% PasswordGate %}
 
-### What the library enabled:
+### What the component library enabled:
 
-The prototyping system became the connective tissue between design intent and engineering output. When a developer needed to build a feature, they didn't interpret a flat image — they opened a working HTML/CSS prototype that showed exactly how the component should behave, what it looked like at different viewport sizes, and how it related to adjacent elements.
+The prototyping system became the connective tissue between design intent and engineering output.
+
+When a developer needed to build a feature, they didn't interpret a flat image — they opened a working prototype that showed exactly how the component should behave, what it looked like at different viewport sizes, and how it related to adjacent elements.
 
 This eliminated an entire category of implementation drift. Features shipped looking and behaving the way they were designed because the reference material was already in code.
 
-When the UX team wanted to experiment with a new approach — testing a different layout for the financial dashboard, exploring an alternative navigation pattern — they came to me. I could mock up functional prototypes from existing components faster than the external designer could produce a static comp. That speed gave the team room to iterate, test ideas, and make decisions based on working interfaces rather than wireframes.
+When the UX team wanted to experiment with a new approach — testing a different layout for the financial dashboard, exploring an alternative navigation pattern — they came to me.
+
+I could mock up functional prototypes from existing components faster than the external designer could produce a static comp.
+
+That speed gave the team room to iterate, test ideas, and make decisions based on working interfaces rather than wireframes.
+
+{% Gallery folder="pas-liveplan" exclude="Dashboard,compare" layout="2-col" /%}
 
 ## Bridging the gap between design and engineering
 
-When I started at Palo Alto Software, designers and developers operated in separate worlds. Designers produced artifacts. Developers interpreted them. The two groups didn't collaborate on implementation, and the resulting product showed it — inconsistencies between what was designed and what was built, repeated patterns that looked slightly different across sections, interactions that worked in one context but not another.
+When I started at Palo Alto Software, designers and developers operated in separate worlds.
+
+Designers produced artifacts. Developers interpreted them.
+
+The two groups didn't collaborate on implementation, and the resulting product showed it — inconsistencies between what was designed and what was built, repeated patterns that looked slightly different across sections, interactions that worked in one context but not another.
 
 I was part of the UX team, but I wrote front-end code. That positioning — one foot in design, one foot in development — meant I could do something neither side could do alone: translate design decisions into technical specifications in real time, and translate technical constraints back into design adaptations before they became problems.
 
-I made a deliberate effort to build relationships with the engineering team. I learned how they worked, what information they needed, and where handoff typically broke down. Then I structured my prototypes and component documentation to address those specific friction points.
+I made a deliberate effort to build relationships with the engineering team. I learned how they worked, what information they needed, and where handoff typically broke down.
+
+Then I structured my prototypes and component documentation to address those specific friction points.
 
 This wasn't a formal process change or a mandated workflow. It was relational — showing up, being useful, and gradually creating a collaboration pattern that hadn't existed before.
 
 {% Recommendation
    pretitle="From Colleagues"
    recommendations=[
-     { quote: "Aside from her considerable skills and experience in visual design, Jayna's knowledge of front end development gives any team she's a part of a major advantage. That's not just because she can communicate effectively with developers or build out the front end herself. Her ability to think in terms of style guides and design systems makes her the kind of 'architectural' UI designer you want to have around on software projects. And her personality makes her the kind of person you want to have on a team.", name: "Mike Propst", jobTitle: "Engineering Manager", company: "Palo Alto Software" },
+     { quote: "Aside from her considerable skills and experience in visual design, Jayna's knowledge of front end development gives any team she's a part of a major advantage. Her ability to think in terms of style guides and design systems makes her the kind of 'architectural' UI designer you want to have around on software projects.", name: "Mike Propst", jobTitle: "Engineering Manager", company: "Palo Alto Software" },
      { quote: "It is her engaging and functional designs that draw people into our apps and keep them there. Without her work, my efforts to build a stable and functional system wouldn't matter much. I enjoy working with Jayna to make our products great.", name: "Jimmy Hendrix", jobTitle: "Software Architect", company: "Palo Alto Software" }
    ]
 /%}
@@ -104,6 +152,10 @@ This wasn't a formal process change or a mandated workflow. It was relational �
 
 ## Reflection
 
-If I were to do this project again, I'd push earlier to formalize the component library into a documented design system with explicit naming conventions, versioning, and contribution guidelines. The library worked well because I maintained it — but that's a single point of failure. A more structured system would have survived beyond any one person's involvement and scaled more easily as the team grew.
+If I were to do this project again, I'd push earlier to formalize the component library into a documented design system with explicit naming conventions, versioning, and contribution guidelines.
 
-I'd also advocate for bringing the external designer into the prototyping workflow rather than treating design and code as sequential steps. Seeing components in a browser — responsive, interactive, real — changes how a designer thinks about their work. That feedback loop would have caught workflow gaps earlier and reduced the number of times I needed to design solutions independently. ▪️
+The library worked well because I maintained it — but that's a single point of failure. A more structured system would have survived beyond any one person's involvement and scaled more easily as the team grew.
+
+I'd also advocate for bringing the external designer into the prototyping workflow rather than treating design and code as sequential steps.
+
+Seeing components in a browser — responsive, interactive, real — changes how a designer thinks about their work. That feedback loop would have caught workflow gaps earlier and reduced the number of times I needed to design solutions independently. ▪️

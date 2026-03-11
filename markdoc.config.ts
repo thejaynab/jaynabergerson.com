@@ -161,6 +161,15 @@ export default defineMarkdocConfig({
 			},
 			render: component("./src/components/sections/Gallery.astro"),
 		},
+		Compare: {
+			attributes: {
+				folder: { type: String, render: "folder", required: true },
+				exclude: { type: String, render: "exclude" },
+				beforeAlt: { type: String, render: "beforeAlt" },
+				afterAlt: { type: String, render: "afterAlt" },
+			},
+			render: component("./src/components/sections/Compare.astro"),
+		},
 		WorkTLDR: {
 			attributes: {
 				items: { type: Array, render: "items", required: true },
