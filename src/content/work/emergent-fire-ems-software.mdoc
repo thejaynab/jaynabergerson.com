@@ -2,67 +2,95 @@
 title: <strong>Restructured incident documentation</strong> for fire and EMS software
 link: ""
 cover: '../../assets/works/jb-cs-emergent-v2.jpg'
-description: "Emergent was building an iOS application for first responders — firefighters and EMTs who document incidents in the field. New federal reporting standards (NERIS and NEMSIS) were about to change what data had to be collected and how it had to be structured.<br><br>But the app's existing navigation had no place for most of it."
-intro: "As UX Designer, I led the information architecture effort — mapping regulatory data requirements, identifying structural gaps, and presenting a recommended reorganization of the application to stakeholders and the development team."
+description: "Emergent was building an iOS application for first responders — firefighters and EMTs who document incidents in the field. <br/><br/>New federal reporting standards (NERIS and NEMSIS) were about to change what data had to be collected and how it had to be structured. But the app's existing navigation had no place for most of it."
+intro: "As Senior UX Designer, I led the information architecture effort — mapping regulatory data requirements, identifying structural gaps, and presenting a recommended reorganization of the application to stakeholders and the development team."
 tags:
   - Info Architecture
 workType: "Info Architecture"
 tech: "Public Safety Tech"
 tldr:
   - label: "Duration"
-    value: "6 Months"
+    value: "9 Months"
   - label: "Team"
-    value: "8–12"
+    value: "28-32"
   - label: "Company"
-    value: "Emergent (Startup)"
+    value: "Emergent Fire & EMS Software"
   - label: "Role"
-    value: "UX Designer"
+    value: "Senior UX Designer"
+impactTitle: "Deliverables"
+hideImpactButton: true
 impact:
-  - value: "100+"
-    description: "NERIS and NEMSIS data elements mapped and cataloged in Airtable"
+  - value: "450+"
+    description: "NERIS data elements analyzed for conditional logic dependencies and cataloged in Airtable"
+  - value: "650+"
+    description: "NEMSIS data elements mapped and connected to existing app structures in Airtable"
+  - value: "7"
+    description: "Structural recommendations developed and presented to stakeholders for app reorganization"
   - value: "3"
-    description: "Structural recommendations presented to stakeholders for app reorganization"
-  - value: "2"
-    description: "Federal compliance standards (NERIS & NEMSIS) addressed simultaneously"
+    description: "Federal compliance standards—NERIS, NEMSIS, & HIPAA—addressed simultaneously"
 backgroundColor: '#E8F0F0'
 pubDate: 2025-11-01
 lastUpdateDate: 2026-03-04
 ---
 
 
-A firefighter arrives at a structure fire. An EMT treats a patient on scene. Within hours — sometimes minutes — they need to document everything: the incident, the scene, the patients, the actions taken, the resources deployed. Federal reporting standards dictate exactly what data must be collected, in what format, and how it relates to other data points.
+A firefighter arrives at a structure fire. An EMT treats a patient on scene. Within hours — sometimes minutes — they need to document everything: the incident, the scene, the patients, the actions taken, the resources deployed.
 
-Emergent was building an iOS application to make that documentation faster and easier. The app already existed in a basic form — originally a side project built by developers, now being rebuilt as a full product with a dedicated team. But two federal compliance standards were about to reshape everything the app needed to collect: NERIS for fire service reporting and NEMSIS for EMS and patient data.
+Federal reporting standards dictate exactly what data must be collected, in what format, and how it relates to other data points.
 
-The question wasn't whether the app could collect the data. The question was whether it had anywhere to put it.
+Emergent was building an iOS application to make that documentation faster and easier.
+
+The app already existed in a basic form — originally a side project built by developers, now being rebuilt as a full product with a dedicated team.
+
+But two federal compliance standards were about to reshape everything the app needed to collect: the National Emergency Response Information System (NERIS) for fire service reporting and the National Emergency Medical Services Information System (NEMSIS) for EMS and patient data.
 
 ### The problem:
 
-As I researched the regulatory requirements for NERIS and NEMSIS, it became clear that the problem wasn't at the field level — it was structural. The application's navigation and information architecture had no place for much of the data these standards required.
+As I researched the regulatory requirements for NERIS and NEMSIS, it became clear that the problem wasn't at the field level — it was structural.
 
-Patient data, for example, was treated as a separate entity — disconnected from the incident it belonged to. But in reality, every patient encounter happens *within* an incident. The incident is the envelope. Everything that happens on scene — every patient, every action, every resource — needs to live inside that envelope and stay connected to it.
+The application's navigation and information architecture had no place for much of the data these standards required.
 
-NEMSIS also introduced HIPAA requirements for patient data. NERIS had its own set of data structures, packaging formats, and reporting rules. The two standards overlapped in places and diverged in others. And the current app wasn't built to accommodate either one coherently.
+Patient data, for example, was treated as a separate entity — slightly disconnected from the incident it belonged to.
+
+But in reality, every patient encounter happens *within* an incident. The incident is the envelope. Everything that happens on scene — every patient, every action, every resource — needs to live inside that envelope and stay connected to it.
+
+NEMSIS also introduced HIPAA requirements for patient data.
+
+NERIS had its own set of data structures, packaging formats, and reporting rules.
+
+The two standards overlapped in places and diverged in others. And the current app wasn't built to accommodate either one.
 
 ### The constraint:
 
-This was a startup. Timelines were compressed, the team was small, and development was already underway on other features. I couldn't pause everything for a months-long architecture overhaul. And there was no guarantee my recommendations would be implemented before priorities shifted — which, at a startup, they always do.
+This was a startup. Timelines were compressed, the team was small, and development was already underway on other features.
+
+I couldn't pause everything for a months-long architecture overhaul. And there was no guarantee my recommendations would be implemented before priorities shifted — which, at a startup, they always do.
 
 I also had to account for being new to the team — building credibility quickly while making the case for significant structural changes.
 
 ### The decision I made:
 
-Rather than waiting until the regulatory data work was complete and then presenting a finished recommendation, I recognized that the structural implications were urgent enough to escalate immediately. The development team needed to know *now* that their current architecture couldn't hold what was coming — not after I'd finished cataloging every data field.
+Rather than waiting until the regulatory data work was complete and then presenting a finished recommendation, I recognized that the structural implications were urgent enough to escalate immediately.
 
-**I separated the infrastructure problem from the data problem.** I brought the structural concerns to the design team first, then pitched the recommended reorganization to stakeholders. They asked me to go back with the design team and refine the proposal. We whiteboarded the changes together and I presented the refined recommendations — essentially saying: here are structural changes you can make *now* that will allow you to simply plug in the regulatory data work the moment it's ready.
+The development team needed to know *now* that their current architecture couldn't hold what was coming — not after I'd finished cataloging every data field.
+
+**I separated the infrastructure problem from the data problem.**
+
+I brought the structural concerns to the design team first, then pitched the recommended reorganization to stakeholders.
+
+They asked me to go back with the design team and refine the proposal. We whiteboarded the changes together and I presented the refined recommendations — essentially saying: here are structural changes you can make *now* that will allow you to simply plug in the regulatory data work the moment it's ready.
 
 That framing mattered. I wasn't asking them to stop what they were doing. I was showing them how to prepare for what was coming so it wouldn't disrupt their existing work when it arrived.
 
 ## Mapping the regulatory landscape
 
-The data requirements for NERIS and NEMSIS are extraordinarily detailed. Each standard specifies required and optional fields, input types, nesting hierarchies, value sets, nullability rules, and packaging constraints. Swagger UI — confirmed as the authoritative source through direct contact with the Director of Research at FSRI — served as the primary reference.
+The data requirements for NERIS and NEMSIS are extraordinarily detailed. Each standard specifies required and optional fields, input types, nesting hierarchies, value sets, nullability rules, and packaging constraints.
 
-But Swagger UI isn't designed for cross-referencing, filtering, or connecting elements to an existing application's data structures. I built the analysis in Airtable, capturing metadata for each API element — requirement level, input type, nullability, payload constraints, value sets, nesting depth, and source notes.
+NERIS uses Swagger UI — confirmed as the authoritative source through direct contact with the Director of Research at Fire Safety Research Institute (FSRI) — served as the primary reference.
+
+But Swagger UI isn't designed for cross-referencing, filtering, or connecting elements to an existing application's data structures.
+
+I built the analysis in Airtable, capturing metadata for each API element — requirement level, input type, nullability, payload constraints, value sets, nesting depth, and source notes.
 
 This allowed me to do what Swagger UI alone couldn't:
 
@@ -75,13 +103,17 @@ Dispatch data, for example, overlapped significantly between NERIS and NEMSIS �
 
 ## The structural recommendation
 
-The core of my recommendation addressed how the application organized information around an incident. In public safety, when first responders arrive on scene, the *incident* is the primary unit of work. Everything flows from it.
+The core of my recommendation addressed how the application organized information around an incident.
 
-For a small call — a single EMT, one patient — the incident details need to be minimal so the responder can focus on the patient. For a large-scale incident — multiple patients, multiple units — situational data is gathered by different people on scene, and EMTs need to focus solely on their assigned patients without navigating broader scene management.
+In public safety, when first responders arrive on scene, the *incident* is the primary unit of work. Everything flows from it.
+
+For a small call — a single EMT, one patient — the incident details need to be minimal so the responder can focus on the patient.
+
+For a large-scale incident — multiple patients, multiple units — situational data is gathered by different people on scene, and EMTs need to focus solely on their assigned patients without navigating broader scene management.
 
 The app needed to support both scenarios with the same underlying structure. My recommendation reorganized the navigation so that:
 
-1. **The incident became the true container** — patients, resources, actions, and scene data all nested within the incident rather than existing as parallel, disconnected entities
+1. **The incident became the true container** — patients, resources, actions, and scene data all nested within the incident rather than existing as parallel, loosely disconnected entities
 2. **Patient-focused workflows were isolated** — an EMT working with a patient could focus on that patient without navigating through situational data being gathered by others
 3. **New regulatory data fields had logical homes** — rather than bolting NERIS and NEMSIS fields onto an existing structure that couldn't hold them, the reorganization created the scaffolding they needed
 
@@ -89,14 +121,20 @@ I worked with the design team through whiteboarding sessions to refine these cha
 
 ### What I chose not to do:
 
-I recommended a complete redesign of the application — and others on the team shared that view. But I also recognized that a full redesign wasn't going to happen on a startup timeline. Instead, I focused on the structural changes that would *enable* a future redesign while solving the immediate compliance problem.
+I recommended a complete redesign of the application — and others on the team shared that view.
+
+But I also recognized that a full redesign wasn't going to happen on a startup timeline.
+
+Instead, I focused on the structural changes that would *enable* a future redesign while solving the immediate compliance problem.
 
 The structural reorganization was a stop-gap that served double duty: it met the regulatory needs and laid a better foundation for whatever came next.
 
 ## Reflection
 
-I was let go before any of the recommendations were implemented — a reality of startup work where priorities and budgets shift without warning. I don't know how the application evolved after my departure.
+I was let go in a 30% reduction in force (RIF) before any of the recommendations were implemented — a reality of startup work where priorities and budgets shift without warning. I don't know how the application evolved after my departure.
 
 What I do know is that the work itself was sound. The regulatory mapping was thorough, the structural diagnosis was accurate, and the reorganization I recommended was designed to be implemented incrementally without disrupting ongoing development.
 
-If I were to do this engagement again, I would have pushed harder to document the structural recommendations in a formal deliverable earlier. At a startup, institutional knowledge walks out the door when people do. The whiteboarding sessions and presentations were effective for alignment, but a comprehensive written reference would have ensured the thinking survived regardless of team changes. ▪️
+If I were to do this engagement again, I would have pushed harder to document the structural recommendations in a formal deliverable earlier. At a startup, institutional knowledge walks out the door when people do.
+
+The whiteboarding sessions and presentations were effective for alignment, but a comprehensive written reference would have ensured the thinking survived regardless of team changes.▪️

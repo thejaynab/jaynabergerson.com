@@ -51,6 +51,8 @@ const worksCollection = defineCollection({
 			tech: z.optional(z.string()),
 			tldr: z.optional(z.array(z.object({ label: z.string(), value: z.string() }))),
 			impact: z.optional(z.array(z.object({ value: z.string(), description: z.string() }))),
+			impactTitle: z.optional(z.string()),
+			hideImpactButton: z.optional(z.boolean()),
 			backgroundColor: z.optional(z.string()),
 			hidden: z.optional(z.boolean()),
 		}),

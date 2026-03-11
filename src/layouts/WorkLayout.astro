@@ -136,7 +136,7 @@ const videoSrc = frontmatter.data?.video
 			{
 				frontmatter.data.impact && frontmatter.data.impact.length > 0 && (
 					<div class="work-impact-section">
-						<h3 class="work-section-heading work-section-heading--center">Impact</h3>
+						<h3 class="work-section-heading work-section-heading--center">{frontmatter.data.impactTitle || 'Impact'}</h3>
 						<div class="work-impact-cards">
 							{frontmatter.data.impact.map(({ value, description }: { value: string; description: string }) => (
 								<div class="work-impact-card">
@@ -145,17 +145,19 @@ const videoSrc = frontmatter.data?.video
 								</div>
 							))}
 						</div>
-						<div class="work-impact-button">
-							<Link
-								href="#what-changed"
-								size="md"
-								style="outline"
-								class="work-impact-link"
-							>
-								<Icon size={20} name="ic:sharp-vertical-align-bottom" />
-								<span>View full impact</span>
-							</Link>
-						</div>
+						{!frontmatter.data.hideImpactButton && (
+							<div class="work-impact-button">
+								<Link
+									href="#what-changed"
+									size="md"
+									style="outline"
+									class="work-impact-link"
+								>
+									<Icon size={20} name="ic:sharp-vertical-align-bottom" />
+									<span>View full impact</span>
+								</Link>
+							</div>
+						)}
 					</div>
 				)
 			}
