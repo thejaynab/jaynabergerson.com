@@ -165,6 +165,21 @@ if (images.length === 0) return;
 		}
 	}
 
+	/* 4-column */
+	.gallery-grid--4-col {
+		columns: 1 !important;
+	}
+	@media (min-width: 640px) {
+		.gallery-grid--4-col {
+			columns: 2 !important;
+		}
+	}
+	@media (min-width: 1024px) {
+		.gallery-grid--4-col {
+			columns: 4 !important;
+		}
+	}
+
 	/* Feature-left: tall image left, stacked right */
 	.gallery-grid--feature-left,
 	.gallery-grid--feature-right,

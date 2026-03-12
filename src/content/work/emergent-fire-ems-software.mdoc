@@ -40,11 +40,11 @@ Federal reporting standards dictate exactly what data must be collected, in what
 
 Emergent was building an iOS application to make that documentation faster and easier.
 
+{% Video src="/videos/emergent/firefighters/fire-video.mp4" autoplay=true loop=true /%}
+
 The app already existed in a basic form — originally a side project built by developers, now being rebuilt as a full product with a dedicated team.
 
 But two federal compliance standards were about to reshape everything the app needed to collect: the National Emergency Response Information System (NERIS) for fire service reporting and the National Emergency Medical Services Information System (NEMSIS) for EMS and patient data.
-
-{% Compare folder="compare structure" beforeAlt="Original app structure" afterAlt="Recommended app structure" /%}
 
 ### The problem:
 
@@ -70,6 +70,8 @@ I couldn't pause everything for a months-long architecture overhaul. And there w
 
 I also had to account for being new to the team — building credibility quickly while making the case for significant structural changes.
 
+{% Compare folder="compare structure" beforeAlt="Original app structure" afterAlt="Recommended app structure" /%}
+
 ### The decision I made:
 
 Rather than waiting until the regulatory data work was complete and then presenting a finished recommendation, I recognized that the structural implications were urgent enough to escalate immediately.
@@ -84,11 +86,13 @@ They asked me to go back with the design team and refine the proposal. We whiteb
 
 That framing mattered. I wasn't asking them to stop what they were doing. I was showing them how to prepare for what was coming so it wouldn't disrupt their existing work when it arrived.
 
-{% Gallery folder="emergent" exclude="airtable,charts,compare,logic,video,Figma,jb-emergent" layout="2-col" /%}
+
 
 {% PasswordGate %}
 
-{% Gallery folder="emergent/charts" layout="3-col" /%}
+{% Gallery folder="emergent/NEMSIS" layout="4-col" /%}
+
+![NERIS fields for dispatch view](../../assets/works/emergent/NERIS_full_system.png "@extended NEMSIS has a PDF data dictionary while NERIS uses UI Swagger documentation. Both required extensive analysis to map out the data requirements and connections to the app's existing structures.")
 
 ## Mapping the regulatory landscape
 
@@ -98,7 +102,13 @@ NERIS uses Swagger UI — confirmed as the authoritative source through direct c
 
 But Swagger UI isn't designed for cross-referencing, filtering, or connecting elements to an existing application's data structures.
 
+{% Video src="/videos/emergent/airtable/NEMSIS-Sorting.mp4" autoplay=true loop=true /%}
+
 I built the analysis in Airtable, capturing metadata for each API element — requirement level, input type, nullability, payload constraints, value sets, nesting depth, and source notes.
+
+{% Gallery folder="emergent/airtable" layout="3-col" /%}
+
+{% Gallery folder="emergent/charts" layout="3-col" /%}
 
 This allowed me to do what Swagger UI alone couldn't:
 
@@ -107,15 +117,9 @@ This allowed me to do what Swagger UI alone couldn't:
 - Identify where the two standards overlapped, conflicted, or required entirely new data collection
 - Track edge cases and questions requiring subject matter expert input
 
-{% Gallery folder="emergent/airtable" layout="feature-left" /%}
-
-{% Video src="/videos/emergent/airtable/NEMSIS-Sorting.mp4" autoplay=true loop=true /%}
-
-{% Video src="/videos/emergent/airtable/Video-Cards.mp4" autoplay=true loop=true /%}
-
 Dispatch data, for example, overlapped significantly between NERIS and NEMSIS — but with critical differences in format and packaging that needed resolution before implementation.
 
-{% Gallery folder="emergent/logic" layout="2-col" /%}
+![NERIS fields for dispatch view](../../assets/works/emergent/Figma-outline.png)
 
 ## The structural recommendation
 
@@ -133,6 +137,8 @@ The app needed to support both scenarios with the same underlying structure. My 
 2. **Patient-focused workflows were isolated** — an EMT working with a patient could focus on that patient without navigating through situational data being gathered by others
 3. **New regulatory data fields had logical homes** — rather than bolting NERIS and NEMSIS fields onto an existing structure that couldn't hold them, the reorganization created the scaffolding they needed
 
+{% Gallery folder="whiteboarding" layout="2-col" /%}
+
 I worked with the design team through whiteboarding sessions to refine these changes, ensuring they were feasible within the existing technical architecture while still addressing the regulatory requirements.
 
 ### What I chose not to do:
@@ -141,7 +147,7 @@ I recommended a complete redesign of the application — and others on the team 
 
 But I also recognized that a full redesign wasn't going to happen on a startup timeline.
 
-Instead, I focused on the structural changes that would *enable* a future redesign while solving the immediate compliance problem.
+**Instead, I focused on the structural changes that would *enable* a future redesign while solving the immediate compliance problem.**
 
 The structural reorganization was a stop-gap that served double duty: it met the regulatory needs and laid a better foundation for whatever came next.
 
