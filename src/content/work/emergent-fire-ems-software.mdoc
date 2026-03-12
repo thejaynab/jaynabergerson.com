@@ -1,5 +1,5 @@
 ---
-title: <strong>Restructured incident documentation</strong> for fire and EMS software
+title: <strong>Restructured incident reporting</strong> for fire and EMS software
 link: ""
 cover: '../../assets/works/jb-cs-emergent-v2.jpg'
 description: "Emergent was building an iOS application for first responders — firefighters and EMTs who document incidents in the field. <br/><br/>New federal reporting standards (NERIS and NEMSIS) were about to change what data had to be collected and how it had to be structured. But the app's existing navigation had no place for most of it."
@@ -23,7 +23,7 @@ impact:
   - value: "450+"
     description: "NERIS data elements analyzed for conditional logic dependencies and cataloged in Airtable"
   - value: "650+"
-    description: "NEMSIS data elements mapped and connected to existing app structures in Airtable"
+    description: "NEMSIS data elements mapped and connected to existing app data structures in Airtable"
   - value: "7"
     description: "Structural recommendations developed and presented to stakeholders for app reorganization"
   - value: "3"
@@ -66,7 +66,7 @@ The two standards overlapped in places and diverged in others. And the current a
 
 This was a startup. Timelines were compressed, the team was small, and development was already underway on other features.
 
-I couldn't pause everything for a months-long architecture overhaul. And there was no guarantee my recommendations would be implemented before priorities shifted — which, at a startup, they always do.
+I couldn't pause everything for a months-long architecture overhaul. And there was no guarantee my recommendations would be implemented before priorities shifted — which, at a startup, priorities can frequently change.
 
 I also had to account for being new to the team — building credibility quickly while making the case for significant structural changes.
 
@@ -92,7 +92,7 @@ That framing mattered. I wasn't asking them to stop what they were doing. I was 
 
 {% Gallery folder="emergent/NEMSIS" layout="4-col" /%}
 
-![NERIS fields for dispatch view](../../assets/works/emergent/NERIS_full_system.png "@extended NEMSIS has a PDF data dictionary while NERIS uses UI Swagger documentation. Both required extensive analysis to map out the data requirements and connections to the app's existing structures.")
+![NERIS fields for dispatch view](../../assets/works/emergent/NERIS_full_system.png "@original NEMSIS has a PDF data dictionary while NERIS uses Swagger UI documentation. Both required extensive analysis to map out the data requirements and connections to the app's existing structures.")
 
 ## Mapping the regulatory landscape
 
@@ -119,6 +119,8 @@ This allowed me to do what Swagger UI alone couldn't:
 
 Dispatch data, for example, overlapped significantly between NERIS and NEMSIS — but with critical differences in format and packaging that needed resolution before implementation.
 
+
+![NERIS fields for dispatch view](../../assets/works/emergent/EME-3018-Chart-NERIS-Fields-Dispatch-View.png)
 ![NERIS fields for dispatch view](../../assets/works/emergent/Figma-outline.png)
 
 ## The structural recommendation
@@ -152,6 +154,14 @@ But I also recognized that a full redesign wasn't going to happen on a startup t
 The structural reorganization was a stop-gap that served double duty: it met the regulatory needs and laid a better foundation for whatever came next.
 
 {% /PasswordGate %}
+
+## Designing for compliance without sacrificing essential usability
+
+From the start, my goal was to ensure the app could meet federal reporting requirements without adding friction for the people using it.
+
+First responders need to capture incident data quickly and get back to helping people — every extra tap, every confusing navigation path, every unnecessary screen is time taken away from someone in an emergency situation.
+
+Compliance had to be built *into* the structure, not bolted on top of it in ways that would slow the experience down.
 
 ## Reflection
 
