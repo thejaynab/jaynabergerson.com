@@ -1,0 +1,45 @@
+---
+interface Props {
+	src: string;
+	autoplay?: boolean;
+	loop?: boolean;
+	muted?: boolean;
+	controls?: boolean;
+}
+
+const { src, autoplay = false, loop = false, muted = true, controls = true } = Astro.props;
+
+const ext = src.split(".").pop()?.toLowerCase();
+const mimeMap: Record<string, string> = { mp4: "video/mp4", mov: "video/quicktime", webm: "video/webm" };
+const mimeType = mimeMap[ext || ""] || "video/mp4";
+---
+
+<div class="video-container">
+	<video
+		class="video-player"
+		controls={controls}
+		autoplay={autoplay}
+		loop={loop}
+		muted={muted}
+		playsinline
+		preload="metadata"
+	>
+		<source src={src} type={mimeType} />
+	</video>
+</div>
+
+<style>
+	.video-container {
+		margin: 2rem auto;
+		max-width: 750px;
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	.video-player {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: 8px;
+	}
+</style>

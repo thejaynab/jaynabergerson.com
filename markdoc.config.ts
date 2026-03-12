@@ -180,5 +180,15 @@ export default defineMarkdocConfig({
 			children: ["*"],
 			render: component("./src/components/sections/PasswordGate.astro"),
 		},
+		Video: {
+			attributes: {
+				src: { type: String, render: "src", required: true },
+				autoplay: { type: Boolean, render: "autoplay" },
+				loop: { type: Boolean, render: "loop" },
+				muted: { type: Boolean, render: "muted" },
+				controls: { type: Boolean, render: "controls" },
+			},
+			render: component("./src/components/sections/Video.astro"),
+		},
 	},
 });
