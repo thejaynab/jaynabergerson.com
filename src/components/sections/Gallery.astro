@@ -6,10 +6,15 @@ interface Props {
 	exclude?: string;
 	layout?: string;
 	alts?: string;
+	border?: boolean;
 }
 
-const { folder, exclude, layout, alts } = Astro.props;
-const gridClass = layout ? `gallery-grid gallery-grid--${layout}` : "gallery-grid";
+const { folder, exclude, layout, alts, border } = Astro.props;
+const gridClass = [
+	"gallery-grid",
+	layout && `gallery-grid--${layout}`,
+	border && "gallery-grid--border",
+].filter(Boolean).join(" ");
 const altList = alts ? alts.split("|").map((s: string) => s.trim()) : [];
 
 // Import all post and work images eagerly
@@ -60,7 +65,7 @@ if (images.length === 0) return;
 				))}
 			</div>
 		</div>
-	) : layout === 'feature-right' ? (
+	) : (layout === 'feature-right' || layout === 'feature-right-wide') ? (
 		<div class={gridClass}>
 			<div class="gallery-stack">
 				{images.slice(0, -1).map((img) => (
@@ -133,6 +138,11 @@ if (images.length === 0) return;
 		border-radius: 8px;
 	}
 
+	/* Border variant */
+	.gallery-grid--border .gallery-image {
+		border: 1px solid #e7e7e7;
+	}
+
 	/* --- Layout variants --- */
 
 	/* 1-column */
@@ -183,7 +193,8 @@ if (images.length === 0) return;
 	/* Feature-left: tall image left, stacked right */
 	.gallery-grid--feature-left,
 	.gallery-grid--feature-right,
-	.gallery-grid--feature-left-wide {
+	.gallery-grid--feature-left-wide,
+	.gallery-grid--feature-right-wide {
 		columns: unset !important;
 		display: grid;
 		grid-template-columns: 1fr;
@@ -205,6 +216,9 @@ if (images.length === 0) return;
 		}
 		.gallery-grid--feature-left-wide {
 			grid-template-columns: 2fr 1fr;
+		}
+		.gallery-grid--feature-right-wide {
+			grid-template-columns: 1fr 2fr;
 		}
 	}
 </style>

@@ -60,8 +60,11 @@ lastUpdateDate: 2026-01-01
 
      AVAILABLE MARKDOC TAGS:
      - {% Gallery folder="slug" layout="..." /%}
-       Layouts: default (masonry), 1-col, 2-col, 3-col, feature-left, feature-left-wide, feature-right
+       Layouts: default (masonry), 1-col, 2-col, 3-col, feature-left, feature-left-wide, feature-right, feature-right-wide
        Optional: alts="Alt 1|Alt 2|Alt 3" (pipe-separated, one per image)
+       Optional: border=true (adds 1px solid #e7e7e7 border to all images)
+     - Standalone images support @border in the title:
+       ![alt](path "@extended @border Optional caption")
      - {% PasswordGate %} ... {% /PasswordGate %}
        Wraps content behind a password wall (SHA-256 hashed)
      - {% Recommendation pretitle="..." recommendations=[...] /%}

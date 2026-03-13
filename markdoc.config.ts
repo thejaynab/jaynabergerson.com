@@ -180,6 +180,7 @@ export default defineMarkdocConfig({
 				exclude: { type: String, render: "exclude" },
 				layout: { type: String, render: "layout" },
 				alts: { type: String, render: "alts" },
+				border: { type: Boolean, render: "border" },
 			},
 			render: component("./src/components/sections/Gallery.astro"),
 		},

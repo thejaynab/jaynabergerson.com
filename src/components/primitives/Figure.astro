@@ -18,6 +18,7 @@ const { src, alt = "", title = "" } = Astro.props;
 const widthKeywords = ["@original", "@extended", "@article"] as const;
 let width: "original" | "article" | "extended" = "article";
 let caption = title;
+let border = false;
 
 for (const keyword of widthKeywords) {
 	if (title.startsWith(keyword)) {
@@ -25,6 +26,12 @@ for (const keyword of widthKeywords) {
 		caption = title.slice(keyword.length).trim();
 		break;
 	}
+}
+
+// Check for @border flag anywhere in the caption
+if (caption.includes("@border")) {
+	border = true;
+	caption = caption.replace("@border", "").trim();
 }
 
 // Convert relative path (../../assets/...) to absolute (/src/assets/...)
@@ -45,7 +52,7 @@ const widthClass = {
 }[width];
 ---
 
-<figure class:list={["figure-wrapper", widthClass]}>
+<figure class:list={["figure-wrapper", widthClass, border && "figure-border"]}>
 	<Image src={resolvedImage} alt={alt} />
 	{caption && <figcaption>{caption}</figcaption>}
 </figure>
@@ -83,6 +90,11 @@ const widthClass = {
 	.figure-extended :global(img) {
 		width: 100%;
 		border-radius: 1.5rem;
+	}
+
+	/* Border variant */
+	.figure-border :global(img) {
+		border: 1px solid #e7e7e7;
 	}
 
 	.figure-wrapper figcaption {
