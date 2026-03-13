@@ -1,4 +1,5 @@
 import { component, defineMarkdocConfig, nodes } from "@astrojs/markdoc/config";
+import Markdoc from "@markdoc/markdoc";
 
 export default defineMarkdocConfig({
 	nodes: {
@@ -19,6 +20,27 @@ export default defineMarkdocConfig({
 				title: { type: String, render: "title" },
 			},
 			render: component("./src/components/primitives/Figure.astro"),
+		},
+		paragraph: {
+			...nodes.paragraph,
+			transform(node, config) {
+				const children = node.children;
+				// Unwrap paragraphs that contain only images (no text)
+				// AST structure: paragraph → inline → image(s) with possible softbreaks
+				if (children.length === 1 && children[0].type === "inline") {
+					const inlineChildren = children[0].children;
+					const imageChildren = inlineChildren.filter((c: any) => c.type === "image");
+					const onlyImagesAndBreaks = imageChildren.length > 0 &&
+						inlineChildren.every((c: any) => c.type === "image" || c.type === "softbreak");
+					if (onlyImagesAndBreaks) {
+						if (imageChildren.length === 1) {
+							return imageChildren[0].transform(config);
+						}
+						return imageChildren.map((c: any) => c.transform(config));
+					}
+				}
+				return new Markdoc.Tag("p", node.transformAttributes(config), node.transformChildren(config));
+			},
 		},
 		heading: {
 			attributes: {

@@ -1,8 +1,8 @@
 ---
-title: <strong>Redesigned playlist navigation</strong> for a learner credentialing platform
+title: <strong>Redesigned progress sidebar</strong> for a learner credentialing platform
 link: ""
 cover: '../../assets/works/jb-cs-csky-snhu-lrng-v2.jpg'
-description: "LRNG was a learning platform serving over 71,000 learners — many of them underprivileged high school students in Chicago and Philadelphia attending summer programs. Learners were getting lost in the interface, unable to tell where they were, what they'd completed, or what they needed to do next.<br><br>The platform had 937 playlists and over 55,000 digital credentials earned, but no clear way to show a learner their progress."
+description: "LRNG was a learning platform serving over 71,000 learners — many of them underprivileged high school students in Chicago and Philadelphia attending summer programs. <br/><br/>Learners were getting lost in the interface, unable to tell where they were, what they'd completed, or what they needed to do next.<br><br>The platform had 937 playlists and over 55,000 digital credentials earned, but no clear way to show a learner their progress."
 intro: "As Senior UX Designer at Concentric Sky, I led the redesign of the learner navigation experience — creating a strategic action plan, designing a playlist sidebar with progress tracking, and establishing documentation practices that reduced design-phase errors by 60%."
 tags:
   - UX/UI Design
@@ -27,7 +27,7 @@ impact:
     description: "Reduction in things missed during the design phase"
   - value: "110+"
     description: "UX concerns identified and cataloged across the existing interface"
-  - value: "55,212"
+  - value: "55k+"
     description: "Digital credentials earned by learners on the platform"
 backgroundColor: '#E8EBF0'
 pubDate: 2025-08-01
@@ -45,7 +45,13 @@ You don't know how many activities you've completed, how many are left, or wheth
 
 The LRNG platform had evolved over time — features were added incrementally without reconsidering the cumulative experience. A recent simplification had reduced component configurations from 24 to six, but the remaining variation didn't always communicate meaningful distinctions. When distinctions actually mattered — like telling the difference between a playlist and an activity within it — they were so subtle as to be imperceptible.
 
-During a summer session, LRNG staff gathered learner feedback — high-level statements without follow-up research: *Learners don't know where they are. Learners can't tell what they're about to submit. Learners aren't aware they need to resubmit work. Learners don't always see feedback.* The feedback confirmed the interface needed improvement — but there was no budget for additional user research.
+During a summer session, LRNG staff gathered learner feedback — high-level statements without follow-up research:
+- Learners don't know where they are.
+- Learners can't tell what they're about to submit.
+- Learners aren't aware they need to resubmit work.
+- Learners don't always see feedback.
+
+The feedback confirmed the interface needed improvement — but there was no budget for additional user research.
 
 ### The constraint:
 
@@ -53,23 +59,36 @@ LRNG wanted these problems addressed before the next summer session — roughly 
 
 ### The decision I made:
 
-When I first joined the LRNG project, I spent time using the application myself and documented over 110 UX concerns. Many of them overlapped with the learner feedback that surfaced months later. Rather than treating the feedback as a standalone problem to solve, **I connected it to the broader pattern of UX issues I'd already mapped — and used that combined evidence to build a strategic action plan that sequenced the work so each phase built on the last.**
+When I first joined the LRNG project, I spent time using the application myself and documented over 110 UX concerns. Many of them overlapped with the learner feedback that surfaced months later.
 
-The feedback wasn't just about navigation. It was about trust — learners not trusting that the system was tracking their work, not trusting that submissions were received, not understanding the relationship between where they were and where they needed to go. The action plan addressed all of it, organized into JIRA epics with clear dependencies so nothing had to be torn down to make room for what came next.
+Rather than treating the feedback as a standalone problem to solve, **I connected it to the broader pattern of UX issues I'd already mapped — and used that combined evidence to build a strategic action plan that sequenced the work so each phase built on the last.**
+
+The feedback wasn't just about navigation. It was about trust — learners not trusting that the system was tracking their work, not trusting that submissions were received, not understanding the relationship between where they were and where they needed to go.
+
+The action plan addressed all of it, organized into JIRA epics with clear dependencies so nothing had to be torn down to make room for what came next.
+
+
+![alt](../../assets/works/csky-lrng/2023-01-24-Portfolio-Epics.jpg "@original")
 
 ## A strategic action plan as the foundation
 
 The action plan wasn't a list of features to build. It was a sequenced roadmap — each phase identified a corresponding JIRA epic, the feedback statements it addressed, and the goals of the work.
 
-The first epic, for example — "Playlist UI Redesign" — addressed the most urgent feedback: learners getting lost in the interface. I defined the goals explicitly: learners should be able to quickly identify where they are and what their progress is on the playlist view. This work should increase playlist submissions.
+The first epic, for example — "Playlist UI Redesign" — addressed the most urgent feedback: learners getting lost in the interface.
+
+I defined the goals explicitly: learners should be able to quickly identify where they are and what their progress is on the playlist view. This work should increase playlist submissions.
 
 Each subsequent epic built on the previous one. The navigation redesign came before the approval workflow changes because the approval changes depended on learners understanding where they were first. The notification improvements came after both because they required a stable interface to reference.
 
 This sequencing mattered because priorities had shifted mid-stream before. By structuring the plan so each phase delivered standalone value while also preparing the ground for the next, I ensured that even if only part of the plan was implemented, the completed work would still improve the learner experience.
 
-The plan went through several iterations with stakeholders and team members as I combined business considerations and technical limitations into each phase. Once agreed upon, I organized all the JIRA epics and tickets to correspond with the plan.
+The plan went through several iterations with stakeholders and team members as I combined business considerations and technical limitations into each phase.
+
+Once agreed upon, I organized all the JIRA epics and tickets to correspond with the plan.
 
 {% PasswordGate %}
+
+![alt](../../assets/works/csky-lrng/Milestone-Learner-Approvals-Approvals-Walkthrough.jpg "@original")
 
 ### Understanding the approval process:
 
@@ -83,11 +102,23 @@ The core of the redesign was a sidebar navigation and progress indicator for pla
 
 The previous design had the right instinct — a step-by-step concept with checkmarks for completed activities. But it hadn't been fully thought through. It didn't account for how admins review and approve work. It didn't address what happens when a playlist has prerequisites — when you have to complete one playlist before starting another. It didn't handle the difference between a standard playlist and a premium playlist, or playlists with video banners, or mega-badges that require completing multiple playlists.
 
-I updated and expanded the designs, focusing on messaging that would guide learners through their educational journey. Without a user testing budget, I iterated through multiple versions and shared them broadly — with my team, other Concentric Sky teams, and colleagues whose feedback could approximate what I couldn't get from learners directly. Concentric Sky's portfolio included National Geographic, NASA, Encyclopedia Britannica, and PBS — the expertise in the building was real, even if it wasn't a substitute for dedicated research.
+![alt](../../assets/works/csky-lrng/2023-01-24-Portfolio-Sample-Presentation.jpg)
+
+I updated and expanded the designs, focusing on messaging that would guide learners through their educational journey.
+
+Without a user testing budget, I iterated through multiple versions and shared them broadly — with my team, other Concentric Sky teams, and colleagues whose feedback could approximate what I couldn't get from learners directly.
+
+Concentric Sky's portfolio included National Geographic, NASA, Encyclopedia Britannica, and PBS — the expertise in the building was real, even if it wasn't a substitute for dedicated research.
+
+![alt](../../assets/works/csky-lrng/2021-07-08-Playlist-Nav-and-Progress-Sidebar.jpeg)
 
 I built the interface designs in Figma but documented the user journey in Lucidchart. The Lucidchart diagrams served as the single source of truth for each JIRA ticket — showing the sidebar design alongside the user's journey through it, so stakeholders and developers could visually trace how the interface changed with each step or situation.
 
 The sidebar showed learners what they'd completed, what they'd submitted, what had received feedback, and what remained. It gave them the one thing the existing interface lacked entirely: a sense of where they were and how far they had to go.
+
+{% Compare folder="compare-activity" beforeAlt="Original activity design" afterAlt="Recommended activity design" /%}
+
+{% Compare folder="compare-playlist" beforeAlt="Original playlist design" afterAlt="Recommended playlist design" /%}
 
 ### Redesigning playlist and activity views:
 
