@@ -18,94 +18,200 @@ tldr:
   - label: "Role"
     value: "UX/UI Lead Designer & Developer"
 impact:
+  - value: "4"
+    description: "Designers hired to create the new application design before I joined — all rejected by leadership"
   - value: "40+"
-    description: "New business customers signed up during the initial trial release"
-  - value: "#1"
-    description: "Google search result for 'Team Email Application'"
-  - value: "40 hrs"
-    description: "Average work time saved per account per month"
+    description: "New customers signed up during the initial beta launch"
+  - value: "5 wks"
+    description: "To redesign the entire application interface to unify with the marketing brand"
+  - value: "480 hrs"
+    description: "Average work time saved per account per year according to user feedback"
 backgroundColor: '#EDE5E8'
 pubDate: 2025-07-01
 lastUpdateDate: 2026-03-04
 ---
 
+### The experience:
 
-Your small business has a shared inbox — support@, info@, maybe a dedicated mailbox for the CEO. Emails come in from customers, and your team needs to figure out who's handling what. Someone assigns a thread. Someone else adds a note because the customer called in separately. A third person needs to search for a conversation from last month and save those search parameters so they don't have to reconstruct them every time.
+Your small business has a shared inbox — support@, info@, help@, and maybe a dedicated mailbox for the CEO.
 
-Email Center Pro handled all of this — but it had been built by developers without a designer. The interface worked, but it was clunky. Too many clicks to complete basic tasks. Search was complex and awkward. The application had accumulated users, including Adobe, through sheer utility rather than good experience.
+Emails come in from customers, and your team needs to figure out who's handling what.
 
-Palo Alto Software decided it was time to rebuild. New tech stack, new team, new product — eventually named Outpost. They assembled a full team of 14 to 18 people: developers, an architect, QA, a project manager. But when it came to the design, they hit a wall.
+Someone assigns a thread for an email. Someone else adds a note because the customer called in separately.
+
+A third person needs to search for a conversation from last month and save those search parameters so they don't have to reconstruct them every time.
+
+Email Center Pro handled all of this — but it had been built by developers without a designer. The interface worked, but it took too many clicks to complete basic tasks. Search was complex and often difficult to use.
+
+The application had accumulated users, including Adobe, through sheer utility rather than good experience.
+
+Palo Alto Software decided it was time to rebuild. New tech stack, new team, new product — eventually named Outpost.
+
+They assembled a full team of 14 to 18 people: developers, an architect, QA, a project manager.
+
+But when it came to the design, they hit a wall.
 
 ### The problem:
 
-Four different designers were hired to create the visual direction for Outpost. Each one was rejected by the CEO, CTO, and VP of Technology. None captured the direction leadership was looking for — and that direction hadn't been fully articulated yet, making the target difficult to hit. Formal requirements hadn't been developed, there was no budget for user research, and the product had no logo, brand colors, or visual identity to design against.
+Four different designers were hired to create the visual direction for Outpost. Each one was rejected by the CEO, CTO, and VP of Technology.
+
+None captured the direction leadership was looking for — and that direction hadn't been fully articulated yet, making the target difficult to hit.
+
+Formal requirements hadn't been developed, there was no budget for user research, and the product had no logo, brand colors, or visual identity to design against.
 
 Meanwhile, the development team was already in motion — assembling React components based on reasonable assumptions about what the application would need, building the technical structure of a product that had no approved design.
 
 ### The constraint:
 
-I was working on a different project at Palo Alto Software when they asked me to take on the design. The team had been waiting. Development was moving forward without direction. The timeline was already compressed, and I was starting from a position that four other designers had failed to crack — with the same stakeholders who had rejected all previous attempts.
+I was working on a different project at Palo Alto Software when they asked me to take on the design.
 
-There was also no requirement documentation, no user research budget, and no existing design system. I had to simultaneously figure out what the product needed to do, design how it should look and behave, and produce artifacts detailed enough for a development team that was already building.
+The timeline was already compressed, and I was starting from a position that four other designers had attempted — with the same stakeholders who had rejected all previous attempts.
+
+There was also no requirement documentation, no user research budget, and no existing design system.
+
+I had to simultaneously figure out what the product needed to do, design how it should look and behave, and produce artifacts detailed enough for a development team that was already building.
+
+
+{% Gallery folder="ECP" layout="3-col" alts="Screenshots of Email Center Pro (ECP)" /%}
 
 ### The decision I made:
 
-Rather than spending weeks developing a comprehensive design proposal — which is what the previous designers had done, and which had been rejected each time — **I dove into the existing product.** I used Email Center Pro myself. I sent emails back and forth with team members, testing every workflow. I interviewed developers who had built the original application. I gathered and organized every piece of existing user feedback I could find.
+Rather than spending weeks developing a comprehensive design proposal — which is what the previous designers had done, and which had been rejected each time — **I dove into the existing product.**
 
-From that immersion, I built my own requirements list and then designed fast. I iterated rapidly — showing work to the team, getting feedback, making adjustments, and showing again. Each cycle refined both the design and the underlying requirements. The stakeholders who had rejected four designers approved my direction immediately, and I became the lead designer for the project.
+I used Email Center Pro myself. I sent emails back and forth with team members, testing every workflow. I interviewed stakeholders and the developers who had built the original application.
 
-## From requirements to a shipped interface
+I gathered and organized every piece of existing user feedback I could find.
 
-The requirements I developed from existing user feedback identified four core capabilities: assigning emails to team members, saving search parameters, adding notes to email conversations, and managing permissions per mailbox. The pain points were equally clear: too many clicks to complete a task, and search that was too complex and difficult to use.
+From that immersion, I built my own requirements list and then designed fast.
 
-I designed the complete application interface — every screen, every interaction, every state. The inbox view, the conversation thread, the assignment workflow, the search and saved search experience, the tagging system, the dashboard for managers to view performance across mailboxes. Each element was designed to reduce the number of steps required to accomplish what users came to do.
+{% Gallery folder="Outpost-Iteration-v1" layout="feature-right-wide" alts="Screenshots of Outpost iterations version 1" border=true /%}
 
-I didn't just produce visual designs. I built HTML/CSS prototypes for everything — working code that developers could reference and directly translate into React components. The prototypes weren't approximations. They showed exact spacing, responsive behavior, interaction states, and visual hierarchy. Developers used them as their primary reference for implementation.
+I iterated rapidly — showing work to the team, getting feedback, making adjustments, and showing again. Each cycle refined both the design and the underlying requirements.
 
-The development team took pride in matching my prototypes precisely. The gap between design and production was nearly invisible — there were times I clicked on my own prototype expecting it to function, not realizing I wasn't in the actual application.
+The stakeholders who had rejected four designers approved my direction immediately, and **I became the lead designer for the project.**
 
 {% PasswordGate %}
 
-### Designing for accessibility:
+{% Gallery folder="whiteboarding-app-designs" layout="2-col" alts="Screenshots of whiteboarding and sketches" /%}
 
-The tagging system was a key organizational tool — users labeled email conversations with colored tags for quick visual categorization. Working with the QA team, I selected tag colors so that colorblind individuals could differentiate between each tag easily. This wasn't an afterthought. I chose the palette deliberately, informed by accessibility standards, because a team email tool used by diverse organizations couldn't afford to exclude anyone from its primary organizational mechanism.
+## From requirements to a shipped interface
+
+The requirements I developed from existing user feedback identified four core capabilities:
+- assigning emails to team members,
+- saving search parameters,
+- adding notes to email conversations, and
+- managing permissions per mailbox.
+
+The pain points were equally clear:
+- too many clicks to complete a task and
+- search that was too complex and difficult to use.
+
+![alt](../../assets/works/pas-outpost/Outpost-Iteration-v2/p-conv-details-assign-dropdown.png "@original @border")
+
+{% Gallery folder="Outpost-Iteration-v2" exclude="p-conv-details-assign-dropdown.png" layout="2-col" alts="Screenshots of Outpost iterations version 2" border=true /%}
+
+**Based on stakeholder input, I designed the complete application interface** — every screen, every interaction, every state.
+
+The inbox view, the conversation thread, the assignment workflow, the search and saved search experience, the tagging system, the dashboard for managers to view performance across mailboxes.
+
+Each element was designed to reduce the number of steps requirred to accomplish what users came to do.
+
+I didn't just produce visual designs. I built HTML/CSS pototypes using Jekyll static site builder and liquid templating language — providing code that developers could reference and directly translate into React components.
+
+The prototypes weren't approximations. They showed exact spacing, responsive behavior, interaction states, and visual hierarchy. Developers used them as their primary reference for implementation.
+
+The development team took pride in matching my prototypes precisely. The gap between design and production was nearly invisible — there were times I clicked on my own prototype expecting it to function, not realizing I wasn't in the actual application.
+
+
+
+{% Compare folder="Compare-v2-to-v3" beforeAlt="Original design" afterAlt="Redesign with updated brand" /%}
 
 ## Unifying the brand
 
-Several months into the project, the marketing team revealed their plans for the Outpost website and brand identity. The colors, fonts, and design language they'd developed were entirely different from the application interface. The two had evolved on separate tracks, and the result was a visual disconnect.
+Several months into the project, the marketing team revealed their plans for the Outpost website and brand identity.
 
-This created a problem I couldn't ignore: a customer would visit the marketing website, form an impression of the brand, then open the application and encounter something that looked and felt like a different product. That disconnect erodes trust. It makes software feel unfinished.
+The colors, fonts, and design language they'd developed were entirely different from the application interface.
 
-I raised the concern with the marketing designer, but their focus was on the website launch. So I went to the VP of Technology and the project manager. I told them: give me some time. By this point, I'd been working on the application for months. I had deep insight into the functionality, the interaction patterns, and the opportunities for improvement I'd been cataloging along the way.
+The two had evolved on separate tracks, and the result was a visual disconnect.
+
+This created a problem I couldn't ignore: a customer would visit the marketing website, form an impression of the brand, then open the application and encounter something that looked and felt like a different product. That kind of disconnect makes software appear untrustworthy.
+
+I raised the concern with the marketing designer, but their focus was on the website launch.
+
+So I went to the VP of Technology and the project manager. I asked them to give me some time.
+
+By this point, I'd been working on the application for months. I had deep insight into the functionality, the interaction patterns, and the opportunities for improvement I'd been cataloging along the way.
 
 They gave me the time.
 
+![alt](../../assets/works/pas-outpost/Outpost-Brand-Redesign/outpost-editor.png "@original @border")
+
+{% Gallery folder="Outpost-Brand-Redesign" exclude="outpost-editor.png" layout="2-col" alts="Screenshots of Outpost iterations version 2" border=true /%}
+
 ### What I delivered:
 
-I redesigned the application interface to incorporate the marketing team's visual direction — the cleaner aesthetic, the blue palette that would become the brand's signature color — while preserving and enhancing the interaction design and usability improvements I'd developed over the preceding months. The redesign wasn't a coat of paint. It was a chance to address every interaction I'd flagged for improvement, now unified under a cohesive brand identity.
+I redesigned the application interface to incorporate the marketing team's visual direction — the cleaner aesthetic, the blue palette that would become the brand's signature color — while preserving and enhancing the interaction design and usability improvements I'd developed over the preceding months.
 
-Stakeholders loved the redesign so much that they requested immediate implementation — postponing several planned features to get the new design into production as quickly as possible. The application design then inspired updates to the marketing website, completing the brand unification in the opposite direction from where it started.
+The redesign wasn't just some new colors. It was a chance to address every interaction I'd flagged for improvement, now unified under a cohesive brand identity.
+
+Stakeholders loved the redesign so much that they requested immediate implementation — postponing several planned features to get the new design into production as quickly as possible.
+
+The application design then inspired updates to the marketing website, completing the brand unification in the opposite direction from where it started.
+
+{% Video src="/videos/pas-outpost/2020-06-29-Outpost-Tags.mp4" autoplay=true loop=true /%}
+
+### Designing for accessibility:
+
+The tagging system was a key organizational tool — users labeled email conversations with colored tags for quick visual categorization.
+
+With tags, I needed to convince the team and stakeholders to make tags easy to apply, edit, and delete. Some wanted to move the delete to a different views, others didn't want to include color.
+
+I negotiated all the concerns and through my designs convinced them of the benefits of this design.
+
+Working with the QA team, I selected tag colors so that colorblind individuals could differentiate between each tag easily.
+
+I chose the palette deliberately, informed by accessibility standards, because a team email tool used by diverse organizations couldn't afford to exclude anyone from one of its primary organizational mechanism.
+
 
 {% Recommendation
    pretitle="From Colleagues"
    recommendations=[
-     { quote: "Jayna was a total pleasure to work with in all ways during my time with her at Palo Alto Software. She consistently delivered design that was both thorough and thoughtful to all members of the development and test team. One of many positives that will always stand out to me is her understanding and deep insight into user behaviors, psychology of user interfaces and the fact that she cared about colorblindness in her designs! I have one of the worst types and it was a thrill to finally meet someone in the software development industry who was finally considering me as a user! I would work with Jayna again in a heartbeat!", name: "Brian Carlson", jobTitle: "Lead Software Test Engineer", company: "Palo Alto Software" },
-     { quote: "Jayna has impeccable skills as a designer. She strives for clarity and consistency of the user experience above all else, and has great attention to detail. She excels at collaborating with engineers and other project stakeholders in order to understand requirements and technical details, with an eye to delivering the best possible solution for the product and the team. Jayna is a pleasure to work with.", name: "Dennis Linsley", jobTitle: "Engineering Manager", company: "Palo Alto Software" }
-   ]
+     { quote: "She excels at collaborating with engineers and other project stakeholders in order to understand requirements and technical details, with an eye to delivering the best possible solution for the product and the team.", name: "Dennis Linsley", jobTitle: "Engineering Manager", company: "Palo Alto Software" },
+     { quote: "Jayna has impeccable skills as a designer. She strives for clarity and consistency of the user experience above all else, and has great attention to detail.", name: "Dennis Linsley", jobTitle: "Engineering Manager", company: "Palo Alto Software" },
+     { quote: "Jayna was a total pleasure to work with in all ways during my time with her at Palo Alto Software. I would work with Jayna again in a heartbeat!", name: "Brian Carlson", jobTitle: "Lead Software Test Engineer", company: "Palo Alto Software" },
+	 { quote: "One of many positives that will always stand out to me is her understanding and deep insight into user behaviors, psychology of user interfaces.", name: "Brian Carlson", jobTitle: "Lead Software Test Engineer", company: "Palo Alto Software" },
+     { quote: "She cared about colorblindness in her designs! I have one of the worst types and it was a thrill to finally meet someone in the software development industry who was finally considering me as a user!", name: "Brian Carlson", jobTitle: "Lead Software Test Engineer", company: "Palo Alto Software" },
+	]
 /%}
 
 {% /PasswordGate %}
+
+![alt](../../assets/works/pas-outpost/outpost-tags.png "@border")
 
 ## Impact: What changed {% #what-changed %}
 
 1. **Over 40 new business customers signed up during Outpost's initial trial release** — validating that the redesigned experience was compelling enough to attract users in a competitive market for team email tools.
 
-2. **Outpost became the #1 Google search result for "Team Email Application"** and quickly outpaced competitors. Users reported saving an average of 40 work hours per month per account — time previously lost to the clunky interface of the original Email Center Pro.
+2. **Outpost became the #1 Google search result for "Team Email Application"** and quickly outpaced competitors.
 
-3. **The brand unification I initiated became the product's visual identity.** The blue palette and design language from the application redesign carried through to marketing materials, creating the seamless experience from website to product that hadn't existed before. Outpost was eventually discontinued as the company shifted priorities, but the design work demonstrated what a unified, user-centered redesign could achieve.
+3. **User feedback reported saving an average of 40 work hours per month per account**, which is 480 work hours saved per year.
+
+4. **The brand unification I initiated became the product's visual identity.** The blue palette and design language from the application redesign carried through to marketing materials, creating the seamless experience from website to product that hadn't existed before.
+
+Outpost was eventually discontinued as the company shifted priorities, but the design work demonstrated what a unified, user-centered redesign could achieve.
 
 ## Reflection
 
-If I were to do this project again, I'd push harder for even a small user research budget at the start. I built the requirements from staff knowledge and existing feedback, and the results validated that approach — but there's always a gap between what internal stakeholders think users need and what users actually struggle with. Even a handful of usability sessions with real customers during the first month would have either confirmed my direction or revealed blind spots early enough to address them.
+If I were to do this project again, I'd push harder for even a small user research budget at the start.
 
-I'd also document the design rationale more explicitly from the beginning. The rapid iteration that got stakeholder approval was the right move for the moment, but it meant that some design decisions lived in conversations and whiteboard sessions rather than in written records. When the brand unification redesign happened, I had to reconstruct the reasoning behind earlier choices. A lightweight decision log would have preserved that context without slowing down the pace. ▪️
+I built the requirements from staff knowledge and existing feedback, and the results validated that approach — but there's always a gap between what internal stakeholders think users need and what users actually struggle with.
+
+Even a handful of usability sessions with real customers during the first month would have either confirmed my direction or revealed blind spots early enough to address them.
+
+I'd also document the design rationale more explicitly from the beginning.
+
+The rapid iteration that got stakeholder approval was the right move for the moment, but it meant that some design decisions lived in conversations and whiteboard sessions rather than in written records.
+
+When the brand unification redesign happened, I had to reconstruct the reasoning behind earlier choices.
+
+A lightweight decision log would have preserved that context without slowing down the pace. ▪️
