@@ -16,6 +16,21 @@ type Props = {
 
 const currentLocale = Astro.currentLocale;
 
+const disclaimerMap: Record<string, { label: string; text: string }> = {
+	celebrity: {
+		label: "Celebrity Notice",
+		text: "The celebrity names and images referenced in this article are used for illustrative and educational purposes only. Their inclusion does not imply endorsement, affiliation, or any personal stance toward the individuals mentioned.",
+	},
+	politics: {
+		label: "Political Notice",
+		text: "This article explores AI-generated imagery in a political context for educational purposes only. It does not represent support for or opposition to any political party, candidate, or ideology.",
+	},
+	fairuse: {
+		label: "Fair Use Notice",
+		text: "Images and references in this article are used under the doctrine of fair use for educational, commentary, and illustrative purposes. All original works remain the property of their respective owners.",
+	},
+};
+
 interface PostLayoutLocale {
 	writtenBy: string;
 	writtenAt: string;
@@ -82,35 +97,19 @@ const { frontmatter } = Astro.props;
 
 				<Prose class="post-prose"><slot /></Prose>
 				{
-					"disclaimers" in frontmatter.data && frontmatter.data?.disclaimers?.length > 0 && (() => {
-						const disclaimerMap: Record<string, { label: string; text: string }> = {
-							celebrity: {
-								label: "Celebrity Notice",
-								text: "The celebrity names and images referenced in this article are used for illustrative and educational purposes only. Their inclusion does not imply endorsement, affiliation, or any personal stance toward the individuals mentioned.",
-							},
-							politics: {
-								label: "Political Notice",
-								text: "This article explores AI-generated imagery in a political context for educational purposes only. It does not represent support for or opposition to any political party, candidate, or ideology.",
-							},
-							fairuse: {
-								label: "Fair Use Notice",
-								text: "Images and references in this article are used under the doctrine of fair use for educational, commentary, and illustrative purposes. All original works remain the property of their respective owners.",
-							},
-						};
-						return (
-							<div class="post-disclaimers w-full max-w-3xl pt-12">
-								{frontmatter.data.disclaimers.map((type: string) => {
-									const d = disclaimerMap[type];
-									return d ? (
-										<div class="post-disclaimer">
-											<span class="post-disclaimer-label">{d.label}</span>
-											{d.text}
-										</div>
-									) : null;
-								})}
-							</div>
-						);
-					})()
+					"disclaimers" in frontmatter.data && frontmatter.data?.disclaimers?.length > 0 && (
+						<div class="post-disclaimers w-full max-w-3xl pt-12">
+							{frontmatter.data.disclaimers.map((type: string) => {
+								const d = disclaimerMap[type];
+								return d ? (
+									<div class="post-disclaimer">
+										<span class="post-disclaimer-label">{d.label}</span>
+										{d.text}
+									</div>
+								) : null;
+							})}
+						</div>
+					)
 				}
 				{
 					"pubDate" in frontmatter.data && frontmatter.data?.pubDate && (
