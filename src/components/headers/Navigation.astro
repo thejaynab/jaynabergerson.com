@@ -9,7 +9,7 @@ const currentLocale = Astro.currentLocale;
 const { header } = getLocalizedSettings(currentLocale);
 
 const navLinks = header.pages.filter((page) =>
-	["/work", "/about", "/articles", "/contact"].includes(page.link),
+	["/work", "/about", "/articles", "mailto:hello@jaynabergerson.com"].includes(page.link),
 );
 ---
 
@@ -166,7 +166,7 @@ const navLinks = header.pages.filter((page) =>
 			{
 				navLinks.map((page) => (
 					<a
-						href={translatePath(
+						href={page.link.startsWith('mailto:') ? page.link : translatePath(
 							currentLocale ?? defaultLocale,
 							page.link,
 						)}
@@ -213,7 +213,7 @@ const navLinks = header.pages.filter((page) =>
 					navLinks.map((page, index) => (
 						<a
 							data-nav-item
-							href={translatePath(
+							href={page.link.startsWith('mailto:') ? page.link : translatePath(
 								currentLocale ?? defaultLocale,
 								page.link,
 							)}

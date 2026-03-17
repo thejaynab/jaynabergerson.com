@@ -4,7 +4,7 @@
 	"buttons": [
 		{
 			"text": "Get in Touch",
-			"url": "/contact"
+			"url": "mailto:hello@jaynabergerson.com"
 		}
 	]
 }
