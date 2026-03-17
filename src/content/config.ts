@@ -30,8 +30,7 @@ const postsCollection = defineCollection({
 			author: z.string(),
 			cover: image(),
 			tags: z.array(z.string()),
-			hidden: z.optional(z.boolean()),
-		}),
+			hidden: z.optional(z.boolean()),			 disclaimers: z.optional(z.array(z.enum(["celebrity", "politics", "fairuse"]))),		}),
 });
 
 const worksCollection = defineCollection({
