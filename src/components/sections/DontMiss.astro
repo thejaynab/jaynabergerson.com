@@ -40,7 +40,7 @@ const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 6) a
 	<div class="dont-miss-section">
 		<div class="dont-miss-container">
 			<h2 class="dont-miss-heading">Don't miss</h2>
-			<div class="dont-miss-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[10px]">
+			<div class="dont-miss-grid">
 				{relatedPosts.map((post) => {
 					const unlocalizedPath = unlocalizedUrl(post.slug);
 					const localizedPath = translatePath(
@@ -49,20 +49,6 @@ const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 6) a
 					);
 					return (
 						<a href={localizedPath} class="dont-miss-card group">
-							<div class="dont-miss-card-body">
-								<span class="dont-miss-card-category">
-									{post.data.category}
-								</span>
-							<span class="dont-miss-card-title" set:html={post.data.title} />
-								<span class="dont-miss-card-date">
-									{post.data.pubDate.toLocaleDateString("en-US", {
-										month: "long",
-										day: "numeric",
-										year: "numeric",
-										timeZone: "UTC",
-									})}
-								</span>
-							</div>
 							<div class="dont-miss-card-image-wrapper">
 								<div class="dont-miss-card-arrow">
 									<div class="dont-miss-card-arrow-inner">
@@ -77,6 +63,20 @@ const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 6) a
 									alt={post.data.title}
 									class="w-full h-full object-cover rounded-xl"
 								/>
+							</div>
+							<div class="dont-miss-card-body">
+								<span class="dont-miss-card-category">
+									{post.data.category}
+								</span>
+								<span class="dont-miss-card-title" set:html={post.data.title} />
+								<span class="dont-miss-card-date">
+									{post.data.pubDate.toLocaleDateString("en-US", {
+										month: "long",
+										day: "numeric",
+										year: "numeric",
+										timeZone: "UTC",
+									})}
+								</span>
 							</div>
 						</a>
 					);
@@ -108,6 +108,23 @@ const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 6) a
 		margin-bottom: 2.5rem;
 	}
 
+	.dont-miss-grid {
+		columns: 1;
+		gap: 10px;
+	}
+
+	@media (min-width: 640px) {
+		.dont-miss-grid {
+			columns: 2;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.dont-miss-grid {
+			columns: 3;
+		}
+	}
+
 	.dont-miss-card {
 		background: #fff;
 		border-radius: 1rem;
@@ -117,6 +134,8 @@ const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 6) a
 		text-decoration: none;
 		color: inherit;
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		break-inside: avoid;
+		margin-bottom: 10px;
 	}
 
 	.dont-miss-card:hover {
@@ -126,7 +145,7 @@ const relatedPosts = [...sameCategoryPosts, ...otherCategoryPosts].slice(0, 6) a
 
 	.dont-miss-card-image-wrapper {
 		position: relative;
-		padding: 0 20px 20px;
+		padding: 20px 20px 5px;
 		overflow: hidden;
 	}
 
