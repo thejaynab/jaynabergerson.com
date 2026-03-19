@@ -8,7 +8,7 @@ const currentLocale = Astro.currentLocale;
 
 const posts = await getCollection("articles");
 
-const recentPosts = posts
+const visiblePosts = posts
 	.map((post) => {
 		return {
 			...post,
@@ -19,7 +19,10 @@ const recentPosts = posts
 	.sort(
 		(a, b) =>
 			b.data.lastUpdateDate.getTime() - a.data.lastUpdateDate.getTime(),
-	)
+	);
+
+const featuredPosts = visiblePosts.filter((post) => post.data.featured);
+const recentPosts = (featuredPosts.length > 0 ? featuredPosts : visiblePosts)
 	.slice(0, 3) as CollectionEntry<"articles">[];
 
 interface Props {
