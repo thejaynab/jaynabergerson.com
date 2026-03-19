@@ -17,9 +17,9 @@ const gridClass = [
 ].filter(Boolean).join(" ");
 const altList = alts ? alts.split("|").map((s: string) => s.trim()) : [];
 
-// Import all post and work images eagerly
+// Import all post, work, and page images eagerly
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
-	["/src/assets/posts/**/*.{webp,png,jpg,jpeg,svg,gif}", "/src/assets/works/**/*.{webp,png,jpg,jpeg,svg,gif}"],
+	["/src/assets/posts/**/*.{webp,png,jpg,jpeg,svg,gif}", "/src/assets/works/**/*.{webp,png,jpg,jpeg,svg,gif}", "/src/assets/pages/**/*.{webp,png,jpg,jpeg,svg,gif}"],
 	{ eager: true }
 );
 

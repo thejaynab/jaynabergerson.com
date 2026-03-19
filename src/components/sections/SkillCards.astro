@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+	title: string;
+	cards: {
+		title: string;
+		description: string;
+		icon: string;
+	}[];
+}
+
+const { title, cards } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+	"/src/assets/pages/**/*.{webp,jpeg,jpg,png,gif,svg}",
+);
+---
+
+<div class="skill-cards-section" id="how-i-work">
+	<p class="skill-cards-heading" set:html={title} />
+	<div class="skill-cards-grid">
+		{
+			cards.map(({ title, description, icon }) => (
+				<div class="skill-card">
+					<div class="skill-card-icon">
+						<Image
+							src={images[icon]()}
+							alt={title}
+							class="w-16 h-16"
+						/>
+					</div>
+					<h3 class="skill-card-title">{title}</h3>
+					<p class="skill-card-description">{description}</p>
+				</div>
+			))
+		}
+	</div>
+</div>
+
+<style>
+	.skill-cards-section {
+		padding-top: 9rem;
+	}
+
+	.skill-cards-heading {
+		font-size: 2.13rem;
+		line-height: 2.25rem;
+		font-weight: 600;
+		margin-bottom: 0.75rem;
+	}
+
+	.skill-cards-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+		margin-top: 4rem;
+	}
+
+	@media (min-width: 640px) {
+		.skill-cards-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.skill-cards-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.skill-card {
+		background: #f5f5f5;
+		border-radius: 1rem;
+		padding: 2.5rem 2rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+			box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.skill-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+	}
+
+	.skill-card-icon {
+		margin-bottom: 1.5rem;
+	}
+
+	.skill-card-title {
+		font-size: 1.38rem;
+		font-weight: 600;
+		line-height: 1.75rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.skill-card-description {
+		font-size: 1rem;
+		line-height: 1.6;
+		color: #525252;
+		margin: 0;
+	}
+</style>

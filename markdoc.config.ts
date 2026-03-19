@@ -61,6 +61,13 @@ export default defineMarkdocConfig({
 		},
 	},
 	tags: {
+		comment: {
+			attributes: {},
+			children: ["*"],
+			transform() {
+				return [];
+			},
+		},
 		Container: {
 			attributes: {
 				class: { type: String, render: "class" },
@@ -153,10 +160,9 @@ export default defineMarkdocConfig({
 		},
 		About: {
 			attributes: {
-				title: { type: String, render: "title", required: true },
-				subtitle: { type: String, render: "subtitle", required: true },
-				content: { type: String, render: "content", required: true },
+				image: { type: String, render: "image" },
 			},
+			children: ["*"],
 			render: component("./src/components/sections/About.astro"),
 		},
 		Works: {
@@ -198,6 +204,13 @@ export default defineMarkdocConfig({
 				items: { type: Array, render: "items", required: true },
 			},
 			render: component("./src/components/sections/WorkTLDR.astro"),
+		},
+		SkillCards: {
+			attributes: {
+				title: { type: String, render: "title", required: true },
+				cards: { type: Array, render: "cards", required: true },
+			},
+			render: component("./src/components/sections/SkillCards.astro"),
 		},
 		PasswordGate: {
 			children: ["*"],
