@@ -15,15 +15,15 @@ const { frontmatter } = Astro.props;
 	<main>
 		{
 			frontmatter.data.hideTitle ? null : (
-				<header class:list={["pt-8 lg:pt-12", frontmatter.data.headerImage ? "pb-[71px]" : "pb-32 lg:pb-36"]}>
+				<header class:list={["pt-8 lg:pt-12", frontmatter.data.compactTitle ? "pb-4" : (frontmatter.data.headerImage ? "pb-[71px]" : "pb-32 lg:pb-36")]}>
 					<Container
 						tag="div"
-						class="mx-0 flex justify-center items-center gap-10"
+						class:list={[frontmatter.data.compactTitle ? "mx-0 flex items-center gap-10" : "mx-0 flex justify-center items-center gap-10"]}
 					>
-						<div class="items-center text-sm font-medium justify-center flex min-h-[auto]">
-							<div class="items-center flex-col w-full m-auto text-6xl lg:text-[7.13rem] leading-none font-semibold">
-								<div class="items-center text-center flex-col justify-start flex gap-2 leading-[1.15]">
-									<h1 class="my-3 mx-0 max-w-screen-sm">
+						<div class:list={["text-sm font-medium flex min-h-[auto]", frontmatter.data.compactTitle ? "items-start justify-start w-full" : "items-center justify-center"]}>
+							<div class:list={["w-full leading-none font-semibold", frontmatter.data.compactTitle ? "items-start flex-col max-w-3xl mx-auto text-[6rem]" : "items-center flex-col m-auto text-6xl lg:text-[7.13rem]"]}>
+								<div class:list={["flex-col justify-start flex gap-2 leading-[1.15]", frontmatter.data.compactTitle ? "items-start text-left" : "items-center text-center"]}>
+									<h1 class:list={["my-3 mx-0", frontmatter.data.compactTitle ? "" : "max-w-screen-sm"]}>
 										{frontmatter.data.title}
 									</h1>
 									<h2 class="text-2xl lg:text-3xl max-w-screen-sm">
