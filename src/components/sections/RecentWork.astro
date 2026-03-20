@@ -8,17 +8,21 @@ const currentLocale = Astro.currentLocale;
 
 const works = await getCollection("work");
 
-const recentWorks = works
+const visibleWorks = works
 	.map((work) => {
 		return {
 			...work,
 			slug: work.slug.startsWith("/") ? work.slug : `/${work.slug}`,
 		};
 	})
+	.filter((work) => !work.data.hidden)
 	.sort(
 		(a, b) =>
-			a.data.lastUpdateDate.getTime() - b.data.lastUpdateDate.getTime(),
-	)
+			b.data.lastUpdateDate.getTime() - a.data.lastUpdateDate.getTime(),
+	);
+
+const featuredWorks = visibleWorks.filter((work) => work.data.featured);
+const recentWorks = (featuredWorks.length > 0 ? featuredWorks : visibleWorks)
 	.slice(0, 3) as CollectionEntry<"works">[];
 
 interface Props {

@@ -56,6 +56,7 @@ const worksCollection = defineCollection({
 			hideImpactButton: z.optional(z.boolean()),
 			backgroundColor: z.optional(z.string()),
 			hidden: z.optional(z.boolean()),
+			featured: z.optional(z.boolean()),
 		}),
 });
 
